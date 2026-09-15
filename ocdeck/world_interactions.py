@@ -4,6 +4,7 @@ from collections import deque
 from dataclasses import asdict, dataclass
 import math
 from .world_objects import DEFINITIONS, ATMOSPHERES, Object
+from .world_actions import advance, duration, DURABLE
 
 RECIPES = {name: d.action for name, d in DEFINITIONS.items()}
 TOOLS = {"rake", "broom", "scythe"}
@@ -30,6 +31,7 @@ class Interaction:
     def __init__(self):
         self.objects = {}
         self.serial = 0
+        self.generation = ""
         self.target = None
         self.key = None
         self.home_key = None
@@ -39,6 +41,7 @@ class Interaction:
         self.frame = None
         self.stage = ""
         self.stage_started = 0.0
+        self.stage_time = 0.0
         self.next_at = 0.6
         self.owns_actor = False
         self.held = None
@@ -51,10 +54,16 @@ class Interaction:
         self.visible = False
         self.geometry = None
         self.water = 1.0
+        self.followup = None
+        self.environment_since = 0.0
+        self.environment = ""
+        self.retiring = False
+        self.environment_served = ""
 
     def snapshot(self):
         return {
             "version": 1,
+            "generation": self.generation,
             "serial": self.serial,
             "objects": [asdict(o) for o in list(self.objects.values())[-8:]],
             "history": list(self.history),
@@ -82,9 +91,23 @@ class Interaction:
             obj = Object(raw["id"], raw["name"], None, None, "stored", raw["progress"], raw["amount"])
             obj.applied = raw.get("applied") is True
             obj.result = DEFINITIONS[obj.name].result if obj.applied else ""
+            data = raw.get("data", {})
+            if isinstance(data, dict):
+                obj.data = {
+                    k: v
+                    for k, v in data.items()
+                    if k in ("growth", "previous_growth", "moisture", "gathered", "gift_id", "visits")
+                    and type(v) in (int, float)
+                    and math.isfinite(v)
+                    and 0 <= v <= 10**9
+                }
             restored[obj.id] = obj
         self.objects = restored
         self.serial = max(restored, default=0)
+        for obj in restored.values():
+            toy = restored.get(obj.data.get("gift_id"))
+            if toy and not toy.applied:
+                self.followup = toy.name
         history = value.get("history", [])
         if isinstance(history, list):
             self.history.extend(n for n in history[-24:] if isinstance(n, str) and n in DEFINITIONS)
@@ -138,11 +161,19 @@ class Interaction:
             deficit = 100 - jelly.mind.needs.get(need, 50)
             weights.append((20 + deficit) / (1 + self.history.count(name) * 3))
         name = candidates[0] if options["scene_override"] and scene.prop else jelly.rng.choices(candidates, weights)[0]
-        obj = next((o for o in self.objects.values() if o.name == name and not o.applied), None)
+        if not options["scene_override"] and scene.sky in ATMOSPHERES and self.environment_served != scene.sky:
+            name = ATMOSPHERES[scene.sky]
+        if self.followup in DEFINITIONS:
+            name, self.followup = self.followup, None
+        obj = next((o for o in self.objects.values() if o.name == name and (not o.applied or name in DURABLE)), None)
         if obj is None:
             self.serial += 1
             obj = Object(self.serial, name, None, None, color=scene.color)
             self.objects[obj.id] = obj
+        if obj.applied and name in DURABLE:
+            obj.data["previous_growth"] = obj.data.get("growth", 0.3)
+            obj.data["visits"] = min(100, obj.data.get("visits", 0) + 1)
+            obj.progress, obj.applied = 0, False
         # Keep bounded logical keepsakes, never unbounded decorations.
         while len(self.objects) > 8:
             del self.objects[next(k for k in self.objects if k != obj.id)]
@@ -152,18 +183,22 @@ class Interaction:
             obj.home = obj.cell
         obj.state = "reserved"
         self.target, self.key, self.home_key = obj.id, obj.cell, jelly.current
-        self.work_key = self._choose_cell(jelly, reachable, obj.cell) if name in TOOLS | TRANSFER else obj.cell
-        if name in TOOLS | TRANSFER and len(reachable) > 1 and self.work_key == obj.cell:
+        self.work_key = (
+            self._choose_cell(jelly, reachable, obj.cell) if name in TOOLS | TRANSFER | {"fountain"} else obj.cell
+        )
+        if name in TOOLS | TRANSFER | {"fountain"} and len(reachable) > 1 and self.work_key == obj.cell:
             self.work_key = self._choose_cell(jelly, reachable, exclude=obj.cell)
         self.scene, self.sky = scene_id, scene.sky
-        self.use_elapsed = obj.progress * 6
+        self.use_elapsed = obj.progress * duration(name, RECIPES[name])
         self.water = max(0.0, 1 - obj.progress)
         self.owns_actor, self.visible = True, True
+        self.retiring = False
         self._stage("notice", now, jelly)
         self.events.append(("selected", name, obj.cell))
 
     def _stage(self, stage, now, jelly):
         self.stage, self.stage_started = stage, now
+        self.stage_time = 0.0
         self.origin_x = jelly.x
         self.events.append(("stage", stage, jelly.current))
 
@@ -185,6 +220,8 @@ class Interaction:
             return
         obj.applied, obj.result, obj.state = True, DEFINITIONS[obj.name].result, "changed"
         self.history.append(obj.name)
+        if ATMOSPHERES.get(self.sky) == obj.name:
+            self.environment_served = self.sky
         motive = DEFINITIONS[obj.name].motive
         need = {
             "play": "stimulation",
@@ -201,6 +238,15 @@ class Interaction:
             toy = Object(self.serial, "beachball", obj.cell, obj.cell, "stored", color=obj.color)
             self.objects[toy.id] = toy
             obj.data["gift_id"] = toy.id
+            self.followup = "beachball"
+            while len(self.objects) > 8:
+                del self.objects[next(k for k in self.objects if k not in (obj.id, toy.id))]
+        if obj.name == "windsock":
+            self.followup = "kite"
+        if obj.name == "window" and self.sky == "rain":
+            self.followup = "puddle"
+        if obj.name == "clock":
+            self.followup = "lamp"
         self.events.append(("outcome", obj.id, obj.result))
 
     def tick(self, now, jelly, available, scene_id, scene, options, blocked=False):
@@ -209,6 +255,7 @@ class Interaction:
         free = set(available) & set(range(jelly.geometry.count))
         allowed = (
             not blocked
+            and options["living_world"]
             and options["interactions"]
             and options["props"]
             and not options["reduced_motion"]
@@ -225,6 +272,8 @@ class Interaction:
                 obj.cell = obj.home = None
                 obj.state = "stored"
         self.geometry = jelly.geometry
+        if scene and scene.sky != self.environment:
+            self.environment, self.environment_since = scene.sky, now
         if not allowed:
             self.cancel(now, jelly)
             return
@@ -240,11 +289,13 @@ class Interaction:
             if self.target is None:
                 return
         obj = self.objects[self.target]
-        elapsed = max(0, now - self.stage_started)
+        self.stage_time += dt
+        elapsed = self.stage_time
         travel_stages = {
             "approach": (obj.home, "position"),
             "carry": (self.work_key, "work_position"),
             "return": (obj.home, "return_position"),
+            "water_carry": (self.work_key, "water_pour"),
         }
         if self.stage in travel_stages:
             destination, following = travel_stages[self.stage]
@@ -263,7 +314,7 @@ class Interaction:
                     self._stage("approach", now, jelly)
             elif self.stage in ("position", "work_position", "return_position"):
                 left = jelly.geometry.bounds(jelly.current)[0]
-                goal = left + max(18 * jelly.geometry.scale, jelly.geometry.width / 2 - 7 * jelly.geometry.scale)
+                goal = left + jelly.geometry.width - 26 * jelly.geometry.scale
                 jelly.x = self.origin_x + (goal - self.origin_x) * ease(elapsed / 0.6)
                 if elapsed >= 0.6:
                     following = {"position": "reach", "work_position": "use", "return_position": "putdown"}[self.stage]
@@ -273,41 +324,25 @@ class Interaction:
                     if DEFINITIONS[obj.name].carry:
                         self.held, obj.state = obj.id, "held"
                         self.events.append(("pickup", obj.id, jelly.current))
-                    self._stage("carry" if obj.name in TOOLS | TRANSFER else "use", now, jelly)
+                    self._stage("carry" if obj.name in TOOLS | TRANSFER | {"fountain"} else "use", now, jelly)
             elif self.stage == "use":
-                # Only reached contact can mutate material state. Long wall-clock
-                # gaps pause the action rather than awarding invisible work.
-                self.use_elapsed = min(6.0, self.use_elapsed + dt)
-                obj.progress = self.use_elapsed / 6
-                obj.state = "in_use"
-                action = RECIPES[obj.name]
-                if action in ("drink", "lick", "serve", "picnic", "unwrap_eat"):
-                    obj.amount = max(0.0, 1 - obj.progress)
-                if action in ("water", "fill_water"):
-                    self.water = max(0, 1 - obj.progress)
-                    obj.amount = obj.progress
-                if action in ("rake", "sweep", "harvest"):
-                    # Gather on the pulling half of each stroke; never on recovery.
-                    cycle = self.use_elapsed % 1.5
-                    pulls = int(self.use_elapsed / 1.5) + min(1, cycle / 0.85)
-                    obj.data["gathered"] = min(1, pulls / 4)
-                if action == "ride":
-                    jelly.x = self.origin_x + math.sin(obj.progress * math.pi) * 3 * jelly.geometry.scale
-                    jelly.y = jelly.geometry.anchor(jelly.current)[1] - 5 * jelly.geometry.scale
-                elif action in ("splash", "snow_angel"):
-                    jelly.pose = "puddle" if action == "snow_angel" else "rebound"
-                    jelly.y = jelly.geometry.anchor(jelly.current)[1] - (
-                        round(5 * abs(math.sin(obj.progress * math.tau))) if action == "splash" else 0
-                    )
-                elif action in ("aim", "moonwatch", "lullaby", "shelter"):
-                    jelly.gaze, jelly.face = "up", "curious"
-                if self.use_elapsed >= 6:
+                if advance(self, jelly, obj, dt):
+                    if obj.name == "fountain":
+                        self.water = 1
+                        self._stage("water_carry", now, jelly)
+                    else:
+                        self._outcome(jelly, obj)
+                        self._stage("return" if obj.name in TOOLS | {"kite"} else "putdown", now, jelly)
+            elif self.stage == "water_pour":
+                self.water = max(0, 1 - elapsed / 3)
+                obj.data["plant_water"] = 1 - self.water
+                if elapsed >= 3:
                     self._outcome(jelly, obj)
-                    self._stage("return" if obj.name in TOOLS else "putdown", now, jelly)
+                    self._stage("return", now, jelly)
             elif self.stage == "putdown":
                 if elapsed >= 0.8:
                     self.held = None
-                    obj.cell = self.work_key if obj.name in TRANSFER else obj.home
+                    obj.cell = self.work_key if obj.name in {"balloon", "lantern"} else obj.home
                     obj.state = "changed"
                     jelly.y = jelly.geometry.anchor(jelly.current)[1]
                     self._stage("admire", now, jelly)
@@ -319,18 +354,27 @@ class Interaction:
                     jelly.state, jelly.deadline = "idle", now + 3
                     self.next_at = now + options["interaction_seconds"]
             elif self.stage == "rest":
-                # A result remains observable through theme changes and pauses.
-                self.owns_actor = False
-                jelly.state = "idle"
-                if now >= self.next_at:
+                self.owns_actor = True
+                jelly.pose, jelly.face = "sleep_curl", "half"
+                jelly.gesture = ""
+                if elapsed >= 3:
+                    self._stage("cleanup", now, jelly)
+            elif self.stage == "cleanup":
+                # Fade only after putting down / tending, then logical storage.
+                self.retiring = True
+                if elapsed >= 1.2:
+                    obj.state = "stored"
                     self.frame = None
                     self.target, self.key = None, None
                     self.stage = ""
+                    self.visible, self.owns_actor = False, False
+                    jelly.state, jelly.deadline = "idle", now + 3
+                    self.next_at = now + (3 if self.followup else options["interaction_seconds"])
                     return
         if self.held == obj.id:
             obj.cell = jelly.current
         self.visible = True
-        elapsed = max(0, now - self.stage_started)
+        elapsed = self.stage_time
         p = obj.progress if self.stage == "use" else min(1, elapsed / 0.8)
         assert self.key is not None
         self.frame = PlayFrame(self.key, obj.name, RECIPES[obj.name], self.stage, p, elapsed, obj.color)

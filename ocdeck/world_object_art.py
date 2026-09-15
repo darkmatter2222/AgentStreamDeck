@@ -29,6 +29,7 @@ def render_layers(director, jelly, available):
         return {}, {}
     action = DEFINITIONS[obj.name].action
     active = f.stage == "use"
+    pouring = f.stage == "water_pour"
     done = obj.applied
     p = obj.progress
     beat = int(director.use_elapsed * 8) % 8 if active else 0
@@ -109,10 +110,12 @@ def render_layers(director, jelly, available):
                     hy -= 3
             else:
                 hx, hy = x + side * 3, y + 5
-            topx, topy = x - side * 2, y - 13
+            topx, topy = x - side * 2, y - 9
+            draw.line((topx, topy, x, y, hx, hy), fill=WOOD, width=2)
         else:
             hx, hy, topx, topy = x - 3, y - 1, x + 4, y - 22
-        draw.line((topx, topy, hx, hy), fill=WOOD, width=2)
+        if not (held or reach):
+            draw.line((topx, topy, hx, hy), fill=WOOD, width=2)
         if obj.name == "rake":
             draw.line((hx - 5, hy - 1, hx + 5, hy - 1), fill="#a6bdc5")
             for dx in (-5, -2, 1, 4):
@@ -130,56 +133,75 @@ def render_layers(director, jelly, available):
         if liquid:
             draw.rectangle((x - 3, y - 1 - liquid, x + 3, y - 2), fill=GOLD)
         draw.arc((x + 2, y - 7, x + 8, y - 1), 270, 90, fill=WHITE)
+        if active and 0.25 < p < 0.8:
+            draw.line((x - 3, y - 8, gx - 2, gy - 2), fill=GOLD)
         if obj.name == "cocoa" and obj.amount > 0.1:
             for k in (0, 4):
                 draw.line((x - 2 + k, y - 11 - beat // 3, x - 1 + k, y - 13 - beat // 3), fill="#8c9aa3")
     elif action in ("water", "fill_water", "plant"):
-        if action == "plant" and not active and not done:
+        if action == "plant" and p < 0.2:
             icon("acorn", x, y, layer=layer, limit=10)
         else:
-            px, py = place(home)
+            px, py = place(director.work_key if action == "fill_water" else home)
             d.ellipse((px - 7, py - 2, px + 7, py + 1), fill="#684832")
             if action != "plant" or p > 0.45:
                 icon("seedling" if action in ("plant", "fill_water") else obj.name, px, py, limit=13)
-                if p > 0.6:
+                if obj.data.get("growth", 0) > 0.2:
                     d.line((px, py - 12, px + 4, py - 16), fill=GREEN, width=2)
-            if active:
+            if active and action != "fill_water" or pouring or f.stage == "water_carry":
                 fg.rectangle((gx - 3, gy - 5, gx + 3, gy + 1), fill="#638b9e", outline=INK)
                 fg.line((gx + 3, gy - 1, px - 2, gy - 3), fill=BLUE, width=2)
                 for k in range(3):
                     yy = gy + 2 + (beat + k * 3) % max(1, py - gy - 2)
                     fg.point((px - 2 + k % 2, yy), fill=BLUE)
             if action == "fill_water":
+                px, py = place(home)
                 d.arc((px - 8, py - 5, px + 8, py + 2), 0, 180, fill=WHITE, width=2)
                 d.line((px - 6, py - 3, px + 6, py - 3), fill=BLUE)
+                d.line((px, py - 3, px, py - 12), fill=BLUE)
+                d.arc((px - 6, py - 15, px + 6, py - 8), 180, 360, fill=WHITE)
+                if active:
+                    fg.rectangle((gx - 3, gy - 3, gx + 3, gy + 3), outline=WHITE)
+                    fg.line(
+                        (gx - 2, gy + 2 - round(4 * director.water), gx + 2, gy + 2 - round(4 * director.water)),
+                        fill=BLUE,
+                    )
     elif action in ("chase", "roll_snow", "drive", "ride"):
         px, py = place(home)
-        motion = round(6 * math.sin(math.pi * p)) if active else 0
+        motion = round(obj.data.get("offset", 0))
         if action == "ride":
-            px = round(jelly.x / scale)
-            py = round(jelly.y / scale) + 5
+            px = round(g.anchor(home)[0] / scale + obj.data.get("offset", 0))
+            py = round(g.anchor(home)[1] / scale)
             d.line((px - 14, py - 1, px + 13, py - 1, px + 16, py - 4), fill=WHITE, width=2)
             d.rectangle((px - 13, py - 6, px + 12, py - 4), fill=PINK, outline=INK)
         else:
-            icon(obj.name, px + motion, py, beat if active else 0, limit=18)
+            if action == "roll_snow":
+                radius = round(obj.data.get("radius", 3))
+                d.ellipse((px + motion - radius, py - radius * 2, px + motion + radius, py), fill=WHITE, outline=BLUE)
+            else:
+                icon(obj.name, px + motion, py, round(obj.data.get("angle", 0)) % 8, limit=18)
             if action == "drive":
                 d.line((px - 12, py + 1, px + 13, py + 1), fill="#7a8b98")
-            if active:
+            if active and (p < 0.2 or p > 0.7):
                 fg.line((gx, gy, px + motion - 5, py - 4), fill=WHITE)
     elif action == "unwrap":
         d.rectangle((x - 7, y - 10, x + 7, y - 1), fill=obj.color, outline=INK)
-        lift = round(8 * p)
-        d.rectangle((x - 8, y - 13 - lift, x + 8, y - 10 - lift), fill=PINK, outline=INK)
+        lift = round(8 * obj.data.get("lid", 0))
+        d.polygon(
+            [(x - 7, y - 10), (x - 7, y - 13), (x + 8, y - 13 - lift), (x + 8, y - 10 - lift)], fill=PINK, outline=INK
+        )
         d.rectangle((x - 1, y - 10, x + 1, y - 1), fill=GOLD)
         if p > 0.6:
             icon("beachball", x, y - 4, limit=8)
         if not done:
             d.line((x + 7, y - 6, x + 10 + round(p * 3), y - 2), fill=GOLD)
     elif action in ("spin", "spin_globe", "blow", "switch_fan"):
-        phase = int((p * 24 if p < 0.75 else 18 + (p - 0.75) * 8)) % 8 if active else 0
+        phase = int(obj.data.get("turn", 0)) % 8
         icon(obj.name, x, y, phase, limit=18)
         if action == "spin" and done:
-            d.line((x - 4, y - 1, x + 5, y - 1), fill=BLUE, width=3)
+            d.rectangle((x - 9, y - 23, x + 9, y), fill=(0, 0, 0, 0))
+            d.polygon([(x - 5, y - 2), (x, y - 6), (x + 5, y - 2), (x, y)], fill=BLUE, outline=INK)
+            d.line((x + 4, y - 2, x + 7, y - 2), fill=GOLD)
         if action == "spin_globe" and active:
             d.line((x - 4 + phase, y - 14, x - 4 + phase, y - 9), fill=GREEN, width=2)
         if active:
@@ -188,7 +210,7 @@ def render_layers(director, jelly, available):
                 fg.line((x - 12, y - 13, x - 8, y - 13 - beat % 2), fill=BLUE)
     elif action in ("serve", "picnic", "candles", "unwrap_eat", "lick"):
         icon(obj.name, x, y, 0, layer=layer, limit=17)
-        if p > 0.1:
+        if p > 0.2:
             # Author a missing portion, not unrelated glitter.
             draw.rectangle((x + 1, y - 11, x + 7, y - 4), fill=(0, 0, 0, 0))
             if active:
@@ -197,17 +219,23 @@ def render_layers(director, jelly, available):
             draw.rectangle((x - 8, y - 23, x + 8, y - 14), fill=(0, 0, 0, 0))
         if action == "unwrap_eat" and active:
             d.line((target_x - 4, target_y - 2, target_x + 5, target_y - 1), fill=PINK)
-        if done and action in ("lick", "unwrap_eat"):
+        if obj.data.get("cleared", 0) >= 0.95:
             draw.rectangle((x - 8, y - 23, x + 8, y), fill=(0, 0, 0, 0))
             d.rectangle((target_x - 5, target_y - 3, target_x + 5, target_y), fill=WOOD, outline=INK)
     elif action in ("tend_wick", "light_candles", "read_light", "tend_pumpkin", "hang"):
         icon(obj.name, x, y, beat if active else 0, layer=layer, limit=19)
-        lit = p > 0.2 and not (action == "read_light" and done)
+        lit = obj.data.get("lit", False)
         if lit:
-            draw.line((x - 2, y - 10, x, y - 14, x + 1, y - 9), fill=GOLD, width=2)
+            if obj.name not in ("lamp", "menorah"):
+                draw.line((x - 2, y - 10, x, y - 14, x + 1, y - 9), fill=GOLD, width=2)
             d.line((target_x - 8, target_y, target_x + 7, target_y), fill="#8e6a43")
         else:
-            draw.rectangle((x - 2, y - 14, x + 2, y - 10), fill="#594f44")
+            if obj.name == "lamp":
+                draw.polygon(
+                    [(x - 4, y - 23), (x + 4, y - 23), (x + 8, y - 14), (x - 8, y - 14)], fill="#657785", outline=INK
+                )
+            else:
+                draw.rectangle((x - 2, y - 14, x + 2, y - 10), fill="#594f44")
         if action == "hang" and done:
             d.line((x, y - 21, x + 4, y - 22), fill=WOOD)
         if action == "read_light" and active and p > 0.4:
@@ -218,13 +246,29 @@ def render_layers(director, jelly, available):
             )
     elif action in ("aim", "moonwatch", "shelter", "lullaby", "catch_flake"):
         # Sky landmarks retain a distinct nonphysical role.
-        if obj.name in ("cloud", "crescent", "snowflake"):
+        if obj.name in ("cloud", "crescent"):
             icon(obj.name, target_x, target_y - 22, beat if active else 0, limit=14)
+        elif obj.name == "snowflake":
+            if p < 0.5:
+                crystal_y = gy - round(obj.data.get("height", 12))
+                icon("snowflake", gx, crystal_y, 0, limit=max(2, round(10 * obj.amount)), layer=front)
+            elif obj.amount > 0.1:
+                fg.point((gx, gy), fill=BLUE)
         elif obj.name == "music":
-            if active:
+            d.rectangle((target_x - 7, target_y - 7, target_x + 7, target_y), fill=WOOD, outline=INK)
+            lid = 5 if active and 0.15 < p < 0.85 else 0
+            d.line((target_x - 7, target_y - 7, target_x + 7, target_y - 7 - lid), fill=GOLD, width=2)
+            if active and 0.15 < p < 0.85:
                 icon("music", gx + 6, gy - 7 - beat // 2, limit=10)
         else:
-            icon("telescope", target_x, target_y, limit=20)
+            tx, ty = target_x, target_y
+            d.line((tx, ty - 10, tx - 7, ty), fill="#92a8b8")
+            d.line((tx, ty - 10, tx + 7, ty), fill="#92a8b8")
+            rise = round(4 * math.sin(p * math.pi))
+            d.line((tx - 8, ty - 12, tx + 6, ty - 19 - rise), fill=BLUE, width=5)
+            d.line((tx - 8, ty - 13, tx + 6, ty - 20 - rise), fill=WHITE)
+            if active:
+                d.point((tx + 5, ty - 27 - rise), fill=GOLD)
         if action in ("aim", "moonwatch"):
             if obj.name != "telescope":
                 icon("telescope", target_x, target_y, limit=15)
@@ -240,9 +284,12 @@ def render_layers(director, jelly, available):
     elif action in ("build_sand", "build_snow", "snow_angel", "trim", "harvest", "finish_pattern", "pour_pattern"):
         if action in ("build_sand", "build_snow"):
             icon(obj.name, x, y, limit=20)
-            if p < 0.65:
-                d.rectangle((x - 11, y - 25, x + 11, y - 10), fill=(0, 0, 0, 0))
-                d.ellipse((x - 7, y - 8, x + 7, y), fill=WHITE if action == "build_snow" else GOLD)
+            tier = obj.data.get("tier", 0)
+            if tier < 3:
+                cutoff = y - 5 - tier * 5
+                d.rectangle((x - 11, y - 25, x + 11, cutoff), fill=(0, 0, 0, 0))
+                if tier == 0:
+                    d.ellipse((x - 7, y - 5, x + 7, y), fill=WHITE if action == "build_snow" else GOLD)
             if active:
                 fg.rectangle((gx, gy, gx + 3, gy + 3), fill=WHITE if action == "build_snow" else GOLD)
         elif action == "snow_angel":
@@ -250,13 +297,15 @@ def render_layers(director, jelly, available):
                 icon("snowangel", round(jelly.x / scale), y, limit=26)
         elif action == "trim":
             icon("grass", x, y, limit=19)
-            if p > 0.3:
+            if p > 0.3 and director.sky != "fireflies":
                 d.rectangle((x - 10, y - 12, x + 10, y - 5), fill=(0, 0, 0, 0))
-            if active:
+            if active and director.sky != "fireflies":
                 fg.line((gx, gy, x + 3, y - 4), fill=WHITE, width=2)
             if done:
                 d.rectangle((x + 3, y - 3, x + 7, y), fill=GREEN)
         else:
+            d.arc((x - 10, y - 7, x - 3, y), 0, 180, fill=WHITE)
+            d.line((x - 9, y - 4, x - 4, y - 4), fill=PINK)
             for i in range(8):
                 if i / 8 <= p:
                     a = i * math.tau / 8
@@ -265,10 +314,12 @@ def render_layers(director, jelly, available):
             if active:
                 fg.line((gx, gy, x, y - 2), fill=GOLD)
     elif action in ("retie", "fly"):
-        airborne = held or active or action == "retie"
+        airborne = (held or active or action == "retie") and not (action == "fly" and obj.data.get("folded", False))
         if airborne:
-            icon(obj.name, x + side * 2, y - 15, beat if active else 0, layer=layer, limit=12)
-            draw.line((x + side * 2, y - 17, x, y), fill=WHITE)
+            height = obj.data.get("height", 15) if action == "fly" else 15
+            sway = round(obj.data.get("wind", 0) * 3)
+            icon(obj.name, x + side * 2 + sway, y - height, 0, layer=layer, limit=12)
+            draw.line((x + side * 2 + sway, y - height - 2, x, y), fill=WHITE)
             if action == "fly":
                 draw.rectangle((x - 2, y - 1, x + 2, y + 1), fill=WOOD)
         else:
@@ -276,8 +327,10 @@ def render_layers(director, jelly, available):
     elif action in ("read_letter", "press_leaf", "hug", "wear", "decorate_egg"):
         icon(obj.name, x, y, 0, layer=layer, limit=12)
         if action == "read_letter" and p > 0.15:
-            draw.rectangle((x - 5, y - 12, x + 5, y - 2), fill=WHITE, outline=INK)
-            for yy in (y - 9, y - 6):
+            unfolding = min(1, (p - 0.15) / 0.2) * (1 - min(1, max(0, (p - 0.8) / 0.2)))
+            height = 5 + round(7 * unfolding)
+            draw.rectangle((x - 5, y - height, x + 5, y - 2), fill=WHITE, outline=INK)
+            for yy in range(y - height + 3, y - 2, 3):
                 draw.line((x - 3, yy, x + 3, yy), fill=WOOD)
         elif action == "press_leaf" and done:
             d.rectangle((x - 7, y - 3, x + 7, y), fill=WOOD, outline=INK)
@@ -286,8 +339,11 @@ def render_layers(director, jelly, available):
             fg.arc((gx - 7, gy - 6, gx + 4, gy + 2), 0, 180, fill=WHITE)
         elif action == "wear" and active:
             fg.rectangle((gx - 3, gy - 2, gx + 3, gy + 2), fill=PINK, outline=INK)
-        elif action == "decorate_egg" and p > 0.4:
-            draw.line((x - 2, y - 6, x + 2, y - 6), fill=PINK, width=2)
+        elif action == "decorate_egg":
+            for stripe in range(min(3, int(p * 4))):
+                draw.line((x - 2, y - 4 - stripe * 3, x + 2, y - 4 - stripe * 3), fill=(PINK, BLUE, GOLD)[stripe])
+            if active:
+                fg.line((gx, gy, x - 2, y - 4 - min(2, int(p * 4)) * 3), fill=WOOD)
     elif action in (
         "wind_clock",
         "count_coins",
@@ -306,14 +362,20 @@ def render_layers(director, jelly, available):
             for i in range(round(5 * p)):
                 d.ellipse((x - 9 + i * 2, y - 2, x - 6 + i * 2, y), fill=GOLD, outline=WOOD)
         elif action == "catch_drips":
+            melt = round(6 * p)
+            if melt:
+                d.rectangle((x - 8, y - 15, x + 8, y - 15 + melt), fill=(0, 0, 0, 0))
             d.arc((x - 6, y - 5, x + 6, y + 1), 0, 180, fill=WHITE, width=2)
             if active:
                 d.point((x, y - 15 + beat), fill=BLUE)
             if p > 0.4:
                 d.line((x - 4, y - 2, x + 4, y - 2), fill=BLUE)
-        elif action == "close_window" and p > 0.2:
-            d.rectangle((x - 7, y - 19, x + 7, y - 3), fill="#29485b", outline=WOOD)
-            d.line((x, y - 19, x, y - 3), fill=WOOD)
+        elif action == "close_window":
+            opening = obj.data.get("opening", 1)
+            d.rectangle((x - 7, y - 19, x + 7, y - 3), fill="#152938", outline=WOOD)
+            edge = x - 7 + round(14 * (1 - opening))
+            d.rectangle((x - 7, y - 19, edge, y - 3), fill="#365d72", outline=WOOD)
+            d.point((edge - 1, y - 10), fill=GOLD)
         elif action == "check_wind" and active:
             fg.line((gx, gy, x - 3, y - 5), fill=GOLD)
         elif action == "decorate_tree":
@@ -325,12 +387,20 @@ def render_layers(director, jelly, available):
         elif action == "smoke_show" and (not active or p > 0.8):
             d.rectangle((x - 10, y - 24, x + 10, y - 9), fill=(0, 0, 0, 0))
             d.line((x - 4, y - 9, x + 4, y - 9), fill=WHITE)
-        elif action == "launch" and p > 0.3:
+        elif action == "launch":
             d.rectangle((x - 10, y - 26, x + 10, y - 5), fill=(0, 0, 0, 0))
-            if active and p < 0.8:
-                icon("rocket", x, y - round(35 * p), 0, limit=10)
+            lift = round(obj.data.get("height", 0))
+            icon("rocket", x, y - lift, 0, limit=10)
+            if not active or obj.data.get("landed", False):
+                d.rectangle((x - 5, y - 5, x + 5, y - 1), fill=(0, 0, 0, 0))
+                d.line((x - 5, y, x + 5, y), fill=WOOD)
     else:
         raise ValueError("Missing activity renderer: " + action)
+
+    if f.stage == "cleanup":
+        alpha = max(0, 1 - f.elapsed / 1.2)
+        for canvas in (back, front):
+            canvas.putalpha(canvas.getchannel("A").point([round(v * alpha) for v in range(256)]))
 
     def crops(canvas):
         occupied = canvas.getbbox()

@@ -25,13 +25,15 @@ Every prop has eight cyclic held poses. Stationary objects use subtle material c
 
 ![Every atmosphere effect rendered independently](world-atmosphere.gif)
 
+[Rain, snow and leaf contact review](weather/README.md). Natural particle motion follows elapsed time on every rendered frame; droplets splash, flakes settle, and leaves lie sideways before fading.
+
 Stars keep their positions as they twinkle. Fireflies wander slowly, butterflies flap, balloons rise and leaves tumble. Fog stays low, smoke rises in small curls, and clouds retain a continuous lit silhouette. Fireworks have launch, expansion and fading stages. Weather and decorative particles remain behind Jelly. A scene can deliberately be scenery-only, such as cloud watching.
 
 ## Composition and crowded decks
 
 Props and Jelly share the same logical pixel scale. Solid objects meet a common floor with a restrained contact shadow. Airborne objects retain headroom. A small nut is never enlarged to fill an empty button.
 
-The renderer chooses a free neighbor that is not part of a current Jelly crop, then another available key. A single free key gets a compact corner vignette behind the character, so some fine detail is intentionally sacrificed there. No free keys means no decorations. The sun, rainbow and toy wind funnels are placed on available keys rather than hidden behind session buttons. Other atmosphere continues across the shared deck coordinates.
+The renderer chooses a free neighbor that is not part of a current Jelly crop, then another available key. A single free key gets a compact corner vignette behind the character, so some fine detail is intentionally sacrificed there. No free keys means no decorations. The sun, rainbow and toy wind funnels are placed on available keys rather than hidden behind session buttons. Falling and drifting particles are clipped to individual free-key viewports, with separate floor contact and seeded variation. Stars and supported decorative fixtures retain the shared deck composition.
 
 Existing CLI controls govern props, particles, costumes, reduced motion and maximum keys. `interactions` enables object use and `interaction_seconds` controls the interval between activities; see [Jelly using its props](world.md#jelly-can-use-its-props). Existing configuration files receive the new defaults.
 

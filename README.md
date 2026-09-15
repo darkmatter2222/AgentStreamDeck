@@ -160,7 +160,7 @@ Prefer a quieter deck? Set `"jelly": {"coffee": false}` to disable coffee invita
 
 Fireworks for July Fourth. A Thanksgiving feast. Christmas lights across the deck. A floating Halloween ghost. Holi colors, snow days and a sunhat when it gets hot. **75 configurable scenes**, including 50 additional seasonal and festival experiences, bring Jelly into the world around you.
 
-Jelly picks up a rake and gathers leaves, lifts a mug for a sip, opens gifts, waters plants, and plays with a ball. Veined autumn leaves tumble past, lanterns glow, and tiny acorns sit beside Jelly at a believable scale. Layered pixel scenery and object-specific motion keep the little world readable without crowding your companion. [See the animated artwork gallery](docs/jelly/artwork.md) and [Jelly using the props](docs/jelly/prop-review.md).
+Jelly picks up a rake and gathers leaves, lifts a mug for a sip, opens gifts, waters plants, and plays with a ball. Rain falls in quick individual drops and splashes on each key, snow drifts and settles, and autumn leaves flutter down, land sideways and fade. Lanterns glow, and tiny acorns sit beside Jelly at a believable scale. Layered pixel scenery and object-specific motion keep the little world readable without crowding your companion. [See the animated artwork gallery](docs/jelly/artwork.md) and [Jelly using the props](docs/jelly/prop-review.md).
 
 The broker can discover approximate location and retrieve current weather. Jelly shares temperature updates and wears the right outfit while your agent buttons keep their jobs. Hold Jelly for setup guidance, then hold again to open the instructions. Every scene, costume, effect and caption can be configured or disabled.
 
@@ -247,4 +247,4 @@ CI tests Windows and Ubuntu with Python 3.11/3.13, including package installatio
 
 Licensed under [Apache 2.0](LICENSE). Agent names and logos belong to their respective owners; see [third-party notices](THIRD-PARTY.md).
 
-For contributors: [living-world development preview and remaining acceptance criteria](docs/jelly/living-world-development.md).
+Jelly gives objects a purpose: fetch a supported rake, gather leaves, sip and return a cup, plant an acorn, chase a ball, or unfold and reel in a kite. Objects appear as part of a reachable activity and clear after use. [Living-world behavior, controls and visual coverage](docs/jelly/living-world-development.md).

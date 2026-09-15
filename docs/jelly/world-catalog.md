@@ -10,6 +10,8 @@ Every entry is implemented in the production renderer. Use `ocdeck world preview
 
 [Jelly–prop interaction gallery and individual prop assessments](prop-review.md) explain which objects are used and which remain scenery. The `prop` column below selects the interaction recipe automatically when object use is enabled.
 
+Weather and particle motifs in all recipes use independent elapsed-time motion. Rain splashes on each free key; snow, leaves, petals and confetti settle and fade. The scene IDs and controls below are unchanged. [Native particle previews](world.md#natural-weather-particles).
+
 ## Requested holiday and weather scenes
 
 | ID | Experience | Context | Sky / prop / costume |

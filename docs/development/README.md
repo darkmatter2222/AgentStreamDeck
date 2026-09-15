@@ -15,7 +15,7 @@ pre-commit install
 
 Use Node.js 20+ for plugins/tests. Edit original modules in ocdeck/, plugins/ and scripts/; setup.py copies runtime assets when building wheels. Never edit a generated build/runtime copy as your source change.
 
-[Living-world development status and validation gaps](../jelly/living-world-development.md). The new director remains opt-in until the complete per-asset visual gate passes.
+[Living-world architecture and verification](../jelly/living-world-development.md). The intention director is the default; disabling it suppresses objects rather than selecting the legacy renderer.
 
 ## Automated checks
 

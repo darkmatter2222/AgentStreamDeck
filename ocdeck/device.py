@@ -251,7 +251,12 @@ class DeviceLoop:
                 from .world_interactions import Interaction
 
                 if isinstance(self.world.interaction, Interaction) and isinstance(saved, dict):
-                    self.world.interaction.restore(saved.get("world"))
+                    reset = read_json(Path(self.jelly_root) / "world-reset.json", {})
+                    generation = reset.get("generation", "") if isinstance(reset, dict) else ""
+                    state = saved.get("world")
+                    if isinstance(state, dict) and state.get("generation", "") == generation:
+                        self.world.interaction.restore(state)
+                    self.world.interaction.generation = generation
                 self.jelly.thoughts.recent.extend(recent)
             self.jelly_saved_at = time.monotonic()
             self.status["jelly"] = "enabled"

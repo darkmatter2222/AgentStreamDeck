@@ -227,7 +227,7 @@ class WorldTests(unittest.TestCase):
         world.tick(3, jelly)
         b = world.decorate(3, jelly, jelly.crops({0, 1}), {0, 1})
         self.assertEqual(jelly.state, "idle")
-        self.assertEqual(a[1].tobytes(), b[1].tobytes())
+        self.assertEqual({k: v.tobytes() for k, v in a.items()}, {k: v.tobytes() for k, v in b.items()})
 
     def test_calendar_timezone_and_weather_caption_fahrenheit(self):
         jelly, world = self.make(

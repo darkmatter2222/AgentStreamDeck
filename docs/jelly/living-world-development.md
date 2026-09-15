@@ -1,71 +1,47 @@
-# Living-world implementation status
+# Living-world architecture and verification
 
-[World controls](world.md) · [Coverage inventory](world-coverage.json) · [Development guide](../development/README.md)
+[Controls](world.md) · [Every object and preview](prop-review.md) · [Coverage manifest](world-coverage.json) · [Scene catalog](world-catalog.md)
 
-This is an **unfinished, opt-in implementation**, not the completed living-world experience. The shipped director remains the default. The new director has explicit object definitions and activity render branches for all 57 props, but those branches are not equivalent to verified, complete behaviors. The coverage manifest deliberately keeps visual reviews pending.
+Physical objects appear as part of an achievable activity. The default director replaces the old standalone-prop path. Disabling living-world activities removes their objects; it does not switch back to ambient props.
 
-## Try the development director
+## Lifecycle and ownership
 
-```console
-ocdeck world configure --living-world
-ocdeck world configure --no-living-world
-```
+The director owns one activity, one held object, up to eight remembered objects, 24 recent activities and 12 recent destinations. It ranks feasible scene/environment opportunities using existing needs and repetition penalties. Initial placement samples the reachable free component. Tools get a separate work cell when available. `route_to` reaches the actual target using the existing orthogonal hop animation.
 
-Restart the broker after either command. `living_world` defaults to `false`. Existing `interactions`, `props`, `reduced_motion`, `interaction_seconds`, `max_keys`, captions and priority controls still apply. With the new director, disabling interactions also removes its physical objects. The legacy director retains its documented ambient behavior.
+Notice, approach, local position and reach precede material updates. Carrying uses a pose-aware mirrored grip. Timelines then perform use, return/put-down, admiration, a short rest and cleanup. Tools rest against visible supports. Object-specific contact timelines handle consumption, watering, gathering, ball pursuit, sled boarding and kite reeling. Gifts create one follow-up ball, fountains carry water to a plant, and windsocks lead to kite play.
 
-The new director uses existing Jelly persistence when `jelly.persistent` is enabled. World snapshots share `jelly-state.json`, use an independent version, and restore objects to storage before reconciling coordinates. They contain at most eight objects and 24 recent activity names. No offline neglect debt is accrued. A world-specific reset command is not yet implemented.
+Material progress advances only during valid visible use, with elapsed-time deltas capped after stalls. Outcomes are guarded against duplicate application. Scene changes preserve the current activity; occupied keys, input, menus, help, coffee, updates and agent attention cancel it immediately. Cancellation stores a carried object and releases actor control. Resuming validates geometry and routes again.
 
-## Implemented foundations
+Plants and projects can reuse completed identities on later visits. Snapshots preserve bounded growth, progress and history, and reconcile all restored coordinates. Existing Jelly persistence writes immutable snapshots outside rendering with at most one worker. `ocdeck world reset` writes a generation marker, applied at the next broker restart, so an old background save cannot undo the reset. There is no offline neglect simulation.
 
-- Exact-target free-cell breadth-first routes; orthogonal hops use the existing anticipate/flight/land renderer.
-- Seeded weighted placement over the reachable component, with every valid candidate eligible. Tools get a separate work cell when space permits.
-- Stable object IDs, tool home locations, reservation/held/use/changed/storage states, and bounded snapshots.
-- Notice, approach, local position, reach, carry, use, return, put-down, admiration and rest stages.
-- Rake contact progress, cup contents, plant water transfer values, a single applied-outcome guard, and gift-content identity creation.
-- Pose-aware side grips and independent foreground object layers that crop across deck keys.
-- Immediate cancellation on ownership loss, menus, help, touch, update and agent attention. Scene changes do not cancel an active activity.
-- Snapshot copies created on the owner thread; periodic filesystem writes run on at most one worker. Disconnect saves happen before discarding world state.
+## Environmental behavior
 
-## Work still required before enabling by default
+Natural rain, snow, leaves and wind retain the particle engine introduced in 3.0.13. Sourced displays such as balloons, lanterns, confetti, lights and smoke no longer appear as unrelated global objects. Their activity provides the source. Butterfly/firefly movement, telescope targets, fireworks responses, lamp illumination and snowfall opportunities use activity state. Environmental reactions are scheduled around completed work rather than interrupting every particle.
 
-These are unmet acceptance criteria, not optional polish:
+[All atmosphere-to-activity mappings](world-coverage.json) include the existing 25 effects. Celestial landmarks are observed from a reachable activity location, not picked up. All 75 scenes retain compatible object or environment opportunities.
 
-1. Complete and inspect the contact, manipulation, cleanup and disposition of every prop. Current shared six-second use stages are insufficient for many multi-step activities.
-2. Refine the rake grip, contact arc, leaf resting positions, put-down and occasional pile-play variation at all native sizes.
-3. Implement actual ball chase/stopping, kite launch/reel-in, sled boarding/dismounting, gift-toy follow-up play and fountain-to-plant journeys. Current render branches are prototypes.
-4. Replace unrelated ambient loops with consequences tied to actual atmosphere timing. `ATMOSPHERES` is an opportunity mapping, not completed environmental behavior coverage.
-5. Reuse completed plants and other durable fixtures on later visits. Persistent snapshots currently preserve their records; the selector does not yet revisit every finished object correctly.
-6. Add meaningful rest routines, personality preference, unfinished-project resumption, and a world reset control.
-7. Finish all 57 prop and 25 atmosphere native-size animated reviews and all 75 scene compatibility reviews. Inspect edge/mirror cases, support/contact and face occlusion individually.
-8. Resolve the remaining performance difference and add isolated cold-cache measurements. The checked-in comparison uses equal layouts and simulated durations, but the directors execute different activity poses.
-
-## Reproduce initial evidence
+## Reproduce the review
 
 ```console
+python scripts/review_living_assets.py
 python scripts/preview_living_world.py
+python -m unittest discover -s tests -p test_world_lifecycle.py
 python -m unittest discover -s tests -p test_living_world.py
+python scripts/benchmark_living_world.py --baseline-checkout ../baseline-3.0.13
 ```
 
-The preview script uses the production director and renderer at Mini 72px, Original/MK.2 80px and XL 96px. It writes full-deck GIFs, stage contact sheets and timing metadata. The green cell in the takeover reel represents an owned session key. These are offline simulations, not physical-device verification.
+[Activity timelines](living-previews/activity-timelines.json) record complete generated sequences. [Rake travel, Mini](living-previews/autumn_rake-72.gif), [Original](living-previews/autumn_rake-80.gif), [XL](living-previews/autumn_rake-96.gif), and [session takeover](living-previews/autumn_rake-72-takeover.gif) exercise whole-deck navigation. Individual native captures and stage sheets are linked from the per-object review. These are procedural-renderer recordings, not hand-authored mockups.
 
-[Rake, Mini](living-previews/autumn_rake-72.gif) · [Rake, Original](living-previews/autumn_rake-80.gif) · [Rake, XL](living-previews/autumn_rake-96.gif)
+The native review corrected unsupported gift-lid motion, static snowflake contact, lamp shading, telescope adjustment, incremental egg decoration, letter folding and construction stages. Mini stance placement accounts for its 1x logical artwork; Original and XL use the existing 2x art scale. Jelly's original body artwork remains unchanged.
 
-[Cocoa, Mini](living-previews/autumn_cocoa-72.gif) · [Cocoa, Original](living-previews/autumn_cocoa-80.gif) · [Cocoa, XL](living-previews/autumn_cocoa-96.gif) · [Session takeover](living-previews/autumn_rake-72-takeover.gif)
+## Performance and practical limits
 
-## Architecture and ownership
+[Comparison measurements](living-previews/comparison.json) use separate interpreter processes per checkout/layout, the same scene, seed, free-key layout and simulated duration. They include first-object-frame and warm composition timings. The candidate executes longer routes and different poses than the baseline, so this is an end-to-end workload comparison, not an isolated primitive benchmark. No USB writes or physical screen latency are measured.
 
-`world_objects.py` holds immutable definitions and mutable object records. `world_interactions.py` advances intentions and material state. `world_object_art.py` consumes that state and never changes outcomes. `World` chooses the opt-in or legacy director, then composes background, Jelly and foreground layers. `DeckGeometry.route_to` differs from `route_beside`: a prop's own cell is the destination.
+Single-key play uses a short local ground path. This is authored pixel animation with bounded material state, not a physics engine. The expanded home/economy/crafting concepts remain outside this implementation. Repository CI and semantic tests cover source behavior; actual Stream Deck hardware still requires user observation.
 
-The device retains authority over session ownership and input precedence. World reservations never reserve a hardware key. Every tick revalidates the tool home, work cell and actor availability. A canceled carried object goes into logical storage; world visuals disappear and actor control is released. Future routes are recomputed one hop at a time.
+## Validation record
 
-Time advances only during valid visible use. Large elapsed-time jumps are capped, so missed time cannot silently award a completed offscreen interaction. Rendering uses copied cached sprites. The current renderer allocates a full-deck logical canvas for foreground and background; optimizing that cost requires the comparative measurements above.
+The local full Python suite exercises navigation, persistence, button precedence, weather and object lifecycles; the Node suite exercises the harness and permission paths. Ruff, Pyright, documentation/media checks, package build and an installed-wheel import check are required alongside hosted CI. The process-restart test has a known local skip because this container exposes host PIDs through `/proc`; hosted CI remains authoritative for that platform behavior.
 
-## Validation at this checkpoint
-
-- Python: 214 tests passed, with one real-process restart test skipped because this environment exposes host PIDs through `/proc`.
-- Node: 30 tests passed, including permission tests.
-- Ruff lint/format, Pyright, documentation validation and package build passed.
-- An installed wheel imported the new modules and verified bundled JavaScript/PowerShell assets outside the checkout.
-- Native stage contact sheets for the rake and cup were inspected. This is not a completed full-animation review of every asset.
-
-[Offline comparison measurements](living-previews/comparison.json) are reproducible with `python scripts/benchmark_living_world.py`. Full-sequence capture measurements are in [timings.json](living-previews/timings.json). They do not measure USB writes or real hardware frame timing. The object compositor was changed to scale only intersecting key crops after the first measurement showed excessive full-deck allocation costs.
+The generated evidence includes 246 complete object/environment recordings (57 objects plus 25 atmospheres at three native sizes) and [225 completed scene/layout checks](living-previews/scene-review.json). The scene review reclaims a middle key and verifies that rendering stays within free keys. The semantic tests separately check takeover during activity stages, gift identity, fountain travel, frame-rate equivalence, capped time jumps, cleanup, reset markers and disabled-mode absence of orphan props.

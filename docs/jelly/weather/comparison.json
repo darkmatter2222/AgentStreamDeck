@@ -1,0 +1,133 @@
+{
+  "method": "300 samples at 24Hz simulated time, first 60 discarded; same scene/seed/all keys free; no props or captions; CPU composition only; baseline source tree 987445c148355869d541415f492abda243576a96",
+  "before": [
+    {
+      "size": 72,
+      "keys": 6,
+      "scene": "rain",
+      "median_ms": 0.2303869987372309,
+      "p95_ms": 0.48851499741431326
+    },
+    {
+      "size": 72,
+      "keys": 6,
+      "scene": "snow",
+      "median_ms": 0.2900600011344068,
+      "p95_ms": 1.2086339993402362
+    },
+    {
+      "size": 72,
+      "keys": 6,
+      "scene": "autumn_leaves",
+      "median_ms": 0.22052500025893096,
+      "p95_ms": 0.7917840011941735
+    },
+    {
+      "size": 80,
+      "keys": 15,
+      "scene": "rain",
+      "median_ms": 0.6596974999411032,
+      "p95_ms": 1.240133999090176
+    },
+    {
+      "size": 80,
+      "keys": 15,
+      "scene": "snow",
+      "median_ms": 0.7557270000688732,
+      "p95_ms": 1.3394790003076196
+    },
+    {
+      "size": 80,
+      "keys": 15,
+      "scene": "autumn_leaves",
+      "median_ms": 0.6053849992895266,
+      "p95_ms": 1.1953890025324654
+    },
+    {
+      "size": 96,
+      "keys": 32,
+      "scene": "rain",
+      "median_ms": 1.2017614990327274,
+      "p95_ms": 2.4005480008781888
+    },
+    {
+      "size": 96,
+      "keys": 32,
+      "scene": "snow",
+      "median_ms": 1.3605264994112076,
+      "p95_ms": 1.9469610015221406
+    },
+    {
+      "size": 96,
+      "keys": 32,
+      "scene": "autumn_leaves",
+      "median_ms": 1.1263854976277798,
+      "p95_ms": 2.4022329998842906
+    }
+  ],
+  "after": [
+    {
+      "size": 72,
+      "keys": 6,
+      "scene": "rain",
+      "median_ms": 2.302580500327167,
+      "p95_ms": 5.413382001279388
+    },
+    {
+      "size": 72,
+      "keys": 6,
+      "scene": "snow",
+      "median_ms": 1.1106214988103602,
+      "p95_ms": 3.8412180001614615
+    },
+    {
+      "size": 72,
+      "keys": 6,
+      "scene": "autumn_leaves",
+      "median_ms": 0.7599380005558487,
+      "p95_ms": 2.7253480002400465
+    },
+    {
+      "size": 80,
+      "keys": 15,
+      "scene": "rain",
+      "median_ms": 1.3450480000756215,
+      "p95_ms": 2.516420001484221
+    },
+    {
+      "size": 80,
+      "keys": 15,
+      "scene": "snow",
+      "median_ms": 1.1137049987155478,
+      "p95_ms": 1.9108810010948218
+    },
+    {
+      "size": 80,
+      "keys": 15,
+      "scene": "autumn_leaves",
+      "median_ms": 1.2037070009682793,
+      "p95_ms": 2.56018200161634
+    },
+    {
+      "size": 96,
+      "keys": 32,
+      "scene": "rain",
+      "median_ms": 3.984445998867159,
+      "p95_ms": 8.591377998527605
+    },
+    {
+      "size": 96,
+      "keys": 32,
+      "scene": "snow",
+      "median_ms": 3.004546000738628,
+      "p95_ms": 5.2537740011757705
+    },
+    {
+      "size": 96,
+      "keys": 32,
+      "scene": "autumn_leaves",
+      "median_ms": 2.9193885002314346,
+      "p95_ms": 5.721270998037653
+    }
+  ]
+}

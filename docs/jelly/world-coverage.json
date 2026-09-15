@@ -1,1037 +1,1112 @@
 {
-  "schema_version": 1,
-  "baseline": "e8c88471797cbf70b01112e00bf24d0ae65ad12b",
+  "schema_version": 2,
+  "baseline": "v3.0.13",
   "props": {
     "acorn": {
       "action": "plant",
       "support": "soil",
-      "intended": {
-        "name": "Acorn",
-        "placement": "On soil or in a little collection tray",
-        "interaction": "Hop over, lift, turn to examine, then plant or collect",
-        "outcome": "Acorn enters soil or tray; later sprout or collection persists"
-      },
-      "review": "pending"
+      "outcome": "sprout",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/acorn-72.gif",
+        "living-previews/acorn-80.gif",
+        "living-previews/acorn-96.gif"
+      ]
     },
     "balloon": {
       "action": "retie",
       "support": "post",
-      "intended": {
-        "name": "Balloon",
-        "placement": "Tied to a low post with visible string",
-        "interaction": "Untie, hold string, walk/hop with buoyant balloon, retie",
-        "outcome": "String stays attached; balloon trails and settles at new support"
-      },
-      "review": "pending"
+      "outcome": "tied",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/balloon-72.gif",
+        "living-previews/balloon-80.gif",
+        "living-previews/balloon-96.gif"
+      ]
     },
     "beachball": {
       "action": "chase",
       "support": "floor",
-      "intended": {
-        "name": "Beachball",
-        "placement": "Resting on sand/ground",
-        "interaction": "Approach, nudge, chase, stop it with a second contact",
-        "outcome": "Ball rolls, slows, and rests; play has a clear endpoint"
-      },
-      "review": "pending"
+      "outcome": "parked",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/beachball-72.gif",
+        "living-previews/beachball-80.gif",
+        "living-previews/beachball-96.gif"
+      ]
     },
     "broom": {
       "action": "sweep",
       "support": "rack",
-      "intended": {
-        "name": "Broom",
-        "placement": "Leaning against rack, bristles grounded",
-        "interaction": "Fetch and sweep visible debris",
-        "outcome": "Debris collects; broom returns to support"
-      },
-      "review": "pending"
+      "outcome": "clean",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/broom-72.gif",
+        "living-previews/broom-80.gif",
+        "living-previews/broom-96.gif"
+      ]
     },
     "cake": {
       "action": "candles",
       "support": "plate",
-      "intended": {
-        "name": "Cake",
-        "placement": "On a small plate or stand",
-        "interaction": "Approach, blow candles, take a small serving",
-        "outcome": "Flames extinguish; serving visibly changes; plate is cleared"
-      },
-      "review": "pending"
+      "outcome": "served",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/cake-72.gif",
+        "living-previews/cake-80.gif",
+        "living-previews/cake-96.gif"
+      ]
     },
     "candy": {
       "action": "unwrap_eat",
       "support": "tray",
-      "intended": {
-        "name": "Candy",
-        "placement": "Wrapped on a tray",
-        "interaction": "Pick up, unwrap, taste, collect wrapper",
-        "outcome": "Wrapper and candy states differ; litter is removed"
-      },
-      "review": "pending"
+      "outcome": "wrapper_stored",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/candy-72.gif",
+        "living-previews/candy-80.gif",
+        "living-previews/candy-96.gif"
+      ]
     },
     "canister": {
       "action": "smoke_show",
       "support": "floor",
-      "intended": {
-        "name": "Canister",
-        "placement": "Upright on floor/shelf",
-        "interaction": "Open and use contents appropriate to its actual identity",
-        "outcome": "Lid and contents change; close and store; first verify what current art represents"
-      },
-      "review": "pending"
+      "outcome": "closed",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/canister-72.gif",
+        "living-previews/canister-80.gif",
+        "living-previews/canister-96.gif"
+      ]
     },
     "clock": {
       "action": "wind_clock",
       "support": "stand",
-      "intended": {
-        "name": "Clock",
-        "placement": "Mounted or on a stable stand",
-        "interaction": "Approach and wind or adjust it; respond when it rings",
-        "outcome": "Hands/bell react; Jelly begins a related routine"
-      },
-      "review": "pending"
+      "outcome": "wound",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/clock-72.gif",
+        "living-previews/clock-80.gif",
+        "living-previews/clock-96.gif"
+      ]
     },
     "cloud": {
       "action": "shelter",
       "support": "sky",
-      "intended": {
-        "name": "Cloud",
-        "placement": "In sky, clearly distinct from a solid toy",
-        "interaction": "Visit a viewing spot; follow drift and respond to its shadow or drizzle",
-        "outcome": "Shadow or rain changes ground; Jelly seeks cover or enjoys the clearing"
-      },
-      "review": "pending"
+      "outcome": "puddle",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/cloud-72.gif",
+        "living-previews/cloud-80.gif",
+        "living-previews/cloud-96.gif"
+      ]
     },
     "clover": {
       "action": "water",
       "support": "soil",
-      "intended": {
-        "name": "Clover",
-        "placement": "Rooted in a small soil patch",
-        "interaction": "Tend, gently inspect leaves, water",
-        "outcome": "Leaves lift or growth state improves; plant stays rooted"
-      },
-      "review": "pending"
+      "outcome": "grown",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/clover-72.gif",
+        "living-previews/clover-80.gif",
+        "living-previews/clover-96.gif"
+      ]
     },
     "cocoa": {
       "action": "drink",
       "support": "coaster",
-      "intended": {
-        "name": "Cocoa",
-        "placement": "On a coaster or low table",
-        "interaction": "Lift, blow steam, sip, return",
-        "outcome": "Steam and liquid diminish; cup returns to coaster"
-      },
-      "review": "Initial native stage contact sheets inspected: cup travels to grip and liquid drains; sip pose and mouth contact refinement pending."
+      "outcome": "empty",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/cocoa-72.gif",
+        "living-previews/cocoa-80.gif",
+        "living-previews/cocoa-96.gif"
+      ]
     },
     "crescent": {
       "action": "moonwatch",
       "support": "sky",
-      "intended": {
-        "name": "Crescent",
-        "placement": "Celestial, not a loose floor object",
-        "interaction": "Visit telescope or viewing spot and track moon",
-        "outcome": "Telescope aims; reflection or moonlight scene responds; bedtime follows"
-      },
-      "review": "pending"
+      "outcome": "observed",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/crescent-72.gif",
+        "living-previews/crescent-80.gif",
+        "living-previews/crescent-96.gif"
+      ]
     },
     "diya": {
       "action": "tend_wick",
       "support": "tray",
-      "intended": {
-        "name": "Diya",
-        "placement": "Stable tray with clear base",
-        "interaction": "Carry/set tray, carefully tend wick, admire light",
-        "outcome": "Flame and local glow change; tray remains supported"
-      },
-      "review": "pending"
+      "outcome": "lit",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/diya-72.gif",
+        "living-previews/diya-80.gif",
+        "living-previews/diya-96.gif"
+      ]
     },
     "dreidel": {
       "action": "spin",
       "support": "floor",
-      "intended": {
-        "name": "Dreidel",
-        "placement": "On a clear play surface",
-        "interaction": "Pick up, set, spin, follow wobble",
-        "outcome": "Spin slows, tips, and rests; Jelly retrieves it"
-      },
-      "review": "pending"
+      "outcome": "tipped",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/dreidel-72.gif",
+        "living-previews/dreidel-80.gif",
+        "living-previews/dreidel-96.gif"
+      ]
     },
     "eggs": {
       "action": "decorate_egg",
       "support": "basket",
-      "intended": {
-        "name": "Eggs",
-        "placement": "In nest or decorated basket",
-        "interaction": "Lift/turn one and decorate or arrange",
-        "outcome": "Egg pattern/arrangement changes; egg returns to basket"
-      },
-      "review": "pending"
+      "outcome": "decorated",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/eggs-72.gif",
+        "living-previews/eggs-80.gif",
+        "living-previews/eggs-96.gif"
+      ]
     },
     "fan": {
       "action": "switch_fan",
       "support": "stand",
-      "intended": {
-        "name": "Fan",
-        "placement": "On stand or held with a proper grip",
-        "interaction": "Switch on/adjust or use hand fan according to design",
-        "outcome": "Blades/folds move; nearby ribbon and Jelly react to airflow"
-      },
-      "review": "pending"
+      "outcome": "cooled",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/fan-72.gif",
+        "living-previews/fan-80.gif",
+        "living-previews/fan-96.gif"
+      ]
     },
     "feast": {
       "action": "picnic",
       "support": "plate",
-      "intended": {
-        "name": "Feast",
-        "placement": "Small picnic setting",
-        "interaction": "Arrange a place, sit, take a portion, tidy",
-        "outcome": "Portions change and setting is packed away"
-      },
-      "review": "pending"
+      "outcome": "packed",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/feast-72.gif",
+        "living-previews/feast-80.gif",
+        "living-previews/feast-96.gif"
+      ]
     },
     "flower": {
       "action": "water",
       "support": "soil",
-      "intended": {
-        "name": "Flower",
-        "placement": "Rooted or in a supported pot",
-        "interaction": "Water, smell with visible lean, remove a fallen petal",
-        "outcome": "Bloom/leaf state changes; petal is collected"
-      },
-      "review": "pending"
+      "outcome": "grown",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/flower-72.gif",
+        "living-previews/flower-80.gif",
+        "living-previews/flower-96.gif"
+      ]
     },
     "fountain": {
       "action": "fill_water",
       "support": "basin",
-      "intended": {
-        "name": "Fountain",
-        "placement": "Basin on ground",
-        "interaction": "Approach edge, dip/fill a small container, water a plant",
-        "outcome": "Ripples and container water connect fountain to another task"
-      },
-      "review": "pending"
+      "outcome": "watered",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/fountain-72.gif",
+        "living-previews/fountain-80.gif",
+        "living-previews/fountain-96.gif"
+      ]
     },
     "gift": {
       "action": "unwrap",
       "support": "floor",
-      "intended": {
-        "name": "Gift",
-        "placement": "Grounded box with ribbon",
-        "interaction": "Carry to open space, untie, open",
-        "outcome": "Revealed usable item joins play; wrapping is folded away"
-      },
-      "review": "pending"
+      "outcome": "opened",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/gift-72.gif",
+        "living-previews/gift-80.gif",
+        "living-previews/gift-96.gif"
+      ]
     },
     "globe": {
       "action": "spin_globe",
       "support": "stand",
-      "intended": {
-        "name": "Globe",
-        "placement": "On a small stand",
-        "interaction": "Approach, spin with contact, stop and examine a point",
-        "outcome": "Globe rotates and slows; chosen location becomes a short thought/memory"
-      },
-      "review": "pending"
+      "outcome": "located",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/globe-72.gif",
+        "living-previews/globe-80.gif",
+        "living-previews/globe-96.gif"
+      ]
     },
     "grass": {
       "action": "trim",
       "support": "soil",
-      "intended": {
-        "name": "Grass",
-        "placement": "Rooted turf",
-        "interaction": "Tend or trim a patch using an appropriate tool",
-        "outcome": "Patch height changes; clippings collect"
-      },
-      "review": "pending"
+      "outcome": "trimmed",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/grass-72.gif",
+        "living-previews/grass-80.gif",
+        "living-previews/grass-96.gif"
+      ]
     },
     "heart": {
       "action": "hug",
       "support": "tray",
-      "intended": {
-        "name": "Heart",
-        "placement": "Explicit tangible token/cushion, or explicit effect",
-        "interaction": "Carry token to a keepsake place or hug a cushion",
-        "outcome": "Token is stored or cushion compresses; avoid unexplained floating solid heart"
-      },
-      "review": "pending"
+      "outcome": "kept",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/heart-72.gif",
+        "living-previews/heart-80.gif",
+        "living-previews/heart-96.gif"
+      ]
     },
     "icicles": {
       "action": "catch_drips",
       "support": "ledge",
-      "intended": {
-        "name": "Icicles",
-        "placement": "Attached beneath a ledge",
-        "interaction": "Notice drip, place a bowl beneath, return later",
-        "outcome": "Drops accumulate; icicle slowly shortens; no floating ice sticks"
-      },
-      "review": "pending"
+      "outcome": "collected",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/icicles-72.gif",
+        "living-previews/icicles-80.gif",
+        "living-previews/icicles-96.gif"
+      ]
     },
     "kite": {
       "action": "fly",
       "support": "rack",
-      "intended": {
-        "name": "Kite",
-        "placement": "Folded on ground or stored on rack",
-        "interaction": "Fetch, unfold, run/hop to launch, hold spool, reel in",
-        "outcome": "Kite responds to wind; string remains connected; folds for storage"
-      },
-      "review": "pending"
+      "outcome": "folded",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/kite-72.gif",
+        "living-previews/kite-80.gif",
+        "living-previews/kite-96.gif"
+      ]
     },
     "lamp": {
       "action": "read_light",
       "support": "stand",
-      "intended": {
-        "name": "Lamp",
-        "placement": "Stable base on floor/table",
-        "interaction": "Approach switch, turn on, settle nearby for quiet activity",
-        "outcome": "Light changes and supports reading/rest; switch off afterward"
-      },
-      "review": "pending"
+      "outcome": "off",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/lamp-72.gif",
+        "living-previews/lamp-80.gif",
+        "living-previews/lamp-96.gif"
+      ]
     },
     "lantern": {
       "action": "hang",
       "support": "hook",
-      "intended": {
-        "name": "Lantern",
-        "placement": "Hook, stand, or grounded base",
-        "interaction": "Carry by handle and hang at a destination",
-        "outcome": "Swing settles from attachment; local lighting changes"
-      },
-      "review": "pending"
+      "outcome": "hung",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/lantern-72.gif",
+        "living-previews/lantern-80.gif",
+        "living-previews/lantern-96.gif"
+      ]
     },
     "leaf": {
       "action": "press_leaf",
       "support": "floor",
-      "intended": {
-        "name": "Leaf",
-        "placement": "On ground after a visible fall",
-        "interaction": "Catch or collect; add to pile or press in a keepsake",
-        "outcome": "Leaf moves through contact and ends in a deliberate location"
-      },
-      "review": "pending"
+      "outcome": "pressed",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/leaf-72.gif",
+        "living-previews/leaf-80.gif",
+        "living-previews/leaf-96.gif"
+      ]
     },
     "lemonade": {
       "action": "drink",
       "support": "coaster",
-      "intended": {
-        "name": "Lemonade",
-        "placement": "Glass on coaster/tray",
-        "interaction": "Pick up and sip, then return",
-        "outcome": "Liquid level falls; glass stays upright and returns to support"
-      },
-      "review": "pending"
+      "outcome": "empty",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/lemonade-72.gif",
+        "living-previews/lemonade-80.gif",
+        "living-previews/lemonade-96.gif"
+      ]
     },
     "letter": {
       "action": "read_letter",
       "support": "mat",
-      "intended": {
-        "name": "Letter",
-        "placement": "On mat or in a small mailbox",
-        "interaction": "Collect, open, unfold, read, fold and store",
-        "outcome": "Envelope/paper states and keepsake storage are visible"
-      },
-      "review": "pending"
+      "outcome": "folded",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/letter-72.gif",
+        "living-previews/letter-80.gif",
+        "living-previews/letter-96.gif"
+      ]
     },
     "menorah": {
       "action": "light_candles",
       "support": "stand",
-      "intended": {
-        "name": "Menorah",
-        "placement": "Stable shelf/table",
-        "interaction": "Approach and tend/display lights with an appropriate gesture",
-        "outcome": "Correct modeled lights and subtle illumination; verify cultural depiction"
-      },
-      "review": "pending"
+      "outcome": "lit",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/menorah-72.gif",
+        "living-previews/menorah-80.gif",
+        "living-previews/menorah-96.gif"
+      ]
     },
     "mittens": {
       "action": "wear",
       "support": "rack",
-      "intended": {
-        "name": "Mittens",
-        "placement": "On a rack or folded pair",
-        "interaction": "Fetch, put on before cold play, remove afterward",
-        "outcome": "Wearable attachments follow Jelly; mittens return as a pair"
-      },
-      "review": "pending"
+      "outcome": "returned",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/mittens-72.gif",
+        "living-previews/mittens-80.gif",
+        "living-previews/mittens-96.gif"
+      ]
     },
     "music": {
       "action": "lullaby",
       "support": "effect",
-      "intended": {
-        "name": "Music",
-        "placement": "Define source: instrument or music box; notes are effects",
-        "interaction": "Operate the source, play a short rhythm, dance to it",
-        "outcome": "Source movement produces timed notes; stop and close/store source"
-      },
-      "review": "pending"
+      "outcome": "quiet",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/music-72.gif",
+        "living-previews/music-80.gif",
+        "living-previews/music-96.gif"
+      ]
     },
     "pie": {
       "action": "serve",
       "support": "plate",
-      "intended": {
-        "name": "Pie",
-        "placement": "On a plate/cooling sill",
-        "interaction": "Approach, smell steam, take a slice/portion",
-        "outcome": "Pie visibly changes; plate and crumbs are cleared"
-      },
-      "review": "pending"
+      "outcome": "served",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/pie-72.gif",
+        "living-previews/pie-80.gif",
+        "living-previews/pie-96.gif"
+      ]
     },
     "pinwheel": {
       "action": "blow",
       "support": "stand",
-      "intended": {
-        "name": "Pinwheel",
-        "placement": "Stem planted or handle stored",
-        "interaction": "Pick up, blow, then hold in breeze",
-        "outcome": "Spin rate follows blowing/wind and decays; return stem to holder"
-      },
-      "review": "pending"
+      "outcome": "stopped",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/pinwheel-72.gif",
+        "living-previews/pinwheel-80.gif",
+        "living-previews/pinwheel-96.gif"
+      ]
     },
     "popsicle": {
       "action": "lick",
       "support": "tray",
-      "intended": {
-        "name": "Popsicle",
-        "placement": "Holder or freshly obtained treat",
-        "interaction": "Lift and taste while holding stick",
-        "outcome": "Treat shrinks slightly; drip and stick are handled"
-      },
-      "review": "pending"
+      "outcome": "stick_stored",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/popsicle-72.gif",
+        "living-previews/popsicle-80.gif",
+        "living-previews/popsicle-96.gif"
+      ]
     },
     "pot": {
       "action": "count_coins",
       "support": "floor",
-      "intended": {
-        "name": "Pot",
-        "placement": "Supported pot with identity clarified from art",
-        "interaction": "Plant into a planter, or stir a cooking pot if that is its identity",
-        "outcome": "Soil/plant or contents change; do not mix incompatible meanings"
-      },
-      "review": "pending"
+      "outcome": "counted",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/pot-72.gif",
+        "living-previews/pot-80.gif",
+        "living-previews/pot-96.gif"
+      ]
     },
     "powder": {
       "action": "pour_pattern",
       "support": "tray",
-      "intended": {
-        "name": "Powder",
-        "placement": "Small pile/container, with material identified",
-        "interaction": "Scoop/sprinkle or brush into a pattern",
-        "outcome": "Material transfers and leaves a shaped result; avoid generic mystery pixels"
-      },
-      "review": "pending"
+      "outcome": "pattern",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/powder-72.gif",
+        "living-previews/powder-80.gif",
+        "living-previews/powder-96.gif"
+      ]
     },
     "puddle": {
       "action": "splash",
       "support": "water",
-      "intended": {
-        "name": "Puddle",
-        "placement": "Flat on ground with reflection",
-        "interaction": "Approach, test with a toe, hop through, shake droplets",
-        "outcome": "Contact produces ripples/splash; puddle gradually dries"
-      },
-      "review": "pending"
+      "outcome": "settled",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/puddle-72.gif",
+        "living-previews/puddle-80.gif",
+        "living-previews/puddle-96.gif"
+      ]
     },
     "pumpkin": {
       "action": "tend_pumpkin",
       "support": "floor",
-      "intended": {
-        "name": "Pumpkin",
-        "placement": "Grounded on patch or low stand",
-        "interaction": "Roll into place, clean, decorate",
-        "outcome": "Face/pattern changes; pumpkin remains supported"
-      },
-      "review": "pending"
+      "outcome": "lit",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/pumpkin-72.gif",
+        "living-previews/pumpkin-80.gif",
+        "living-previews/pumpkin-96.gif"
+      ]
     },
     "rake": {
       "action": "rake",
       "support": "rack",
-      "intended": {
-        "name": "Rake",
-        "placement": "Head grounded, handle against visible support",
-        "interaction": "Fetch, carry, rake contacting leaves, return",
-        "outcome": "Leaves form pile; tool rests against support again"
-      },
-      "review": "Initial native stage contact sheets inspected: travel and tool support visible; contact, return and pile-play refinement pending."
+      "outcome": "pile",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/rake-72.gif",
+        "living-previews/rake-80.gif",
+        "living-previews/rake-96.gif"
+      ]
     },
     "rangoli": {
       "action": "finish_pattern",
       "support": "floor",
-      "intended": {
-        "name": "Rangoli",
-        "placement": "Ground-level pattern with material bowl",
-        "interaction": "Carry colors and place successive strokes/dots",
-        "outcome": "Pattern visibly develops; excess material is tidied respectfully"
-      },
-      "review": "pending"
+      "outcome": "complete",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/rangoli-72.gif",
+        "living-previews/rangoli-80.gif",
+        "living-previews/rangoli-96.gif"
+      ]
     },
     "rocket": {
       "action": "launch",
       "support": "stand",
-      "intended": {
-        "name": "Rocket",
-        "placement": "Clearly a toy on a launch base",
-        "interaction": "Position toy, trigger launch, watch, retrieve landed toy",
-        "outcome": "Authored launch arc and landing; no unexplained perpetual hover"
-      },
-      "review": "pending"
+      "outcome": "spent",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/rocket-72.gif",
+        "living-previews/rocket-80.gif",
+        "living-previews/rocket-96.gif"
+      ]
     },
     "sandcastle": {
       "action": "build_sand",
       "support": "soil",
-      "intended": {
-        "name": "Sandcastle",
-        "placement": "On sand patch with small bucket",
-        "interaction": "Fetch sand, pack/invert bucket, pat towers",
-        "outcome": "Castle grows through discrete stages; tools are stored"
-      },
-      "review": "pending"
+      "outcome": "built",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/sandcastle-72.gif",
+        "living-previews/sandcastle-80.gif",
+        "living-previews/sandcastle-96.gif"
+      ]
     },
     "scythe": {
       "action": "harvest",
       "support": "rack",
-      "intended": {
-        "name": "Scythe",
-        "placement": "Blade grounded/covered on tool rack",
-        "interaction": "Carry with controlled pose and harvest a grass patch",
-        "outcome": "Grass becomes gathered cuttings; tool returns safely to rack"
-      },
-      "review": "pending"
+      "outcome": "harvested",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/scythe-72.gif",
+        "living-previews/scythe-80.gif",
+        "living-previews/scythe-96.gif"
+      ]
     },
     "seedling": {
       "action": "water",
       "support": "soil",
-      "intended": {
-        "name": "Seedling",
-        "placement": "Rooted in soil/planter",
-        "interaction": "Fetch water, pour at roots, inspect",
-        "outcome": "Moisture and growth state change over later visits"
-      },
-      "review": "pending"
+      "outcome": "grown",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/seedling-72.gif",
+        "living-previews/seedling-80.gif",
+        "living-previews/seedling-96.gif"
+      ]
     },
     "sled": {
       "action": "ride",
       "support": "floor",
-      "intended": {
-        "name": "Sled",
-        "placement": "Runners resting on snow",
-        "interaction": "Pull by rope to start, sit, slide, step off, retrieve",
-        "outcome": "Sled travels along a valid local slope/path and comes to rest"
-      },
-      "review": "pending"
+      "outcome": "parked",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/sled-72.gif",
+        "living-previews/sled-80.gif",
+        "living-previews/sled-96.gif"
+      ]
     },
     "snowangel": {
       "action": "snow_angel",
       "support": "snow",
-      "intended": {
-        "name": "Snowangel",
-        "placement": "Result drawn into snow, not a floating item",
-        "interaction": "Hop to fresh snow, lie back, sweep limbs/body, rise",
-        "outcome": "Matching imprint remains; Jelly looks back at its work"
-      },
-      "review": "pending"
+      "outcome": "imprint",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/snowangel-72.gif",
+        "living-previews/snowangel-80.gif",
+        "living-previews/snowangel-96.gif"
+      ]
     },
     "snowball": {
       "action": "roll_snow",
       "support": "snow",
-      "intended": {
-        "name": "Snowball",
-        "placement": "Resting in snow",
-        "interaction": "Roll to grow, lift or push toward snowman/play target",
-        "outcome": "Size/position changes; ball is incorporated or breaks into snow"
-      },
-      "review": "pending"
+      "outcome": "rolled",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/snowball-72.gif",
+        "living-previews/snowball-80.gif",
+        "living-previews/snowball-96.gif"
+      ]
     },
     "snowflake": {
       "action": "catch_flake",
       "support": "sky",
-      "intended": {
-        "name": "Snowflake",
-        "placement": "Falling particle or caught crystal",
-        "interaction": "Move to catch it and hold still to inspect",
-        "outcome": "Flake lands at contact point and melts to a droplet"
-      },
-      "review": "pending"
+      "outcome": "melted",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/snowflake-72.gif",
+        "living-previews/snowflake-80.gif",
+        "living-previews/snowflake-96.gif"
+      ]
     },
     "snowman": {
       "action": "build_snow",
       "support": "snow",
-      "intended": {
-        "name": "Snowman",
-        "placement": "Grounded snow structure",
-        "interaction": "Roll and stack balls, add recognizable details",
-        "outcome": "Build stages persist; Jelly revisits or repairs later"
-      },
-      "review": "pending"
+      "outcome": "built",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/snowman-72.gif",
+        "living-previews/snowman-80.gif",
+        "living-previews/snowman-96.gif"
+      ]
     },
     "sweets": {
       "action": "serve",
       "support": "plate",
-      "intended": {
-        "name": "Sweets",
-        "placement": "Small tray/bowl",
-        "interaction": "Select a piece, taste, offer/arrange remaining pieces",
-        "outcome": "Count/arrangement changes; bowl remains supported"
-      },
-      "review": "pending"
+      "outcome": "served",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/sweets-72.gif",
+        "living-previews/sweets-80.gif",
+        "living-previews/sweets-96.gif"
+      ]
     },
     "telescope": {
       "action": "aim",
       "support": "tripod",
-      "intended": {
-        "name": "Telescope",
-        "placement": "Grounded tripod at viewing spot",
-        "interaction": "Hop over, approach eyepiece, adjust aim, observe",
-        "outcome": "Tube tracks an actual sky target; Jelly withdraws coherently"
-      },
-      "review": "pending"
+      "outcome": "observed",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/telescope-72.gif",
+        "living-previews/telescope-80.gif",
+        "living-previews/telescope-96.gif"
+      ]
     },
     "train": {
       "action": "drive",
       "support": "track",
-      "intended": {
-        "name": "Train",
-        "placement": "Wheels on short track or flat floor",
-        "interaction": "Set on track, push, follow, stop and return",
-        "outcome": "Wheels and translation agree; train rests at a small station"
-      },
-      "review": "pending"
+      "outcome": "parked",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/train-72.gif",
+        "living-previews/train-80.gif",
+        "living-previews/train-96.gif"
+      ]
     },
     "tree": {
       "action": "decorate_tree",
       "support": "soil",
-      "intended": {
-        "name": "Tree",
-        "placement": "Trunk rooted in ground/planter",
-        "interaction": "Water roots, collect fallen material, hang a small keepsake",
-        "outcome": "Tree condition or decoration changes and remains visible"
-      },
-      "review": "pending"
+      "outcome": "decorated",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/tree-72.gif",
+        "living-previews/tree-80.gif",
+        "living-previews/tree-96.gif"
+      ]
     },
     "window": {
       "action": "close_window",
       "support": "wall",
-      "intended": {
-        "name": "Window",
-        "placement": "Mounted in an implied wall",
-        "interaction": "Approach latch, open/close, look out, wipe condensation",
-        "outcome": "Pane state controls breeze/rain entry and view; no free-floating frame"
-      },
-      "review": "pending"
+      "outcome": "closed",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/window-72.gif",
+        "living-previews/window-80.gif",
+        "living-previews/window-96.gif"
+      ]
     },
     "windsock": {
       "action": "check_wind",
       "support": "post",
-      "intended": {
-        "name": "Windsock",
-        "placement": "Attached to a grounded pole",
-        "interaction": "Approach, raise or adjust it, observe before flying kite",
-        "outcome": "Fabric responds to wind and informs Jelly\u2019s next activity"
-      },
-      "review": "pending"
+      "outcome": "secured",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/windsock-72.gif",
+        "living-previews/windsock-80.gif",
+        "living-previews/windsock-96.gif"
+      ]
     }
   },
   "atmospheres": {
     "balloons": {
       "opportunity": "balloon",
-      "review": "pending"
+      "preview": "living-previews/balloons-environment-80.gif"
     },
     "butterflies": {
       "opportunity": "flower",
-      "review": "pending"
+      "preview": "living-previews/butterflies-environment-80.gif"
     },
     "clouds": {
       "opportunity": "cloud",
-      "review": "pending"
+      "preview": "living-previews/clouds-environment-80.gif"
     },
     "confetti": {
       "opportunity": "broom",
-      "review": "pending"
+      "preview": "living-previews/confetti-environment-80.gif"
     },
     "fireflies": {
       "opportunity": "grass",
-      "review": "pending"
+      "preview": "living-previews/fireflies-environment-80.gif"
     },
     "fireworks": {
       "opportunity": "rocket",
-      "review": "pending"
+      "preview": "living-previews/fireworks-environment-80.gif"
     },
     "fog": {
       "opportunity": "lamp",
-      "review": "pending"
+      "preview": "living-previews/fog-environment-80.gif"
     },
     "fountain": {
       "opportunity": "fountain",
-      "review": "pending"
+      "preview": "living-previews/fountain-environment-80.gif"
     },
     "hearts": {
       "opportunity": "heart",
-      "review": "pending"
+      "preview": "living-previews/hearts-environment-80.gif"
     },
     "hurricane": {
       "opportunity": "window",
-      "review": "pending"
+      "preview": "living-previews/hurricane-environment-80.gif"
     },
     "icicles": {
       "opportunity": "icicles",
-      "review": "pending"
+      "preview": "living-previews/icicles-environment-80.gif"
     },
     "lanterns": {
       "opportunity": "lantern",
-      "review": "pending"
+      "preview": "living-previews/lanterns-environment-80.gif"
     },
     "leaves": {
       "opportunity": "rake",
-      "review": "pending"
+      "preview": "living-previews/leaves-environment-80.gif"
     },
     "lights": {
       "opportunity": "tree",
-      "review": "pending"
+      "preview": "living-previews/lights-environment-80.gif"
     },
     "meteor": {
       "opportunity": "telescope",
-      "review": "pending"
+      "preview": "living-previews/meteor-environment-80.gif"
     },
     "petals": {
       "opportunity": "leaf",
-      "review": "pending"
+      "preview": "living-previews/petals-environment-80.gif"
     },
     "rain": {
       "opportunity": "window",
-      "review": "pending"
+      "preview": "living-previews/rain-environment-80.gif"
     },
     "rainbow": {
       "opportunity": "puddle",
-      "review": "pending"
+      "preview": "living-previews/rainbow-environment-80.gif"
     },
     "smoke": {
       "opportunity": "canister",
-      "review": "pending"
+      "preview": "living-previews/smoke-environment-80.gif"
     },
     "snow": {
       "opportunity": "snowman",
-      "review": "pending"
+      "preview": "living-previews/snow-environment-80.gif"
     },
     "stars": {
       "opportunity": "telescope",
-      "review": "pending"
+      "preview": "living-previews/stars-environment-80.gif"
     },
     "sun": {
       "opportunity": "lemonade",
-      "review": "pending"
+      "preview": "living-previews/sun-environment-80.gif"
     },
     "sunrise": {
       "opportunity": "window",
-      "review": "pending"
+      "preview": "living-previews/sunrise-environment-80.gif"
     },
     "tornado": {
       "opportunity": "window",
-      "review": "pending"
+      "preview": "living-previews/tornado-environment-80.gif"
     },
     "wind": {
       "opportunity": "kite",
-      "review": "pending"
+      "preview": "living-previews/wind-environment-80.gif"
     }
   },
   "scenes": {
     "sky_fireworks": {
       "prop": "rocket",
-      "atmosphere": "fireworks"
+      "sky": "fireworks",
+      "opportunity": "rocket"
     },
     "ground_fountain": {
       "prop": "fountain",
-      "atmosphere": "fountain"
+      "sky": "fountain",
+      "opportunity": "fountain"
     },
     "smoke_bombs": {
       "prop": "canister",
-      "atmosphere": "smoke"
+      "sky": "smoke",
+      "opportunity": "canister"
     },
     "thanksgiving_table": {
       "prop": "feast",
-      "atmosphere": ""
+      "sky": "",
+      "opportunity": "feast"
     },
     "thanksgiving_bite": {
       "prop": "pie",
-      "atmosphere": ""
+      "sky": "",
+      "opportunity": "pie"
     },
     "christmas_lights": {
       "prop": "tree",
-      "atmosphere": "lights"
+      "sky": "lights",
+      "opportunity": "tree"
     },
     "christmas_santa": {
       "prop": "gift",
-      "atmosphere": "snow"
+      "sky": "snow",
+      "opportunity": "gift"
     },
     "christmas_elf": {
       "prop": "gift",
-      "atmosphere": "lights"
+      "sky": "lights",
+      "opportunity": "gift"
     },
     "christmas_snow": {
       "prop": "snowman",
-      "atmosphere": "snow"
+      "sky": "snow",
+      "opportunity": "snowman"
     },
     "holi_colors": {
       "prop": "powder",
-      "atmosphere": "confetti"
+      "sky": "confetti",
+      "opportunity": "powder"
     },
     "easter_hunt": {
       "prop": "eggs",
-      "atmosphere": ""
+      "sky": "",
+      "opportunity": "eggs"
     },
     "ghost_hover": {
       "prop": "pumpkin",
-      "atmosphere": "stars"
+      "sky": "stars",
+      "opportunity": "pumpkin"
     },
     "skeleton_dance": {
       "prop": "pumpkin",
-      "atmosphere": ""
+      "sky": "",
+      "opportunity": "pumpkin"
     },
     "reaper_stroll": {
       "prop": "scythe",
-      "atmosphere": "fog"
+      "sky": "fog",
+      "opportunity": "scythe"
     },
     "masked_jelly": {
       "prop": "candy",
-      "atmosphere": ""
+      "sky": "",
+      "opportunity": "candy"
     },
     "rain": {
       "prop": "puddle",
-      "atmosphere": "rain"
+      "sky": "rain",
+      "opportunity": "puddle"
     },
     "snow": {
       "prop": "snowman",
-      "atmosphere": "snow"
+      "sky": "snow",
+      "opportunity": "snowman"
     },
     "hot": {
       "prop": "fan",
-      "atmosphere": "sun"
+      "sky": "sun",
+      "opportunity": "fan"
     },
     "cloudy": {
       "prop": "",
-      "atmosphere": "clouds"
+      "sky": "clouds",
+      "opportunity": "cloud"
     },
     "wind": {
       "prop": "windsock",
-      "atmosphere": "wind"
+      "sky": "wind",
+      "opportunity": "windsock"
     },
     "storm": {
       "prop": "cloud",
-      "atmosphere": "rain"
+      "sky": "rain",
+      "opportunity": "cloud"
     },
     "fog": {
       "prop": "lamp",
-      "atmosphere": "fog"
+      "sky": "fog",
+      "opportunity": "lamp"
     },
     "tornado": {
       "prop": "windsock",
-      "atmosphere": "tornado"
+      "sky": "tornado",
+      "opportunity": "windsock"
     },
     "hurricane": {
       "prop": "cloud",
-      "atmosphere": "hurricane"
+      "sky": "hurricane",
+      "opportunity": "cloud"
     },
     "straight_line_wind": {
       "prop": "leaf",
-      "atmosphere": "wind"
+      "sky": "wind",
+      "opportunity": "leaf"
     },
     "new_year_countdown": {
       "prop": "clock",
-      "atmosphere": "stars"
+      "sky": "stars",
+      "opportunity": "clock"
     },
     "new_year_confetti": {
       "prop": "balloon",
-      "atmosphere": "confetti"
+      "sky": "confetti",
+      "opportunity": "balloon"
     },
     "valentine_hearts": {
       "prop": "heart",
-      "atmosphere": "hearts"
+      "sky": "hearts",
+      "opportunity": "heart"
     },
     "valentine_letter": {
       "prop": "letter",
-      "atmosphere": "hearts"
+      "sky": "hearts",
+      "opportunity": "letter"
     },
     "lunar_lanterns": {
       "prop": "lantern",
-      "atmosphere": "lanterns"
+      "sky": "lanterns",
+      "opportunity": "lantern"
     },
     "lunar_envelope": {
       "prop": "letter",
-      "atmosphere": "stars"
+      "sky": "stars",
+      "opportunity": "letter"
     },
     "diwali_diyas": {
       "prop": "diya",
-      "atmosphere": "stars"
+      "sky": "stars",
+      "opportunity": "diya"
     },
     "diwali_rangoli": {
       "prop": "rangoli",
-      "atmosphere": "confetti"
+      "sky": "confetti",
+      "opportunity": "rangoli"
     },
     "eid_crescent": {
       "prop": "crescent",
-      "atmosphere": "stars"
+      "sky": "stars",
+      "opportunity": "crescent"
     },
     "eid_sweets": {
       "prop": "sweets",
-      "atmosphere": "lanterns"
+      "sky": "lanterns",
+      "opportunity": "sweets"
     },
     "hanukkah_lights": {
       "prop": "menorah",
-      "atmosphere": "stars"
+      "sky": "stars",
+      "opportunity": "menorah"
     },
     "hanukkah_dreidel": {
       "prop": "dreidel",
-      "atmosphere": ""
+      "sky": "",
+      "opportunity": "dreidel"
     },
     "st_patrick_clover": {
       "prop": "clover",
-      "atmosphere": ""
+      "sky": "",
+      "opportunity": "clover"
     },
     "st_patrick_rainbow": {
       "prop": "pot",
-      "atmosphere": "rainbow"
+      "sky": "rainbow",
+      "opportunity": "pot"
     },
     "earth_day_seed": {
       "prop": "seedling",
-      "atmosphere": ""
+      "sky": "",
+      "opportunity": "seedling"
     },
     "earth_day_globe": {
       "prop": "globe",
-      "atmosphere": "stars"
+      "sky": "stars",
+      "opportunity": "globe"
     },
     "birthday_cake": {
       "prop": "cake",
-      "atmosphere": "confetti"
+      "sky": "confetti",
+      "opportunity": "cake"
     },
     "birthday_balloons": {
       "prop": "gift",
-      "atmosphere": "balloons"
+      "sky": "balloons",
+      "opportunity": "gift"
     },
     "spring_blossoms": {
       "prop": "flower",
-      "atmosphere": "petals"
+      "sky": "petals",
+      "opportunity": "flower"
     },
     "spring_butterfly": {
       "prop": "flower",
-      "atmosphere": "butterflies"
+      "sky": "butterflies",
+      "opportunity": "flower"
     },
     "spring_seedling": {
       "prop": "seedling",
-      "atmosphere": ""
+      "sky": "",
+      "opportunity": "seedling"
     },
     "spring_kite": {
       "prop": "kite",
-      "atmosphere": "clouds"
+      "sky": "clouds",
+      "opportunity": "kite"
     },
     "summer_lemonade": {
       "prop": "lemonade",
-      "atmosphere": "sun"
+      "sky": "sun",
+      "opportunity": "lemonade"
     },
     "summer_sandcastle": {
       "prop": "sandcastle",
-      "atmosphere": "sun"
+      "sky": "sun",
+      "opportunity": "sandcastle"
     },
     "summer_beachball": {
       "prop": "beachball",
-      "atmosphere": "clouds"
+      "sky": "clouds",
+      "opportunity": "beachball"
     },
     "summer_fireflies": {
       "prop": "grass",
-      "atmosphere": "fireflies"
+      "sky": "fireflies",
+      "opportunity": "grass"
     },
     "autumn_leaves": {
       "prop": "leaf",
-      "atmosphere": "leaves"
+      "sky": "leaves",
+      "opportunity": "leaf"
     },
     "autumn_rake": {
       "prop": "rake",
-      "atmosphere": "leaves"
+      "sky": "leaves",
+      "opportunity": "rake"
     },
     "autumn_acorn": {
       "prop": "acorn",
-      "atmosphere": ""
+      "sky": "",
+      "opportunity": "acorn"
     },
     "autumn_cocoa": {
       "prop": "cocoa",
-      "atmosphere": "smoke"
+      "sky": "smoke",
+      "opportunity": "cocoa"
     },
     "winter_snowangel": {
       "prop": "snowangel",
-      "atmosphere": "snow"
+      "sky": "snow",
+      "opportunity": "snowangel"
     },
     "winter_snowball": {
       "prop": "snowball",
-      "atmosphere": "snow"
+      "sky": "snow",
+      "opportunity": "snowball"
     },
     "winter_icicles": {
       "prop": "snowman",
-      "atmosphere": "icicles"
+      "sky": "icicles",
+      "opportunity": "snowman"
     },
     "winter_mittens": {
       "prop": "mittens",
-      "atmosphere": "snow"
+      "sky": "snow",
+      "opportunity": "mittens"
     },
     "rain_puddle_jump": {
       "prop": "puddle",
-      "atmosphere": "rain"
+      "sky": "rain",
+      "opportunity": "puddle"
     },
     "rain_umbrella": {
       "prop": "flower",
-      "atmosphere": "rain"
+      "sky": "rain",
+      "opportunity": "flower"
     },
     "rain_window": {
       "prop": "window",
-      "atmosphere": "rain"
+      "sky": "rain",
+      "opportunity": "window"
     },
     "rain_rainbow": {
       "prop": "puddle",
-      "atmosphere": "rainbow"
+      "sky": "rainbow",
+      "opportunity": "puddle"
     },
     "snow_catch": {
       "prop": "snowflake",
-      "atmosphere": "snow"
+      "sky": "snow",
+      "opportunity": "snowflake"
     },
     "snow_sled": {
       "prop": "sled",
-      "atmosphere": "snow"
+      "sky": "snow",
+      "opportunity": "sled"
     },
     "hot_popsicle": {
       "prop": "popsicle",
-      "atmosphere": "sun"
+      "sky": "sun",
+      "opportunity": "popsicle"
     },
     "hot_fan": {
       "prop": "fan",
-      "atmosphere": "wind"
+      "sky": "wind",
+      "opportunity": "fan"
     },
     "wind_pinwheel": {
       "prop": "pinwheel",
-      "atmosphere": "wind"
+      "sky": "wind",
+      "opportunity": "pinwheel"
     },
     "wind_scarf": {
       "prop": "windsock",
-      "atmosphere": "leaves"
+      "sky": "leaves",
+      "opportunity": "windsock"
     },
     "night_stargazing": {
       "prop": "telescope",
-      "atmosphere": "stars"
+      "sky": "stars",
+      "opportunity": "telescope"
     },
     "night_meteor": {
       "prop": "crescent",
-      "atmosphere": "meteor"
+      "sky": "meteor",
+      "opportunity": "crescent"
     },
     "night_lullaby": {
       "prop": "music",
-      "atmosphere": "stars"
+      "sky": "stars",
+      "opportunity": "music"
     },
     "morning_sunrise": {
       "prop": "flower",
-      "atmosphere": "sunrise"
+      "sky": "sunrise",
+      "opportunity": "flower"
     },
     "halloween_witch": {
       "prop": "broom",
-      "atmosphere": "stars"
+      "sky": "stars",
+      "opportunity": "broom"
     },
     "christmas_train": {
       "prop": "train",
-      "atmosphere": "lights"
+      "sky": "lights",
+      "opportunity": "train"
     }
   }
 }

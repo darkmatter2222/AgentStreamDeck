@@ -2,7 +2,7 @@
 
 import math
 from PIL import ImageDraw
-from .world_props import prop, cloud, leaf, wave, INK, WHITE, GOLD, PINK, GREEN, BLUE
+from .world_props import prop, cloud, wave, INK, WHITE, GOLD, PINK, GREEN, BLUE
 
 
 def costume(image, name, phase, head):
@@ -126,118 +126,23 @@ def costume(image, name, phase, head):
     return im
 
 
-def sky(draw, kind, width, height, phase, color, density=1):
-    """Sparse atmosphere in continuous deck coordinates; never an opaque backdrop.
+def sky(draw, kind, width, height, phase, color, density=1, *, seconds=None, seed=0):
+    """Elapsed-time local particles plus authored stars and supported fixtures."""
+    from .world_particles import atmosphere
 
-    Static stars twinkle, leaves tumble, balloons rise, rain falls. Separate depth
-    bands keep large motifs in the sky and fog near the ground, behind the actor.
-    """
+    if atmosphere(draw, kind, width, height, phase / 8 if seconds is None else seconds, seed, density):
+        return
     p = phase
-    count = max(3, width * height // (360 if kind in ("rain", "snow") else 1100)) * density
-    if kind in (
-        "rain",
-        "snow",
-        "confetti",
-        "petals",
-        "leaves",
-        "fireflies",
-        "butterflies",
-        "hearts",
-        "stars",
-        "balloons",
-    ):
-        if kind in ("leaves", "butterflies", "balloons", "hearts"):
-            count = max(2, width * height // 2600) * density
+    if kind == "stars":
+        count = max(3, width * height // 1100) * density
         for i in range(count):
-            drift = wave(p // 3 + i)
-            x = (i * 47 + (p // 3 if kind not in ("stars", "fireflies") else 0)) % (width + 12) - 6
-            y = (i * 31 + p * (2 if kind == "rain" else 1)) % (height + 16) - 8
-            c = (PINK, GOLD, BLUE, GREEN)[i % 4]
-            if kind == "rain":
-                draw.line((x, y, x - 1, y + 3 + i % 2), fill=BLUE if i % 3 else "#406583")
-                if y > height - 6:
-                    draw.line((x - 2, height - 3, x + 2, height - 3), fill="#638b9b")
-            elif kind == "snow":
-                x += drift
-                draw.point((x, y), fill=WHITE)
-                if i % 5 == 0:
-                    draw.line((x - 1, y, x + 1, y), fill="#91b6c8")
-                    draw.line((x, y - 1, x, y + 1), fill=WHITE)
-            elif kind == "stars":
-                # Fixed coordinates are essential: a starfield must not look like rain.
-                x, y = (i * 47 + 9) % width, (i * 29 + 6) % max(1, height - 10)
-                bright = (p // 2 + i * 3) % 12 < 3
-                draw.point((x, y), fill=GOLD if bright else "#61788e")
-                if bright and i % 4 == 0:
-                    draw.line((x - 1, y, x + 1, y), fill=GOLD)
-                    draw.line((x, y - 1, x, y + 1), fill=WHITE)
-            elif kind == "fireflies":
-                x = (i * 47 + round(3 * math.sin(p / 9 + i))) % width
-                y = (i * 29 + round(2 * math.cos(p / 11 + i))) % height
-                bright = (p + i * 3) % 16 < 6
-                draw.point((x, y), fill=GOLD if bright else "#486649")
-                if bright:
-                    draw.point((x + 1, y), fill="#9baf65")
-            elif kind == "leaves":
-                leaf(draw, x + drift, y, ("#cb7945", "#dba351", "#b7593e")[i % 3], drift)
-            elif kind == "butterflies":
-                x += round(4 * math.sin(p / 6 + i))
-                y = (i * 31 + round(5 * math.sin(p / 9 + i))) % max(1, height - 10)
-                wing = (3, 2, 1, 2)[(p + i) % 4]
-                draw.ellipse((x - wing, y - 2, x - 1, y + 1), fill=color)
-                draw.ellipse((x + 1, y - 2, x + wing, y + 1), fill=GOLD)
-                draw.line((x, y - 2, x, y + 2), fill="#526b85")
-                draw.point((x - 1, y - 3), fill=WHITE)
-            elif kind == "balloons":
-                y = (i * 31 - p // 2) % (height + 20) - 10
-                draw.ellipse((x - 3, y - 5, x + 3, y + 3), fill=c, outline=INK)
-                draw.point((x - 1, y - 3), fill=WHITE)
-                draw.line([(x, y + 4), (x + drift, y + 7), (x, y + 9)], fill="#71899a")
-            elif kind == "hearts":
-                y = (i * 31 - p // 2) % (height + 10) - 5
-                draw.polygon(
-                    [
-                        (x, y + 3),
-                        (x - 3, y),
-                        (x - 3, y - 2),
-                        (x - 1, y - 3),
-                        (x, y - 1),
-                        (x + 1, y - 3),
-                        (x + 3, y - 2),
-                        (x + 3, y),
-                    ],
-                    fill=PINK,
-                )
-                draw.point((x - 2, y - 1), fill="#ffd1d5")
-            elif kind == "petals":
-                draw.polygon(
-                    [(x + drift, y - 1), (x + 3 + drift, y), (x + 2 + drift, y + 2), (x + drift, y + 2)], fill="#d795b0"
-                )
-                draw.point((x + drift, y), fill="#f4c5d6")
-            else:
-                draw.line((x, y, x + (2 if (p + i) % 4 < 2 else 0), y + 1), fill=c)
-    elif kind == "clouds":
-        for i in range(max(2, width // 65)):
-            x = (i * 67 + p // 3) % (width + 40) - 20
-            cloud(draw, x, 14 + i % 2 * 8)
-    elif kind == "fog":
-        for i in range(3):
-            x = (i * 73 + p // 3) % (width + 60) - 30
-            y = height - 9 - i * 6
-            draw.line(
-                [(x, y), (x + 10, y - 2), (x + 29, y - 2), (x + 42, y)],
-                fill=("#314758", "#293b4d", "#233345")[i],
-                width=2,
-            )
-    elif kind == "smoke":
-        # Small rising curls, not four solid clouds covering the screen.
-        for i in range(max(2, width // 55)):
-            age = (p + i * 7) % 28
-            x = (i * 59 + 25) % width + round(3 * math.sin(age / 5))
-            y = height - 12 - age
-            draw.arc(
-                (x - 3 - age // 9, y - 3, x + 3 + age // 9, y + 3), 160, 330, fill="#647186" if age < 18 else "#354653"
-            )
+            # Fixed coordinates are essential: a starfield must not look like rain.
+            x, y = (i * 47 + 9) % width, (i * 29 + 6) % max(1, height - 10)
+            bright = (p // 2 + i * 3) % 12 < 3
+            draw.point((x, y), fill=GOLD if bright else "#61788e")
+            if bright and i % 4 == 0:
+                draw.line((x - 1, y, x + 1, y), fill=GOLD)
+                draw.line((x, y - 1, x, y + 1), fill=WHITE)
     elif kind in ("lights", "lanterns", "icicles"):
         for y in range(3, height, 48):
             for x in range(0, width, 24):
@@ -259,40 +164,6 @@ def sky(draw, kind, width, height, phase, color, density=1):
                         draw.rectangle((x + dx, y + 3, x + dx + 1, y + 5), fill=c)
                         if (p // 3 + x + dx) % 8 < 2:
                             draw.point((x + dx, y + 4), fill=WHITE)
-    elif kind in ("fireworks", "fountain"):
-        for i in range(max(1, width // 65)):
-            cx = (i * 67 + 27) % width
-            age = (p + i * 11) % 32
-            cy = height - 5 if kind == "fountain" else 14 + (i * 11) % max(1, height // 2)
-            if kind == "fireworks" and age < 8:
-                y = height - 5 - round((height - 5 - cy) * age / 8)
-                draw.line((cx, y, cx, y + 4), fill=GOLD)
-                continue
-            r = (age - 8) * 0.7 if kind == "fireworks" else age * 0.55
-            if r < 0 or age > 28:
-                continue
-            for a in range(0, 360 if kind == "fireworks" else 180, 45 if kind == "fireworks" else 25):
-                angle = math.radians(a)
-                x = round(cx + math.cos(angle) * r)
-                y = round(cy - math.sin(angle) * r + (max(0, age - 17) ** 2 / 35 if kind == "fireworks" else 0))
-                draw.line(
-                    (x, y, x - round(math.cos(angle) * 2), y + round(math.sin(angle) * 2)),
-                    fill=(PINK, GOLD, BLUE)[i % 3] if age < 23 else "#795e66",
-                )
-    elif kind in ("wind", "tornado", "hurricane"):
-        if kind == "wind":
-            for i in range(max(3, width // 35)):
-                x = (i * 43 + p * 2) % (width + 15) - 15
-                y = 10 + (i * 17) % max(1, height - 20)
-                draw.line([(x, y), (x + 6, y), (x + 8, y - 1), (x + 8, y - 3)], fill="#526c7e")
-        else:
-            for i in range(9):
-                radius = 12 - i if kind == "tornado" else 12
-                x = width // 2 + round(math.sin(p / 5 + i / 2) * 2)
-                y = 9 + i * 3
-                draw.arc((x - radius, y - 2, x + radius, y + 2), 0 if (p + i) % 8 < 4 else 120, 300, fill="#71879d")
-            for i in range(3):
-                draw.point((width // 2 + round(15 * math.sin(p / 4 + i)), 15 + i * 7), fill=WOOD_COLOR)
     elif kind in ("sun", "sunrise"):
         x, y = width - 13, 10
         draw.ellipse((x - 6, y - 6, x + 6, y + 6), fill="#d5a563")

@@ -166,9 +166,9 @@ class LivingWorldTests(unittest.TestCase):
         self.assertEqual(set(data["props"]), set(DEFINITIONS))
         self.assertEqual(len(data["scenes"]), 75)
 
-    def test_default_is_legacy_until_visual_gate_is_complete(self):
+    def test_default_uses_living_director(self):
         o = settings({"weather": False, "auto_location": False})
         w = World(o, WeatherService(o))
-        self.assertNotIsInstance(w.interaction, Interaction)
+        self.assertIsInstance(w.interaction, Interaction)
         o["living_world"] = True
         self.assertIsInstance(World(o, WeatherService(o)).interaction, Interaction)

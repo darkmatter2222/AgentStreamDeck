@@ -9,7 +9,7 @@ from ocdeck.world import World
 from ocdeck.world_settings import settings, read_ini
 from ocdeck.world_weather import WeatherService
 from ocdeck.world_catalog import SCENES
-from ocdeck.world_legacy_interactions import RECIPES
+from ocdeck.world_interactions import RECIPES
 from ocdeck.world_cli import add_parser, save
 
 
@@ -45,7 +45,7 @@ class InteractionTests(unittest.TestCase):
                     stages = set()
                     keys = set()
                     used_pixels = set()
-                    for n in range(168):
+                    for n in range(600):
                         frames = self.step(jelly, world, n / 12, free)
                         f = world.interaction.frame
                         if f:
@@ -53,29 +53,27 @@ class InteractionTests(unittest.TestCase):
                             keys.add(f.key)
                             if f.stage == "use":
                                 used_pixels.add(frames[f.key].tobytes())
-                    self.assertTrue({"notice", "position", "reach", "use", "release", "admire", "rest"} <= stages)
-                    self.assertEqual(len(keys), 1)
+                            if f.stage == "rest":
+                                break
+                    self.assertTrue({"notice", "position", "reach", "use", "putdown", "admire", "rest"} <= stages)
+                    self.assertTrue(keys <= free)
                     self.assertGreater(len(used_pixels), 2)
                     if len(free) > 1:
                         self.assertIn("approach", stages)
-        self.assertEqual(seen, set(RECIPES))
+        self.assertEqual(seen, {s.prop for s in SCENES.values() if s.prop})
 
     def test_rake_gathers_leaves_and_retains_pile_after_putting_tool_down(self):
         jelly, world = self.make()
-        ground = {}
-        for n in range(145):
+        for n in range(600):
             self.step(jelly, world, n / 12)
-            f = world.interaction.frame
-            if f and f.stage in ("notice", "use", "rest"):
-                ground[f.stage] = world.interaction.layers(jelly)[0].tobytes()
-        self.assertEqual(set(ground), {"notice", "use", "rest"})
-        self.assertNotEqual(ground["notice"], ground["rest"])
-        self.assertEqual(world.interaction.frame.key, 1)
-        # Finished actor returns by a normal hop; the pile stays in its original key.
-        for n in range(145, 180):
-            self.step(jelly, world, n / 12)
-        self.assertEqual(jelly.current, 0)
-        self.assertEqual(world.interaction.frame.key, 1)
+            if world.interaction.stage == "rest":
+                break
+        director = world.interaction
+        obj = director.objects[director.target]
+        self.assertEqual(obj.data["gathered"], 1)
+        self.assertEqual(obj.cell, obj.home)
+        self.assertEqual(jelly.current, obj.home)
+        self.assertIsNone(director.held)
 
     def test_cancel_on_ownership_loss_touch_focus_help_update_or_menu(self):
         for reason in (
@@ -86,20 +84,22 @@ class InteractionTests(unittest.TestCase):
             "update",
             "menu",
             "disabled",
-            "scene",
             "props",
             "reduced",
         ):
             jelly, world = self.make()
-            for n in range(72):
+            for n in range(600):
                 self.step(jelly, world, n / 12)
+                if world.interaction.stage == "use":
+                    break
             self.assertEqual(world.interaction.stage, "use")
+            now = (n + 1) / 12
             free = {0, 1}
             blocked = False
             if reason == "ownership":
-                free = {0}
+                free = {0, 1} - {world.interaction.objects[world.interaction.target].home}
             elif reason == "touch":
-                jelly.tap(6)
+                jelly.tap(now)
             elif reason == "focus":
                 jelly.look_until = 20
             elif reason == "help":
@@ -116,12 +116,12 @@ class InteractionTests(unittest.TestCase):
                 world.options["props"] = False
             else:
                 world.options["reduced_motion"] = True
-            self.step(jelly, world, 6, free, blocked)
+            self.step(jelly, world, now, free, blocked)
             with self.subTest(reason=reason):
                 self.assertIsNone(world.interaction.frame)
                 self.assertFalse(world.interaction.owns_actor)
                 if reason == "touch":
-                    self.assertGreater(jelly.touch_until, 6)
+                    self.assertGreater(jelly.touch_until, now)
 
     def test_no_crossing_occupied_or_disconnected_keys_and_max_keys(self):
         for free, options in (({0, 2}, {}), ({0, 1}, {"max_keys": 1}), (set(), {})):

@@ -1,0 +1,3680 @@
+[
+  {
+    "scene": "sky_fireworks",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "ground_fountain",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "carry",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "return",
+      "return_position",
+      "use",
+      "water_carry",
+      "water_pour",
+      "work_position"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "smoke_bombs",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "thanksgiving_table",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "thanksgiving_bite",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "christmas_lights",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "christmas_santa",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "christmas_elf",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "christmas_snow",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "holi_colors",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "easter_hunt",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "ghost_hover",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "skeleton_dance",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "reaper_stroll",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "carry",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "return",
+      "return_position",
+      "use",
+      "work_position"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "masked_jelly",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "rain",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "snow",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "hot",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "cloudy",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "wind",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "storm",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "fog",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "tornado",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "hurricane",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "straight_line_wind",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "new_year_countdown",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "new_year_confetti",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "carry",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use",
+      "work_position"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "valentine_hearts",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "valentine_letter",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "lunar_lanterns",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "carry",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use",
+      "work_position"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "lunar_envelope",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "diwali_diyas",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "diwali_rangoli",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "eid_crescent",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "eid_sweets",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "hanukkah_lights",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "hanukkah_dreidel",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "st_patrick_clover",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "st_patrick_rainbow",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "earth_day_seed",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "earth_day_globe",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "birthday_cake",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "birthday_balloons",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "spring_blossoms",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "spring_butterfly",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "spring_seedling",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "spring_kite",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "carry",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "return",
+      "return_position",
+      "use",
+      "work_position"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "summer_lemonade",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "summer_sandcastle",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "summer_beachball",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "summer_fireflies",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "autumn_leaves",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "autumn_rake",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "carry",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "return",
+      "return_position",
+      "use",
+      "work_position"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "autumn_acorn",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "autumn_cocoa",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "winter_snowangel",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "winter_snowball",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "winter_icicles",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "winter_mittens",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "rain_puddle_jump",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "rain_umbrella",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "rain_window",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "rain_rainbow",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "snow_catch",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "snow_sled",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "hot_popsicle",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "hot_fan",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "wind_pinwheel",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "wind_scarf",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "night_stargazing",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "night_meteor",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "night_lullaby",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "morning_sunrise",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "halloween_witch",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "carry",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "return",
+      "return_position",
+      "use",
+      "work_position"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "christmas_train",
+    "size": 72,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "sky_fireworks",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "ground_fountain",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "carry",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "return",
+      "return_position",
+      "use",
+      "water_carry",
+      "water_pour",
+      "work_position"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "smoke_bombs",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "thanksgiving_table",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "thanksgiving_bite",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "christmas_lights",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "christmas_santa",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "christmas_elf",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "christmas_snow",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "holi_colors",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "easter_hunt",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "ghost_hover",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "skeleton_dance",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "reaper_stroll",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "carry",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "return",
+      "return_position",
+      "use",
+      "work_position"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "masked_jelly",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "rain",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "snow",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "hot",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "cloudy",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "wind",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "storm",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "fog",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "tornado",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "hurricane",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "straight_line_wind",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "new_year_countdown",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "new_year_confetti",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "carry",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use",
+      "work_position"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "valentine_hearts",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "valentine_letter",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "lunar_lanterns",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "carry",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use",
+      "work_position"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "lunar_envelope",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "diwali_diyas",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "diwali_rangoli",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "eid_crescent",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "eid_sweets",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "hanukkah_lights",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "hanukkah_dreidel",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "st_patrick_clover",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "st_patrick_rainbow",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "earth_day_seed",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "earth_day_globe",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "birthday_cake",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "birthday_balloons",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "spring_blossoms",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "spring_butterfly",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "spring_seedling",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "spring_kite",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "carry",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "return",
+      "return_position",
+      "use",
+      "work_position"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "summer_lemonade",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "summer_sandcastle",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "summer_beachball",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "summer_fireflies",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "autumn_leaves",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "autumn_rake",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "carry",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "return",
+      "return_position",
+      "use",
+      "work_position"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "autumn_acorn",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "autumn_cocoa",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "winter_snowangel",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "winter_snowball",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "winter_icicles",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "winter_mittens",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "rain_puddle_jump",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "rain_umbrella",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "rain_window",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "rain_rainbow",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "snow_catch",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "snow_sled",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "hot_popsicle",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "hot_fan",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "wind_pinwheel",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "wind_scarf",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "night_stargazing",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "night_meteor",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "night_lullaby",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "morning_sunrise",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "halloween_witch",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "carry",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "return",
+      "return_position",
+      "use",
+      "work_position"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "christmas_train",
+    "size": 80,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "sky_fireworks",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "ground_fountain",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "carry",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "return",
+      "return_position",
+      "use",
+      "water_carry",
+      "water_pour",
+      "work_position"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "smoke_bombs",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "thanksgiving_table",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "thanksgiving_bite",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "christmas_lights",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "christmas_santa",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "christmas_elf",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "christmas_snow",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "holi_colors",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "easter_hunt",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "ghost_hover",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "skeleton_dance",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "reaper_stroll",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "carry",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "return",
+      "return_position",
+      "use",
+      "work_position"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "masked_jelly",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "rain",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "snow",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "hot",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "cloudy",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "wind",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "storm",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "fog",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "tornado",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "hurricane",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "straight_line_wind",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "new_year_countdown",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "new_year_confetti",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "carry",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use",
+      "work_position"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "valentine_hearts",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "valentine_letter",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "lunar_lanterns",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "carry",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use",
+      "work_position"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "lunar_envelope",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "diwali_diyas",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "diwali_rangoli",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "eid_crescent",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "eid_sweets",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "hanukkah_lights",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "hanukkah_dreidel",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "st_patrick_clover",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "st_patrick_rainbow",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "earth_day_seed",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "earth_day_globe",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "birthday_cake",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "birthday_balloons",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "spring_blossoms",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "spring_butterfly",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "spring_seedling",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "spring_kite",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "carry",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "return",
+      "return_position",
+      "use",
+      "work_position"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "summer_lemonade",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "summer_sandcastle",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "summer_beachball",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "summer_fireflies",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "autumn_leaves",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "autumn_rake",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "carry",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "return",
+      "return_position",
+      "use",
+      "work_position"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "autumn_acorn",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "autumn_cocoa",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "winter_snowangel",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "winter_snowball",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "winter_icicles",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "winter_mittens",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "rain_puddle_jump",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "rain_umbrella",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "rain_window",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "rain_rainbow",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "snow_catch",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "snow_sled",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "hot_popsicle",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "hot_fan",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "wind_pinwheel",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "wind_scarf",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "night_stargazing",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "night_meteor",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "night_lullaby",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "morning_sunrise",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "halloween_witch",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "carry",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "return",
+      "return_position",
+      "use",
+      "work_position"
+    ],
+    "completed": true
+  },
+  {
+    "scene": "christmas_train",
+    "size": 96,
+    "stages": [
+      "",
+      "admire",
+      "approach",
+      "notice",
+      "position",
+      "putdown",
+      "reach",
+      "rest",
+      "use"
+    ],
+    "completed": true
+  }
+]

@@ -49,7 +49,11 @@ def render(scene, size, rows, cols, takeover=False):
         if w.interaction.stage=='rest' and now > timeline[-1]['time']+3:
             break
     name=f'{scene}-{size}'+('-takeover' if takeover else '')
-    frames[0].save(OUT/f'{name}.gif',save_all=True,append_images=frames[1:],duration=83,loop=0)
+    temporary=OUT/f'{name}.tmp'
+    frames[0].save(temporary,format='GIF',save_all=True,append_images=frames[1:],duration=83,loop=0)
+    with Image.open(temporary) as check:
+        check.seek(check.n_frames-1);check.load()
+    temporary.replace(OUT/f'{name}.gif')
     picked=[]
     for row in timeline:
         i=min(len(frames)-1,round((row['time']+.4)*12))

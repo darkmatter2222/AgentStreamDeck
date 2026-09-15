@@ -419,6 +419,8 @@ python -m ocdeck focus [-h] slot
 
 ## world
 
+`ocdeck world reset` schedules a world-memory reset for the next broker restart. Jelly needs are preserved; a generation marker prevents old background saves from undoing the reset.
+
 Configure holiday, weather and seasonal scenes in `jelly.ini`. Restart the broker to apply.
 
 - `world configure`: save any combination of the flags below.
