@@ -99,6 +99,35 @@ class DeckGeometry:
             if 0 <= r < self.rows and 0 <= c < self.columns
         )
 
+    def reachable(self, source, available):
+        """Free connected component, including the actor's current cell."""
+        free = set(available) & set(range(self.count))
+        if source not in free:
+            return set()
+        seen, queue = {source}, deque([source])
+        while queue:
+            for key in self.adjacent(queue.popleft()):
+                if key in free and key not in seen:
+                    seen.add(key)
+                    queue.append(key)
+        return seen
+
+    def route_to(self, source, target, available):
+        """Shortest orthogonal path to the object itself; None means unreachable."""
+        free = set(available) & set(range(self.count))
+        if source not in free or target not in free:
+            return None
+        queue, seen = deque([(source, [])]), {source}
+        while queue:
+            key, path = queue.popleft()
+            if key == target:
+                return path
+            for nxt in self.adjacent(key):
+                if nxt in free and nxt not in seen:
+                    seen.add(nxt)
+                    queue.append((nxt, path + [nxt]))
+        return None
+
     def route_beside(self, source, target, available):
         """Shortest free-only route to a free orthogonal neighbor of an agent."""
         if source not in available or target not in range(self.count):

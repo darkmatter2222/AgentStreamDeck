@@ -8,6 +8,7 @@ from .world_catalog import SCENES
 
 DEFAULTS: dict = dict(
     enabled=True,
+    living_world=True,
     holidays=True,
     weather=True,
     seasons=True,

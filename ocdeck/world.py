@@ -8,10 +8,10 @@ from PIL import Image, ImageDraw, ImageFont
 from .world_catalog import SCENES
 from .world_calendar import active_holiday, quiet, season
 from .world_weather import local_country
-from .world_art import prop, sky
-from .world_props import AIRBORNE
+from .world_art import sky
 from .jelly_catalog import ACTIONS
 from .world_interactions import Interaction
+from .world_environment import SOURCED, layers as environment_layers
 
 HELP_URL = "https://github.com/darkmatter2222/AgentStreamDeck/blob/main/docs/jelly/world.md#configuration"
 
@@ -135,6 +135,7 @@ class World:
             jelly.world_phase = 0 if o["reduced_motion"] else int(now * 8) % 8
             if (
                 switched
+                and not o["living_world"]
                 and not o["reduced_motion"]
                 and jelly.current is not None
                 and jelly.state != "hop"
@@ -216,7 +217,8 @@ class World:
                 else:
                     sky(d, kind, *canvas.size, phase, scene.color)
 
-            atmosphere(scene.sky)
+            if scene.sky not in SOURCED:
+                atmosphere(scene.sky)
             # Weather keeps its own material timing around a holiday scene.
             _, weather, _ = self.service.snapshot()
             condition = o["weather_override"] or (weather.condition if weather else "")
@@ -228,57 +230,18 @@ class World:
             bg = world.crop(g.bounds(k))
             if bg.getbbox():
                 result[k] = bg
-        play = self.interaction.frame
-        play_layers = self.interaction.layers(jelly) if play and play.key in keys else None
-        if play_layers and play:
-            bg = result.setdefault(play.key, Image.new("RGBA", (g.width, g.height)))
-            bg.alpha_composite(play_layers[0])
-        if scene and scene.prop and o["props"] and not play_layers:
-            # Keep props out of the full set of keys touched by a hopping sprite.
-            neighbors = (
-                [k for k in g.adjacent(jelly.current) if k in keys and k not in frames]
-                if jelly.current is not None
-                else []
-            )
-            candidates = neighbors or [k for k in keys if k not in frames]
-            target = candidates[0] if candidates else jelly.current if jelly.current in keys else keys[0]
-            if target is not None:
-                shared = target in frames
-                # Same logical scale as Jelly: no viewport-sized acorns or mugs.
-                icon = prop(scene.prop, (phase // 2) % 8, scene.color)
-                box = icon.getbbox()
-                if box:
-                    icon = icon.crop(box)
-                    factor = scale
-                    floor = g.height - 3
-                    x = g.width // 2 + (box[0] - 20) * factor
-                    y = floor + (box[1] - 34) * factor
-                    if shared:
-                        # A restrained corner vignette, composited behind Jelly.
-                        limit = max(10, g.width // 5)
-                        ratio = min(1, limit / max(icon.size))
-                        icon = icon.resize(
-                            (max(1, round(icon.width * ratio)), max(1, round(icon.height * ratio))),
-                            Image.Resampling.NEAREST,
-                        )
-                        factor = 1
-                        x, y = 2, floor - icon.height
-                    else:
-                        icon = icon.resize((icon.width * factor, icon.height * factor), Image.Resampling.NEAREST)
-                    bg = result.setdefault(target, Image.new("RGBA", (g.width, g.height)))
-                    if scene.prop not in AIRBORNE:
-                        ground = ImageDraw.Draw(bg)
-                        ground.ellipse(
-                            (max(0, x - 2), floor - 1, min(g.width - 1, x + icon.width + 2), floor + 1), fill="#20303b"
-                        )
-                    bg.alpha_composite(icon, (x, y))
+        for key, tile in (environment_layers(self.interaction, jelly, set(keys)) if o["particles"] else {}).items():
+            result.setdefault(key, Image.new("RGBA", (g.width, g.height))).alpha_composite(tile)
+        play_back, play_front = self.interaction.render_layers(jelly, set(keys))
+        for key, tile in play_back.items():
+            result.setdefault(key, Image.new("RGBA", (g.width, g.height))).alpha_composite(tile)
         # The character always owns the foreground, including its entire hop crop.
         for k in keys:
             if k in frames:
                 bg = result.setdefault(k, Image.new("RGBA", (g.width, g.height)))
                 bg.alpha_composite(frames[k])
-        if play_layers and play and play.key in result:
-            result[play.key].alpha_composite(play_layers[1])
+        for key, tile in play_front.items():
+            result.setdefault(key, Image.new("RGBA", (g.width, g.height))).alpha_composite(tile)
         if jelly.current in result and jelly.state != "hop":
             if now < self.help_until:
                 tile = Image.new("RGBA", (g.width, g.height), "#09111b")

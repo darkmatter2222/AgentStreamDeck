@@ -246,3 +246,5 @@ Adapter improvements, bug reports and hardware testing are welcome. See [CONTRIB
 CI tests Windows and Ubuntu with Python 3.11/3.13, including package installation and upgrade behavior. USB hardware and interactive window focus also need real desktop testing; [verification details](docs/TEST-RESULTS.md) distinguish that from automated coverage.
 
 Licensed under [Apache 2.0](LICENSE). Agent names and logos belong to their respective owners; see [third-party notices](THIRD-PARTY.md).
+
+Jelly gives objects a purpose: fetch a supported rake, gather leaves, sip and return a cup, plant an acorn, chase a ball, or unfold and reel in a kite. Objects appear as part of a reachable activity and clear after use. [Living-world behavior, controls and visual coverage](docs/jelly/living-world-development.md).

@@ -23,6 +23,7 @@ def add_parser(sub):
         else:
             kwargs["type"] = int if type(value) is int else str
         configure.add_argument("--" + ("hold-help" if key == "help" else key.replace("_", "-")), dest=key, **kwargs)
+    actions.add_parser("reset", help="Reset world memory on next broker restart; preserve Jelly needs")
     actions.add_parser("show", help="Show effective world settings")
     actions.add_parser("catalog", help="List scene IDs, contexts and artwork recipes")
     actions.add_parser("validate", help="Validate world settings without network access")
@@ -88,6 +89,13 @@ def run(args):
         print(str(Path(args.output).resolve()))
         return 0
     root = home()
+    if args.world_command == "reset":
+        from uuid import uuid4
+        from .common import atomic_json
+
+        atomic_json(root / "world-reset.json", {"generation": uuid4().hex})
+        print("World memory reset scheduled. Restart the broker to apply; Jelly needs are preserved.")
+        return 0
     value = settings({**load_config(root).get("world", {}), **read_ini(root)})
     if args.world_command == "configure":
         value.update({k: getattr(args, k) for k in DEFAULTS if getattr(args, k) is not None})

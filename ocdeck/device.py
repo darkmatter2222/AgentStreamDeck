@@ -163,6 +163,7 @@ class DeviceLoop:
         self.jelly_events = queue.Queue(maxsize=32)
         self.jelly_root = root
         self.jelly_saved_at = 0.0
+        self.jelly_writer = None
         self.coffee = None
         self.overlay_actions: dict[int, dict] = {}
         self.controls: "Controls | None" = None
@@ -179,17 +180,37 @@ class DeviceLoop:
             except queue.Full:
                 pass
 
-    def _save_jelly(self):
-        if self.jelly and self.jelly_root and self.jelly.options["persistent"]:
-            from pathlib import Path
-            from .common import atomic_json
+    def _save_jelly(self, wait=True):
+        if not (self.jelly and self.jelly_root and self.jelly.options["persistent"]):
+            return
+        from pathlib import Path
+        from copy import deepcopy
+        from .common import atomic_json
 
+        # At most one filesystem worker. Periodic saves can wait for the next
+        # interval; disconnect saves join outside the frame composition path.
+        if self.jelly_writer and self.jelly_writer.is_alive():
+            if not wait:
+                return
+            self.jelly_writer.join()
+        snapshot = deepcopy(self.jelly.mind.snapshot(self.jelly.thoughts.recent))
+        from .world_interactions import Interaction
+
+        if self.world and isinstance(self.world.interaction, Interaction):
+            snapshot["world"] = self.world.interaction.snapshot()
+        path = Path(self.jelly_root) / "jelly-state.json"
+
+        def write():
             try:
-                atomic_json(
-                    Path(self.jelly_root) / "jelly-state.json", self.jelly.mind.snapshot(self.jelly.thoughts.recent)
-                )
+                atomic_json(path, snapshot)
             except Exception:
                 LOG.warning("Could not save Jelly's optional state", exc_info=True)
+
+        if wait:
+            write()
+        else:
+            self.jelly_writer = threading.Thread(target=write, name="jelly-state-writer", daemon=True)
+            self.jelly_writer.start()
 
     def _start_jelly(self):
         self.jelly = None
@@ -225,7 +246,17 @@ class DeviceLoop:
                 from pathlib import Path
                 from .common import read_json
 
-                recent = self.jelly.mind.restore(read_json(Path(self.jelly_root) / "jelly-state.json", {}))
+                saved = read_json(Path(self.jelly_root) / "jelly-state.json", {})
+                recent = self.jelly.mind.restore(saved)
+                from .world_interactions import Interaction
+
+                if isinstance(self.world.interaction, Interaction) and isinstance(saved, dict):
+                    reset = read_json(Path(self.jelly_root) / "world-reset.json", {})
+                    generation = reset.get("generation", "") if isinstance(reset, dict) else ""
+                    state = saved.get("world")
+                    if isinstance(state, dict) and state.get("generation", "") == generation:
+                        self.world.interaction.restore(state)
+                    self.world.interaction.generation = generation
                 self.jelly.thoughts.recent.extend(recent)
             self.jelly_saved_at = time.monotonic()
             self.status["jelly"] = "enabled"
@@ -319,7 +350,7 @@ class DeviceLoop:
                 "needs": {k: round(v, 1) for k, v in self.jelly.mind.needs.items()},
             }
             if now - self.jelly_saved_at >= 60:
-                self._save_jelly()
+                self._save_jelly(wait=False)
                 self.jelly_saved_at = now
             if self.world and coffee_key is None:
                 # A visible Jelly stays under a held finger until release.
@@ -598,11 +629,11 @@ class DeviceLoop:
                 if self.world_service:
                     self.world_service.close()
                     self.world_service = None
-                self.world = None
                 if self.jelly:
                     self._save_jelly()
                     self.jelly.close()
                     self.jelly = None
+                self.world = None
                 if self.deck:
                     try:
                         if self.stop.is_set():

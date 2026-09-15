@@ -1,44 +1,14 @@
-"""Bounded, interruptible scene play. State lives on the render thread, never in art.
+"""Intention, travel, contact and disposition, independent of rendering and scenes."""
 
-The actor uses existing Jelly poses and the existing free-key hop implementation.
-Props retain an identity, key, grip, timeline and outcome instead of following the
-nearest free viewport each frame. No input actions, I/O or background threads.
-"""
-
-from dataclasses import dataclass
+from collections import deque
+from dataclasses import asdict, dataclass
 import math
-from PIL import Image, ImageDraw
-from .world_props import prop, leaf, INK, WHITE, GOLD, GREEN, BLUE, PINK
+from .world_objects import DEFINITIONS, ATMOSPHERES, Object
+from .world_actions import advance, duration, DURABLE
 
-# Only objects with a readable physical action get a manipulation recipe.
-RECIPES = {
-    "rake": "rake",
-    "broom": "sweep",
-    "cocoa": "drink",
-    "lemonade": "drink",
-    "popsicle": "taste",
-    "acorn": "inspect",
-    "leaf": "inspect",
-    "heart": "inspect",
-    "clover": "inspect",
-    "gift": "unwrap",
-    "letter": "read",
-    "eggs": "inspect",
-    "beachball": "play",
-    "snowball": "play",
-    "dreidel": "spin",
-    "seedling": "water",
-    "flower": "water",
-    "train": "push",
-    "telescope": "observe",
-    "pinwheel": "blow",
-    "cake": "candles",
-    "snowman": "build",
-    "sandcastle": "build",
-    "pie": "taste",
-    "sweets": "taste",
-    "candy": "taste",
-}
+RECIPES = {name: d.action for name, d in DEFINITIONS.items()}
+TOOLS = {"rake", "broom", "scythe"}
+TRANSFER = {"balloon", "lantern", "kite"}
 
 
 def ease(t):
@@ -59,276 +29,366 @@ class PlayFrame:
 
 class Interaction:
     def __init__(self):
-        self.frame = None
-        self.scene = ""
+        self.objects = {}
+        self.serial = 0
+        self.generation = ""
+        self.target = None
         self.key = None
-        self.started = 0.0
-        self.stage_started = 0.0
-        self.next_at = 0.0
-        self.stage = ""
-        self.origin_x = 0.0
         self.home_key = None
+        self.work_key = None
+        self.scene = ""
+        self.sky = ""
+        self.frame = None
+        self.stage = ""
+        self.stage_started = 0.0
+        self.stage_time = 0.0
+        self.next_at = 0.6
         self.owns_actor = False
+        self.held = None
+        self.history = deque(maxlen=24)
+        self.locations = deque(maxlen=12)
+        self.events = deque(maxlen=64)
+        self.origin_x = 0.0
+        self.use_elapsed = 0.0
+        self.last = None
+        self.visible = False
+        self.geometry = None
+        self.water = 1.0
+        self.followup = None
+        self.environment_since = 0.0
+        self.environment = ""
+        self.retiring = False
+        self.environment_served = ""
+
+    def snapshot(self):
+        return {
+            "version": 1,
+            "generation": self.generation,
+            "serial": self.serial,
+            "objects": [asdict(o) for o in list(self.objects.values())[-8:]],
+            "history": list(self.history),
+            "locations": list(self.locations),
+        }
+
+    def restore(self, value):
+        if not isinstance(value, dict) or value.get("version") != 1:
+            return
+        items = value.get("objects", [])
+        if not isinstance(items, list):
+            return
+        restored = {}
+        for raw in items[-8:]:
+            if not isinstance(raw, dict) or raw.get("name") not in DEFINITIONS:
+                continue
+            if type(raw.get("id")) is not int or not 0 < raw["id"] < 10**9:
+                continue
+            if any(
+                type(raw.get(k)) not in (int, float) or not math.isfinite(raw[k]) or not 0 <= raw[k] <= 1
+                for k in ("progress", "amount")
+            ):
+                continue
+            # Coordinates are intentionally reconciled on the next valid placement.
+            obj = Object(raw["id"], raw["name"], None, None, "stored", raw["progress"], raw["amount"])
+            obj.applied = raw.get("applied") is True
+            obj.result = DEFINITIONS[obj.name].result if obj.applied else ""
+            data = raw.get("data", {})
+            if isinstance(data, dict):
+                obj.data = {
+                    k: v
+                    for k, v in data.items()
+                    if k in ("growth", "previous_growth", "moisture", "gathered", "gift_id", "visits")
+                    and type(v) in (int, float)
+                    and math.isfinite(v)
+                    and 0 <= v <= 10**9
+                }
+            restored[obj.id] = obj
+        self.objects = restored
+        self.serial = max(restored, default=0)
+        for obj in restored.values():
+            toy = restored.get(obj.data.get("gift_id"))
+            if toy and not toy.applied:
+                self.followup = toy.name
+        history = value.get("history", [])
+        if isinstance(history, list):
+            self.history.extend(n for n in history[-24:] if isinstance(n, str) and n in DEFINITIONS)
 
     def cancel(self, now, jelly):
-        # Never settle an actor after a higher-priority reaction or user tap.
-        if self.owns_actor and jelly.state == "world_play" and jelly.current is not None:
-            jelly.settle(jelly.current, now)
-        self.frame, self.key, self.stage = None, None, ""
+        if self.target is not None:
+            obj = self.objects[self.target]
+            obj.state = "stored"
+            obj.cell = None
+            # Completed contact progress survives, carried objects never remain floating.
+            self.events.append(("cancel", self.stage, obj.id))
+        if self.owns_actor and jelly.state == "world_play":
+            jelly.state, jelly.deadline = "idle", now + 2
+        self.frame, self.target, self.key = None, None, None
+        self.held = None
         self.owns_actor = False
-        self.next_at = now + 3
+        self.stage = ""
+        self.visible = False
+        self.next_at = max(self.next_at, now + 3)
+
+    def _choose_cell(self, jelly, free, avoid=None, exclude=None):
+        candidates = sorted(
+            jelly.geometry.reachable(jelly.current, free) - ({exclude} if exclude is not None else set())
+        )
+        weights = []
+        for k in candidates:
+            distance = len(jelly.geometry.route_to(jelly.current, k, free) or [])
+            weights.append((1 + min(distance, 3)) / (1 + self.locations.count(k) + (3 if k == avoid else 0)))
+        key = jelly.rng.choices(candidates, weights)[0]
+        self.locations.append(key)
+        return key
+
+    def _begin(self, now, jelly, available, scene_id, scene, options):
+        candidates = list(dict.fromkeys([scene.prop, ATMOSPHERES.get(scene.sky, "")]))
+        candidates = [n for n in candidates if n in DEFINITIONS]
+        if not candidates:
+            return
+        # An explicit scene override remains a reproducible demo. Normal scenes
+        # provide opportunities; existing needs and recent history rank them.
+        weights = []
+        for name in candidates:
+            motive = DEFINITIONS[name].motive
+            need = {
+                "play": "stimulation",
+                "tidy": "confidence",
+                "curiosity": "stimulation",
+                "rest": "energy",
+                "celebrate": "sociability",
+                "weather": "energy",
+            }.get(motive, motive)
+            deficit = 100 - jelly.mind.needs.get(need, 50)
+            weights.append((20 + deficit) / (1 + self.history.count(name) * 3))
+        name = candidates[0] if options["scene_override"] and scene.prop else jelly.rng.choices(candidates, weights)[0]
+        if not options["scene_override"] and scene.sky in ATMOSPHERES and self.environment_served != scene.sky:
+            name = ATMOSPHERES[scene.sky]
+        if self.followup in DEFINITIONS:
+            name, self.followup = self.followup, None
+        obj = next((o for o in self.objects.values() if o.name == name and (not o.applied or name in DURABLE)), None)
+        if obj is None:
+            self.serial += 1
+            obj = Object(self.serial, name, None, None, color=scene.color)
+            self.objects[obj.id] = obj
+        if obj.applied and name in DURABLE:
+            obj.data["previous_growth"] = obj.data.get("growth", 0.3)
+            obj.data["visits"] = min(100, obj.data.get("visits", 0) + 1)
+            obj.progress, obj.applied = 0, False
+        # Keep bounded logical keepsakes, never unbounded decorations.
+        while len(self.objects) > 8:
+            del self.objects[next(k for k in self.objects if k != obj.id)]
+        reachable = jelly.geometry.reachable(jelly.current, available)
+        if obj.cell not in reachable:
+            obj.cell = self._choose_cell(jelly, reachable)
+            obj.home = obj.cell
+        obj.state = "reserved"
+        self.target, self.key, self.home_key = obj.id, obj.cell, jelly.current
+        self.work_key = (
+            self._choose_cell(jelly, reachable, obj.cell) if name in TOOLS | TRANSFER | {"fountain"} else obj.cell
+        )
+        if name in TOOLS | TRANSFER | {"fountain"} and len(reachable) > 1 and self.work_key == obj.cell:
+            self.work_key = self._choose_cell(jelly, reachable, exclude=obj.cell)
+        self.scene, self.sky = scene_id, scene.sky
+        self.use_elapsed = obj.progress * duration(name, RECIPES[name])
+        self.water = max(0.0, 1 - obj.progress)
+        self.owns_actor, self.visible = True, True
+        self.retiring = False
+        self._stage("notice", now, jelly)
+        self.events.append(("selected", name, obj.cell))
+
+    def _stage(self, stage, now, jelly):
+        self.stage, self.stage_started = stage, now
+        self.stage_time = 0.0
+        self.origin_x = jelly.x
+        self.events.append(("stage", stage, jelly.current))
+
+    def _travel(self, now, jelly, free, destination, next_stage):
+        if jelly.state == "hop":
+            return
+        route = jelly.geometry.route_to(jelly.current, destination, free)
+        if route is None:
+            self.cancel(now, jelly)
+        elif route:
+            if not jelly.hop(route[0], now, free):
+                self.cancel(now, jelly)
+        else:
+            self.key = destination
+            self._stage(next_stage, now, jelly)
+
+    def _outcome(self, jelly, obj):
+        if obj.applied:
+            return
+        obj.applied, obj.result, obj.state = True, DEFINITIONS[obj.name].result, "changed"
+        self.history.append(obj.name)
+        if ATMOSPHERES.get(self.sky) == obj.name:
+            self.environment_served = self.sky
+        motive = DEFINITIONS[obj.name].motive
+        need = {
+            "play": "stimulation",
+            "curiosity": "stimulation",
+            "tidy": "confidence",
+            "rest": "energy",
+            "celebrate": "sociability",
+            "weather": "energy",
+        }.get(motive, motive)
+        if jelly.options["needs"] and need in jelly.mind.needs:
+            jelly.mind.needs[need] = min(100, jelly.mind.needs[need] + 5)
+        if obj.name == "gift":
+            self.serial += 1
+            toy = Object(self.serial, "beachball", obj.cell, obj.cell, "stored", color=obj.color)
+            self.objects[toy.id] = toy
+            obj.data["gift_id"] = toy.id
+            self.followup = "beachball"
+            while len(self.objects) > 8:
+                del self.objects[next(k for k in self.objects if k not in (obj.id, toy.id))]
+        if obj.name == "windsock":
+            self.followup = "kite"
+        if obj.name == "window" and self.sky == "rain":
+            self.followup = "puddle"
+        if obj.name == "clock":
+            self.followup = "lamp"
+        self.events.append(("outcome", obj.id, obj.result))
 
     def tick(self, now, jelly, available, scene_id, scene, options, blocked=False):
+        dt = 0 if self.last is None else max(0, min(0.25, now - self.last))
+        self.last = now
+        free = set(available) & set(range(jelly.geometry.count))
         allowed = (
             not blocked
+            and options["living_world"]
             and options["interactions"]
             and options["props"]
             and not options["reduced_motion"]
-            and scene is not None
-            and scene.prop in RECIPES
-            and jelly.current in available
+            and jelly.current in free
             and not jelly.update_available
             and now >= jelly.touch_until
             and jelly.mind.target is None
             and now >= jelly.look_until
             and jelly.mind.mood not in ("asleep", "overwhelmed", "overworked")
         )
-        if scene_id != self.scene:
+        if self.geometry is not None and self.geometry != jelly.geometry:
             self.cancel(now, jelly)
-            self.scene, self.next_at = scene_id, now + 0.6
-        if not allowed or (self.key is not None and self.key not in available):
+            for obj in self.objects.values():
+                obj.cell = obj.home = None
+                obj.state = "stored"
+        self.geometry = jelly.geometry
+        if scene and scene.sky != self.environment:
+            self.environment, self.environment_since = scene.sky, now
+        if not allowed:
             self.cancel(now, jelly)
             return
-        if self.owns_actor and jelly.state not in ("world_play", "hop", "idle"):
-            self.cancel(now, jelly)
-            return
-        if self.key is None:
-            if now < self.next_at or jelly.state == "hop":
-                return
-            g = jelly.geometry
-            # A real one-hop approach; disconnected keys are never crossed.
-            neighbors = [
-                k for k in g.adjacent(jelly.current) if k in available and k // g.columns == jelly.current // g.columns
-            ]
-            self.home_key = jelly.current
-            self.key = neighbors[0] if neighbors else jelly.current
-            self.started = self.stage_started = now
-            self.stage = "notice"
-        action = RECIPES[scene.prop]
-        elapsed = now - self.stage_started
-        if self.stage == "notice":
-            if jelly.state == "hop":
+        if self.target is not None:
+            obj = self.objects[self.target]
+            if obj.home not in free or self.work_key not in free or jelly.state not in ("world_play", "hop", "idle"):
                 self.cancel(now, jelly)
                 return
-            jelly.state = "world_play"
-            jelly.deadline = now + 2
-            jelly.face, jelly.gaze = "curious", "right" if self.key >= jelly.current else "left"
-            self.owns_actor = True
-            if elapsed >= 0.8:
-                if self.key != jelly.current:
-                    if not jelly.hop(self.key, now, available):
-                        self.cancel(now, jelly)
-                        return
-                    self.stage = "approach"
-                else:
-                    self.stage = "position"
-                    self.origin_x = jelly.x
-                self.stage_started = now
-        elif self.stage == "approach":
-            if now - self.started > 5 or (jelly.state != "hop" and jelly.current != self.key):
-                self.cancel(now, jelly)
-                return
-            if jelly.state != "hop":
-                self.stage, self.stage_started, self.origin_x = "position", now, jelly.x
-        elif self.stage == "position":
-            g = jelly.geometry
-            left = g.bounds(self.key)[0]
-            target_x = left + max(14 * g.scale, g.width / 2 - 7 * g.scale)
-            jelly.x = self.origin_x + (target_x - self.origin_x) * ease(elapsed / 0.8)
-            jelly.state, jelly.deadline = "world_play", now + 2
-            jelly.pose, jelly.face, jelly.gaze = "scoot_front", "curious", "right"
-            jelly.mirror = False
-            if elapsed >= 0.8:
-                self.stage, self.stage_started = "reach", now
         else:
-            durations = {"reach": 0.8, "use": 4.0, "release": 0.8, "admire": 2.0}
-            if self.stage != "rest" and elapsed >= durations[self.stage]:
-                if self.stage == "admire":
-                    self.stage = "rest"
-                    x = jelly.x
-                    jelly.settle(self.key, now)
-                    jelly.x = x
-                    if self.home_key in available and self.home_key != self.key:
-                        jelly.hop(self.home_key, now, available)
-                    self.owns_actor = False
-                    self.next_at = now + options["interaction_seconds"]
-                elif self.stage != "rest":
-                    order = ["reach", "use", "release", "admire"]
-                    self.stage = order[order.index(self.stage) + 1]
-                self.stage_started, elapsed = now, 0.0
-            if self.stage != "rest":
-                jelly.state, jelly.deadline = "world_play", now + 2
-                jelly.mirror, jelly.rotation = False, 0
-                jelly.y = jelly.geometry.anchor(self.key)[1]
-                jelly.gaze = "right"
-                jelly.face = "happy" if self.stage == "admire" else "focused"
-                jelly.pose = "curious_lean" if self.stage in ("reach", "use") else "idle"
-                jelly.gesture, jelly.gesture_step = (
-                    ("point", 2) if self.stage in ("reach", "use", "release") else ("clap", 2)
-                )
-                if self.stage == "use":
-                    phase = int(elapsed * 8) % 8
-                    if action in ("rake", "sweep", "water", "push", "build"):
-                        jelly.pose = ("idle", "curious_lean", "curious_lean", "bob")[phase // 2]
-                    if action in ("drink", "taste"):
-                        jelly.face = "happy" if phase > 3 else "focused"
-                    if action in ("observe", "blow", "candles"):
-                        jelly.face = "focused"
-            elif now >= self.next_at:
-                self.cancel(now, jelly)
+            if scene is None or now < self.next_at or jelly.state == "hop":
                 return
-        elapsed = max(0.0, now - self.stage_started)
-        duration = {"reach": 0.8, "use": 4.0, "release": 0.8, "admire": 2.0}.get(self.stage, 1.0)
-        progress = min(1.0, elapsed / duration)
-        if self.stage in ("admire", "rest"):
-            progress = 1.0
-        self.frame = PlayFrame(self.key, scene.prop, action, self.stage, progress, elapsed, scene.color)
+            self._begin(now, jelly, free, scene_id, scene, options)
+            if self.target is None:
+                return
+        obj = self.objects[self.target]
+        self.stage_time += dt
+        elapsed = self.stage_time
+        travel_stages = {
+            "approach": (obj.home, "position"),
+            "carry": (self.work_key, "work_position"),
+            "return": (obj.home, "return_position"),
+            "water_carry": (self.work_key, "water_pour"),
+        }
+        if self.stage in travel_stages:
+            destination, following = travel_stages[self.stage]
+            self._travel(now, jelly, free, destination, following)
+            if self.target is None:
+                return
+        else:
+            jelly.state, jelly.deadline = "world_play", now + 2
+            jelly.rotation, jelly.mirror = 0, False
+            jelly.face, jelly.gaze = "focused", "right"
+            jelly.pose = "curious_lean" if self.stage in ("reach", "use", "putdown") else "idle"
+            jelly.gesture, jelly.gesture_step = ("point", 2) if self.stage in ("reach", "use", "putdown") else ("", 0)
+            if self.stage == "notice":
+                jelly._point(obj.cell)
+                if elapsed >= 0.8:
+                    self._stage("approach", now, jelly)
+            elif self.stage in ("position", "work_position", "return_position"):
+                left = jelly.geometry.bounds(jelly.current)[0]
+                goal = left + jelly.geometry.width - 26 * jelly.geometry.scale
+                jelly.x = self.origin_x + (goal - self.origin_x) * ease(elapsed / 0.6)
+                if elapsed >= 0.6:
+                    following = {"position": "reach", "work_position": "use", "return_position": "putdown"}[self.stage]
+                    self._stage(following, now, jelly)
+            elif self.stage == "reach":
+                if elapsed >= 0.8:
+                    if DEFINITIONS[obj.name].carry:
+                        self.held, obj.state = obj.id, "held"
+                        self.events.append(("pickup", obj.id, jelly.current))
+                    self._stage("carry" if obj.name in TOOLS | TRANSFER | {"fountain"} else "use", now, jelly)
+            elif self.stage == "use":
+                if advance(self, jelly, obj, dt):
+                    if obj.name == "fountain":
+                        self.water = 1
+                        self._stage("water_carry", now, jelly)
+                    else:
+                        self._outcome(jelly, obj)
+                        self._stage("return" if obj.name in TOOLS | {"kite"} else "putdown", now, jelly)
+            elif self.stage == "water_pour":
+                self.water = max(0, 1 - elapsed / 3)
+                obj.data["plant_water"] = 1 - self.water
+                if elapsed >= 3:
+                    self._outcome(jelly, obj)
+                    self._stage("return", now, jelly)
+            elif self.stage == "putdown":
+                if elapsed >= 0.8:
+                    self.held = None
+                    obj.cell = self.work_key if obj.name in {"balloon", "lantern"} else obj.home
+                    obj.state = "changed"
+                    jelly.y = jelly.geometry.anchor(jelly.current)[1]
+                    self._stage("admire", now, jelly)
+            elif self.stage == "admire":
+                jelly.face, jelly.pose = "happy", "proud"
+                if elapsed >= 2:
+                    self._stage("rest", now, jelly)
+                    self.owns_actor = False
+                    jelly.state, jelly.deadline = "idle", now + 3
+                    self.next_at = now + options["interaction_seconds"]
+            elif self.stage == "rest":
+                self.owns_actor = True
+                jelly.pose, jelly.face = "sleep_curl", "half"
+                jelly.gesture = ""
+                if elapsed >= 3:
+                    self._stage("cleanup", now, jelly)
+            elif self.stage == "cleanup":
+                # Fade only after putting down / tending, then logical storage.
+                self.retiring = True
+                if elapsed >= 1.2:
+                    obj.state = "stored"
+                    self.frame = None
+                    self.target, self.key = None, None
+                    self.stage = ""
+                    self.visible, self.owns_actor = False, False
+                    jelly.state, jelly.deadline = "idle", now + 3
+                    self.next_at = now + (3 if self.followup else options["interaction_seconds"])
+                    return
+        if self.held == obj.id:
+            obj.cell = jelly.current
+        self.visible = True
+        elapsed = self.stage_time
+        p = obj.progress if self.stage == "use" else min(1, elapsed / 0.8)
+        assert self.key is not None
+        self.frame = PlayFrame(self.key, obj.name, RECIPES[obj.name], self.stage, p, elapsed, obj.color)
+
+    def render_layers(self, jelly, available):
+        from .world_object_art import render_layers
+
+        return render_layers(self, jelly, available)
 
     def layers(self, jelly):
-        """Back layer, actor, foreground grip/effect: separate sprites, not baked art."""
         if self.frame is None:
             return None
-        f, g = self.frame, jelly.geometry
-        w, h = math.ceil(g.width / g.scale), math.ceil(g.height / g.scale)
-        back, front = Image.new("RGBA", (w, h)), Image.new("RGBA", (w, h))
-        d, fg = ImageDraw.Draw(back), ImageDraw.Draw(front)
-        left, top, _, _ = g.bounds(f.key)
-        floor = (g.height - 3) // g.scale
-        cx = round((jelly.x - left) / g.scale) if jelly.current == f.key else w // 2 - 7
-        gx, gy = cx + 12, floor - 7
-        rest_x = min(w - 8, round(max(14 * g.scale, g.width / 2 - 7 * g.scale) / g.scale) + 19)
-        used = f.stage in ("use", "release", "admire", "rest")
-        done = f.stage in ("release", "admire", "rest")
-        active = f.stage in ("reach", "use", "release")
-        t = (
-            ease(f.progress)
-            if f.stage == "reach"
-            else 1 - ease(f.progress)
-            if f.stage == "release"
-            else 1.0
-            if f.stage == "use"
-            else 0.0
-        )
-        beat = 0 if done else (0, 1, 2, 3, 3, 2, 1, 0)[int(f.elapsed * 8) % 8]
-        # The grip stays fixed; articulate endpoints, never rotate scaled pixel art.
-        if f.action in ("rake", "sweep"):
-            strokes = min(3, int(f.elapsed) + ease((f.elapsed % 1) / 0.65)) if f.stage == "use" else 3 if done else 0
-            for i in range(7):
-                start = rest_x + 4 - (i % 4) * 3
-                x = round(start + ((rest_x - 3) - start) * min(1.0, strokes / 3))
-                y = floor - 2 - (i // 4 if strokes == 0 else i % 3)
-                c = "#d39c51" if i % 2 else "#b86c42"
-                d.polygon(
-                    [(x - 2, y), (x - 2, y - 2), (x, y - 1), (x + 1, y - 3), (x + 2, y - 1), (x + 3, y), (x, y + 1)],
-                    fill=c,
-                )
-                d.line((x - 1, y, x + 1, y), fill=GOLD)
-            hx = round(rest_x * (1 - t) + (gx + 6 - beat if f.stage == "use" else gx + 5) * t)
-            hy = floor - 1 - round((1 - t) * 3)
-            draw = fg if active else d
-            draw.line((gx if active else rest_x - 5, gy - 4 if active else floor - 18, hx, hy), fill="#b98a59", width=2)
-            draw.line((gx if active else rest_x - 5, gy - 4 if active else floor - 18, hx - 1, hy), fill=GOLD)
-            if f.action == "rake":
-                draw.line((hx - 4, hy - 1, hx + 4, hy - 1), fill="#a4bec8")
-                for dx in (-4, -2, 0, 2, 4):
-                    draw.line((hx + dx, hy - 1, hx + dx - 1, hy + 2), fill=WHITE)
-            else:
-                draw.polygon(
-                    [(hx - 2, hy - 4), (hx + 2, hy - 4), (hx + 5, hy + 2), (hx - 5, hy + 2)],
-                    fill="#be944f",
-                    outline=INK,
-                )
-                for dx in (-3, 0, 3):
-                    draw.line((hx + dx, hy - 2, hx + dx, hy + 1), fill=GOLD)
-        else:
-            art_phase = int(f.elapsed * 8) % 8
-            if f.action in ("blow", "spin") and f.stage != "use":
-                art_phase = min(7, int(f.elapsed * 3)) if done else 0
-            im = prop(f.name, art_phase, f.color).copy()
-            # Outcome variants are separate from immutable cached idle sprites.
-            draw = ImageDraw.Draw(im)
-            if f.action == "candles" and (done or f.stage == "use" and f.progress > 0.3):
-                draw.rectangle((11, 8, 29, 16), fill=(0, 0, 0, 0))
-                if not done:
-                    for x in (15, 20, 25):
-                        draw.line((x, 14, x + beat // 2, 10 - beat), fill="#8c9ba8")
-            if f.action in ("unwrap", "read") and used:
-                if f.action == "unwrap":
-                    draw.rectangle((10, 13, 30, 23), fill=(0, 0, 0, 0))
-                    draw.rectangle((12, 21, 28, 23), fill=INK)
-                    lift = 5 if done else round(5 * ease(min(1.0, f.progress * 3)))
-                    draw.rectangle((10, 17 - lift, 30, 21 - lift), fill=f.color, outline=INK)
-                    draw.line((19, 18 - lift, 21, 20 - lift), fill=GOLD, width=2)
-                else:
-                    draw.polygon([(11, 23), (20, 17), (29, 23)], fill="#d1b28a", outline=INK)
-                    draw.rectangle((14, 19, 26, 28), fill="#f4e7c8", outline=INK)
-                    draw.line((16, 22, 24, 22), fill="#8d817b")
-                    draw.line((16, 25, 22, 25), fill="#8d817b")
-            if f.action == "taste" and used:
-                # A small bite cutout at the top edge, held until the scene resets.
-                box = im.getbbox()
-                if box:
-                    draw.ellipse((box[2] - 7, box[1] - 2, box[2] + 2, box[1] + 7), fill=(0, 0, 0, 0))
-            box = im.getbbox()
-            if box:
-                im = im.crop(box)
-                limit = 14 if f.action not in ("inspect", "drink", "taste") else 11
-                ratio = min(1.0, limit / im.width, 22 / im.height)
-                im = im.resize(
-                    (max(1, round(im.width * ratio)), max(1, round(im.height * ratio))), Image.Resampling.NEAREST
-                )
-                x, y = rest_x - im.width // 2, floor - im.height
-                held = f.action in ("drink", "taste", "inspect", "read")
-                if held:
-                    x = round(x * (1 - t) + (gx - 2) * t)
-                    y = round(y * (1 - t) + (gy - im.height + 3 - (beat // 2 if f.action == "drink" else 0)) * t)
-                if f.action in ("inspect", "read", "taste") and f.stage == "use":
-                    y -= beat // 2
-                    x += 1 if beat == 3 else 0
-                if f.action == "play" and f.stage == "use":
-                    # Repeated push, airborne arc, return to Jelly's side.
-                    u = (f.elapsed % 1.3) / 1.3
-                    x = round(gx - 2 + 5 * math.sin(math.pi * u))
-                    y -= round(8 * math.sin(math.pi * u))
-                if f.action == "spin" and f.stage == "use":
-                    x += (beat - 1) // 2
-                if f.action == "push" and f.stage == "use":
-                    x += round(3 * math.sin(f.elapsed * 2))
-                if f.action == "build" and (not used or f.stage == "use" and f.progress < 0.55):
-                    im = im.crop((0, im.height // 2, im.width, im.height))
-                    y = floor - im.height
-                (front if held and active else back).alpha_composite(im, (x, y))
-            if f.action == "water" and active:
-                # Held watering can; drops land at the plant's root.
-                fg.rectangle((gx - 2, gy - 3, gx + 4, gy + 3), fill="#6c9dae", outline=INK)
-                fg.arc((gx - 5, gy - 3, gx, gy + 3), 90, 270, fill=WHITE)
-                fg.line((gx + 4, gy, gx + 7, gy - 2), fill=BLUE, width=2)
-                if f.stage == "use":
-                    for i in range(3):
-                        yy = gy + 1 + (int(f.elapsed * 12) + i * 3) % 8
-                        fg.point((rest_x - 2 + i % 2, yy), fill=BLUE)
-                if done:
-                    d.line((rest_x - 4, floor, rest_x + 3, floor), fill="#365c58")
-            if f.action in ("blow", "candles") and f.stage == "use":
-                for i in range(2):
-                    fg.line((gx + i * 3, gy - 4, gx + i * 3 + 2, gy - 4), fill="#7596aa")
-            if f.action == "observe" and f.stage == "use":
-                d.point((rest_x - 2 + beat % 2, 7 + beat // 2), fill=GOLD)
-                fg.line((gx - 5, gy - 3, gx + 3, gy - 6), fill=BLUE, width=2)
-                fg.point((gx - 4, gy - 4), fill=WHITE)
-            if f.action == "build" and f.stage == "use":
-                fg.rectangle((gx, gy, gx + 3, gy + 3), fill=WHITE if f.name == "snowman" else GOLD, outline=INK)
-        return tuple(
-            im.resize((w * g.scale, h * g.scale), Image.Resampling.NEAREST).crop((0, 0, g.width, g.height))
-            for im in (back, front)
-        )
+        back, front = self.render_layers(jelly, {self.frame.key})
+        from PIL import Image
+
+        blank = lambda: Image.new("RGBA", (jelly.geometry.width, jelly.geometry.height))
+        return back.get(self.frame.key, blank()), front.get(self.frame.key, blank())

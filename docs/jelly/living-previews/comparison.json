@@ -1,0 +1,59 @@
+{
+  "method": "Independent interpreter per checkout and layout; 900 frames at 24Hz simulated time; first 60 excluded from warm statistics; all keys free, seed 6, autumn_rake. First object frame has process-cold object caches; background caches may already be warm. CPU composition only, no USB. Behaviors differ because candidate completes travel and cleanup.",
+  "results": [
+    {
+      "size": 72,
+      "keys": 6,
+      "first_object_frame_ms": 1.237733999005286,
+      "median_ms": 0.8619050022389274,
+      "mean_ms": 1.1303971643601904,
+      "p95_ms": 2.5126200016529765,
+      "implementation": "v3.0.13"
+    },
+    {
+      "size": 80,
+      "keys": 15,
+      "first_object_frame_ms": 1.4277289992605802,
+      "median_ms": 1.5682435005146544,
+      "mean_ms": 2.416647441584376,
+      "p95_ms": 4.453505000128644,
+      "implementation": "v3.0.13"
+    },
+    {
+      "size": 96,
+      "keys": 32,
+      "first_object_frame_ms": 3.7167160007811617,
+      "median_ms": 3.905648998625111,
+      "mean_ms": 4.435693399920551,
+      "p95_ms": 7.678291996853659,
+      "implementation": "v3.0.13"
+    },
+    {
+      "size": 72,
+      "keys": 6,
+      "first_object_frame_ms": 1.9578139981604181,
+      "median_ms": 0.9387654990860028,
+      "mean_ms": 1.062573697639718,
+      "p95_ms": 2.034654000453884,
+      "implementation": "candidate"
+    },
+    {
+      "size": 80,
+      "keys": 15,
+      "first_object_frame_ms": 4.029830000945367,
+      "median_ms": 1.6868229995452566,
+      "mean_ms": 2.4035156393048447,
+      "p95_ms": 4.552728998532984,
+      "implementation": "candidate"
+    },
+    {
+      "size": 96,
+      "keys": 32,
+      "first_object_frame_ms": 6.5498889998707455,
+      "median_ms": 4.151174500293564,
+      "mean_ms": 4.434600776182508,
+      "p95_ms": 6.746877999830758,
+      "implementation": "candidate"
+    }
+  ]
+}

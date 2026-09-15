@@ -10,7 +10,7 @@ Jelly celebrates holidays, wears costumes, watches the weather and enjoys small 
 
 Objects share Jelly's pixel scale: an acorn is smaller than a mug, and a tree is taller than either. Contact shadows ground solid props. Steam, flickering candles, rotating fan blades, fluttering ribbons and rippling water give each scene its own movement. Stars twinkle in place; balloons rise; leaves have lobes and veins. Clouds have lit tops and shaded undersides.
 
-Props prefer an unused neighbor and avoid every key touched by a hop. With one free key, a small corner detail sits behind Jelly. Singular sky landmarks such as the sun stay on an available key. Cloud watching deliberately uses drifting scenery without an extra foreground prop. No scene needs a large object on every button.
+Objects appear only when Jelly has an achievable activity for them. Their initial cells are chosen from the reachable free region with seeded variety; Jelly hops to the actual cell before contact. Tools have racks, cups have coasters, and plants stay rooted. One free key uses a compact local activity; no free keys means no world content.
 
 [Inspect every object and atmosphere effect](artwork.md). The existing `--no-props`, `--no-particles`, `--no-costumes`, `--max-keys` and `--reduced-motion` controls apply to the new artwork; the interaction controls below add short object-use sequences. Reduced motion freezes decorative animation. Restart after changing settings.
 
@@ -28,7 +28,7 @@ Each free key has its own floor and particle seed. Motion follows elapsed time a
 
 Jelly can approach a rake, pick it up, gather leaves, put it down and admire the pile. Other sequences include sipping cocoa, opening a gift or letter, watering a plant, bouncing a ball, spinning a dreidel, pushing a train, looking through a telescope, blowing a pinwheel, tasting a treat, building snowmen or sandcastles, and blowing out birthday candles.
 
-![Jelly rakes fallen leaves and leaves the finished pile behind](world-raking.gif)
+![Jelly rakes fallen leaves and leaves the finished pile behind](living-previews/autumn_rake-80.gif)
 
 [Interaction gallery and review of every prop](prop-review.md). Props have separate resting, held, in-use and outcome sprites. Clouds, the moon and other scenery remain environmental.
 
@@ -38,9 +38,18 @@ ocdeck world configure --no-interactions
 ocdeck world preview autumn_rake --output raking.gif
 ```
 
-Interactions are enabled by default. `interaction_seconds` (12–300, default 24) is the quiet interval after a completed sequence before another can start; scene changes may introduce a different activity. Short scenes can end before a whole sequence finishes. `--no-interactions` keeps the ambient props and atmosphere. `--no-props` and reduced motion also disable object use. Restart the broker to apply settings.
+Living-world activities are enabled by default. `interaction_seconds` (12–300, default 24) sets the quiet interval after cleanup. An active activity survives scene rotation. `--no-interactions`, `--no-props`, `--no-living-world` and reduced motion suppress physical activities and their objects; they never restore unattended decorative props. Natural background weather can remain. Restart the broker after changing settings.
 
-The director checks free keys every frame, uses Jelly's existing adjacent-key hops and never reserves a session button. A single free key gets a compact shared scene. A tap, hold/help, menu, agent attention, update, coffee break, scene change or reclaimed key cancels object use. Existing agent and physical-button actions retain priority. Outcomes remain on their original key until cancellation, scene change or the next activity.
+The director rechecks available keys every frame. Touch, hold/help, menus, agent attention, updates, coffee and ownership changes take priority. Interrupted objects go into logical storage; material progress is retained and routes are revalidated before resuming. Completed work is admired, followed by a short rest and a gentle fade into storage. The Buy Me a Coffee interaction keeps its existing controls.
+
+Plants and projects retain identity and growth across later visits when Jelly persistence is enabled. Memory is bounded to eight objects and 24 recent activities. Gifts create one toy that Jelly plays with next; fountains lead to a water-carrying journey, and windsock checks lead to kite play. Being away does not create missed chores or neglect penalties.
+
+```console
+ocdeck world configure --living-world --interactions --props
+ocdeck world reset
+```
+
+`world reset` resets only world memories on the next broker restart, preserving Jelly's needs and preferences. It uses a generation marker so a still-running broker cannot overwrite the reset with an old snapshot. Existing `jelly.persistent` controls saving. [Architecture, coverage and reproducible review](living-world-development.md).
 
 ## Quick start
 

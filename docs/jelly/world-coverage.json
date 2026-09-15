@@ -1,0 +1,1112 @@
+{
+  "schema_version": 2,
+  "baseline": "v3.0.13",
+  "props": {
+    "acorn": {
+      "action": "plant",
+      "support": "soil",
+      "outcome": "sprout",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/acorn-72.gif",
+        "living-previews/acorn-80.gif",
+        "living-previews/acorn-96.gif"
+      ]
+    },
+    "balloon": {
+      "action": "retie",
+      "support": "post",
+      "outcome": "tied",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/balloon-72.gif",
+        "living-previews/balloon-80.gif",
+        "living-previews/balloon-96.gif"
+      ]
+    },
+    "beachball": {
+      "action": "chase",
+      "support": "floor",
+      "outcome": "parked",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/beachball-72.gif",
+        "living-previews/beachball-80.gif",
+        "living-previews/beachball-96.gif"
+      ]
+    },
+    "broom": {
+      "action": "sweep",
+      "support": "rack",
+      "outcome": "clean",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/broom-72.gif",
+        "living-previews/broom-80.gif",
+        "living-previews/broom-96.gif"
+      ]
+    },
+    "cake": {
+      "action": "candles",
+      "support": "plate",
+      "outcome": "served",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/cake-72.gif",
+        "living-previews/cake-80.gif",
+        "living-previews/cake-96.gif"
+      ]
+    },
+    "candy": {
+      "action": "unwrap_eat",
+      "support": "tray",
+      "outcome": "wrapper_stored",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/candy-72.gif",
+        "living-previews/candy-80.gif",
+        "living-previews/candy-96.gif"
+      ]
+    },
+    "canister": {
+      "action": "smoke_show",
+      "support": "floor",
+      "outcome": "closed",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/canister-72.gif",
+        "living-previews/canister-80.gif",
+        "living-previews/canister-96.gif"
+      ]
+    },
+    "clock": {
+      "action": "wind_clock",
+      "support": "stand",
+      "outcome": "wound",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/clock-72.gif",
+        "living-previews/clock-80.gif",
+        "living-previews/clock-96.gif"
+      ]
+    },
+    "cloud": {
+      "action": "shelter",
+      "support": "sky",
+      "outcome": "puddle",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/cloud-72.gif",
+        "living-previews/cloud-80.gif",
+        "living-previews/cloud-96.gif"
+      ]
+    },
+    "clover": {
+      "action": "water",
+      "support": "soil",
+      "outcome": "grown",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/clover-72.gif",
+        "living-previews/clover-80.gif",
+        "living-previews/clover-96.gif"
+      ]
+    },
+    "cocoa": {
+      "action": "drink",
+      "support": "coaster",
+      "outcome": "empty",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/cocoa-72.gif",
+        "living-previews/cocoa-80.gif",
+        "living-previews/cocoa-96.gif"
+      ]
+    },
+    "crescent": {
+      "action": "moonwatch",
+      "support": "sky",
+      "outcome": "observed",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/crescent-72.gif",
+        "living-previews/crescent-80.gif",
+        "living-previews/crescent-96.gif"
+      ]
+    },
+    "diya": {
+      "action": "tend_wick",
+      "support": "tray",
+      "outcome": "lit",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/diya-72.gif",
+        "living-previews/diya-80.gif",
+        "living-previews/diya-96.gif"
+      ]
+    },
+    "dreidel": {
+      "action": "spin",
+      "support": "floor",
+      "outcome": "tipped",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/dreidel-72.gif",
+        "living-previews/dreidel-80.gif",
+        "living-previews/dreidel-96.gif"
+      ]
+    },
+    "eggs": {
+      "action": "decorate_egg",
+      "support": "basket",
+      "outcome": "decorated",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/eggs-72.gif",
+        "living-previews/eggs-80.gif",
+        "living-previews/eggs-96.gif"
+      ]
+    },
+    "fan": {
+      "action": "switch_fan",
+      "support": "stand",
+      "outcome": "cooled",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/fan-72.gif",
+        "living-previews/fan-80.gif",
+        "living-previews/fan-96.gif"
+      ]
+    },
+    "feast": {
+      "action": "picnic",
+      "support": "plate",
+      "outcome": "packed",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/feast-72.gif",
+        "living-previews/feast-80.gif",
+        "living-previews/feast-96.gif"
+      ]
+    },
+    "flower": {
+      "action": "water",
+      "support": "soil",
+      "outcome": "grown",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/flower-72.gif",
+        "living-previews/flower-80.gif",
+        "living-previews/flower-96.gif"
+      ]
+    },
+    "fountain": {
+      "action": "fill_water",
+      "support": "basin",
+      "outcome": "watered",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/fountain-72.gif",
+        "living-previews/fountain-80.gif",
+        "living-previews/fountain-96.gif"
+      ]
+    },
+    "gift": {
+      "action": "unwrap",
+      "support": "floor",
+      "outcome": "opened",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/gift-72.gif",
+        "living-previews/gift-80.gif",
+        "living-previews/gift-96.gif"
+      ]
+    },
+    "globe": {
+      "action": "spin_globe",
+      "support": "stand",
+      "outcome": "located",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/globe-72.gif",
+        "living-previews/globe-80.gif",
+        "living-previews/globe-96.gif"
+      ]
+    },
+    "grass": {
+      "action": "trim",
+      "support": "soil",
+      "outcome": "trimmed",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/grass-72.gif",
+        "living-previews/grass-80.gif",
+        "living-previews/grass-96.gif"
+      ]
+    },
+    "heart": {
+      "action": "hug",
+      "support": "tray",
+      "outcome": "kept",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/heart-72.gif",
+        "living-previews/heart-80.gif",
+        "living-previews/heart-96.gif"
+      ]
+    },
+    "icicles": {
+      "action": "catch_drips",
+      "support": "ledge",
+      "outcome": "collected",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/icicles-72.gif",
+        "living-previews/icicles-80.gif",
+        "living-previews/icicles-96.gif"
+      ]
+    },
+    "kite": {
+      "action": "fly",
+      "support": "rack",
+      "outcome": "folded",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/kite-72.gif",
+        "living-previews/kite-80.gif",
+        "living-previews/kite-96.gif"
+      ]
+    },
+    "lamp": {
+      "action": "read_light",
+      "support": "stand",
+      "outcome": "off",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/lamp-72.gif",
+        "living-previews/lamp-80.gif",
+        "living-previews/lamp-96.gif"
+      ]
+    },
+    "lantern": {
+      "action": "hang",
+      "support": "hook",
+      "outcome": "hung",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/lantern-72.gif",
+        "living-previews/lantern-80.gif",
+        "living-previews/lantern-96.gif"
+      ]
+    },
+    "leaf": {
+      "action": "press_leaf",
+      "support": "floor",
+      "outcome": "pressed",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/leaf-72.gif",
+        "living-previews/leaf-80.gif",
+        "living-previews/leaf-96.gif"
+      ]
+    },
+    "lemonade": {
+      "action": "drink",
+      "support": "coaster",
+      "outcome": "empty",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/lemonade-72.gif",
+        "living-previews/lemonade-80.gif",
+        "living-previews/lemonade-96.gif"
+      ]
+    },
+    "letter": {
+      "action": "read_letter",
+      "support": "mat",
+      "outcome": "folded",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/letter-72.gif",
+        "living-previews/letter-80.gif",
+        "living-previews/letter-96.gif"
+      ]
+    },
+    "menorah": {
+      "action": "light_candles",
+      "support": "stand",
+      "outcome": "lit",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/menorah-72.gif",
+        "living-previews/menorah-80.gif",
+        "living-previews/menorah-96.gif"
+      ]
+    },
+    "mittens": {
+      "action": "wear",
+      "support": "rack",
+      "outcome": "returned",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/mittens-72.gif",
+        "living-previews/mittens-80.gif",
+        "living-previews/mittens-96.gif"
+      ]
+    },
+    "music": {
+      "action": "lullaby",
+      "support": "effect",
+      "outcome": "quiet",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/music-72.gif",
+        "living-previews/music-80.gif",
+        "living-previews/music-96.gif"
+      ]
+    },
+    "pie": {
+      "action": "serve",
+      "support": "plate",
+      "outcome": "served",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/pie-72.gif",
+        "living-previews/pie-80.gif",
+        "living-previews/pie-96.gif"
+      ]
+    },
+    "pinwheel": {
+      "action": "blow",
+      "support": "stand",
+      "outcome": "stopped",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/pinwheel-72.gif",
+        "living-previews/pinwheel-80.gif",
+        "living-previews/pinwheel-96.gif"
+      ]
+    },
+    "popsicle": {
+      "action": "lick",
+      "support": "tray",
+      "outcome": "stick_stored",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/popsicle-72.gif",
+        "living-previews/popsicle-80.gif",
+        "living-previews/popsicle-96.gif"
+      ]
+    },
+    "pot": {
+      "action": "count_coins",
+      "support": "floor",
+      "outcome": "counted",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/pot-72.gif",
+        "living-previews/pot-80.gif",
+        "living-previews/pot-96.gif"
+      ]
+    },
+    "powder": {
+      "action": "pour_pattern",
+      "support": "tray",
+      "outcome": "pattern",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/powder-72.gif",
+        "living-previews/powder-80.gif",
+        "living-previews/powder-96.gif"
+      ]
+    },
+    "puddle": {
+      "action": "splash",
+      "support": "water",
+      "outcome": "settled",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/puddle-72.gif",
+        "living-previews/puddle-80.gif",
+        "living-previews/puddle-96.gif"
+      ]
+    },
+    "pumpkin": {
+      "action": "tend_pumpkin",
+      "support": "floor",
+      "outcome": "lit",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/pumpkin-72.gif",
+        "living-previews/pumpkin-80.gif",
+        "living-previews/pumpkin-96.gif"
+      ]
+    },
+    "rake": {
+      "action": "rake",
+      "support": "rack",
+      "outcome": "pile",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/rake-72.gif",
+        "living-previews/rake-80.gif",
+        "living-previews/rake-96.gif"
+      ]
+    },
+    "rangoli": {
+      "action": "finish_pattern",
+      "support": "floor",
+      "outcome": "complete",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/rangoli-72.gif",
+        "living-previews/rangoli-80.gif",
+        "living-previews/rangoli-96.gif"
+      ]
+    },
+    "rocket": {
+      "action": "launch",
+      "support": "stand",
+      "outcome": "spent",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/rocket-72.gif",
+        "living-previews/rocket-80.gif",
+        "living-previews/rocket-96.gif"
+      ]
+    },
+    "sandcastle": {
+      "action": "build_sand",
+      "support": "soil",
+      "outcome": "built",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/sandcastle-72.gif",
+        "living-previews/sandcastle-80.gif",
+        "living-previews/sandcastle-96.gif"
+      ]
+    },
+    "scythe": {
+      "action": "harvest",
+      "support": "rack",
+      "outcome": "harvested",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/scythe-72.gif",
+        "living-previews/scythe-80.gif",
+        "living-previews/scythe-96.gif"
+      ]
+    },
+    "seedling": {
+      "action": "water",
+      "support": "soil",
+      "outcome": "grown",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/seedling-72.gif",
+        "living-previews/seedling-80.gif",
+        "living-previews/seedling-96.gif"
+      ]
+    },
+    "sled": {
+      "action": "ride",
+      "support": "floor",
+      "outcome": "parked",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/sled-72.gif",
+        "living-previews/sled-80.gif",
+        "living-previews/sled-96.gif"
+      ]
+    },
+    "snowangel": {
+      "action": "snow_angel",
+      "support": "snow",
+      "outcome": "imprint",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/snowangel-72.gif",
+        "living-previews/snowangel-80.gif",
+        "living-previews/snowangel-96.gif"
+      ]
+    },
+    "snowball": {
+      "action": "roll_snow",
+      "support": "snow",
+      "outcome": "rolled",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/snowball-72.gif",
+        "living-previews/snowball-80.gif",
+        "living-previews/snowball-96.gif"
+      ]
+    },
+    "snowflake": {
+      "action": "catch_flake",
+      "support": "sky",
+      "outcome": "melted",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/snowflake-72.gif",
+        "living-previews/snowflake-80.gif",
+        "living-previews/snowflake-96.gif"
+      ]
+    },
+    "snowman": {
+      "action": "build_snow",
+      "support": "snow",
+      "outcome": "built",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/snowman-72.gif",
+        "living-previews/snowman-80.gif",
+        "living-previews/snowman-96.gif"
+      ]
+    },
+    "sweets": {
+      "action": "serve",
+      "support": "plate",
+      "outcome": "served",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/sweets-72.gif",
+        "living-previews/sweets-80.gif",
+        "living-previews/sweets-96.gif"
+      ]
+    },
+    "telescope": {
+      "action": "aim",
+      "support": "tripod",
+      "outcome": "observed",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/telescope-72.gif",
+        "living-previews/telescope-80.gif",
+        "living-previews/telescope-96.gif"
+      ]
+    },
+    "train": {
+      "action": "drive",
+      "support": "track",
+      "outcome": "parked",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/train-72.gif",
+        "living-previews/train-80.gif",
+        "living-previews/train-96.gif"
+      ]
+    },
+    "tree": {
+      "action": "decorate_tree",
+      "support": "soil",
+      "outcome": "decorated",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/tree-72.gif",
+        "living-previews/tree-80.gif",
+        "living-previews/tree-96.gif"
+      ]
+    },
+    "window": {
+      "action": "close_window",
+      "support": "wall",
+      "outcome": "closed",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/window-72.gif",
+        "living-previews/window-80.gif",
+        "living-previews/window-96.gif"
+      ]
+    },
+    "windsock": {
+      "action": "check_wind",
+      "support": "post",
+      "outcome": "secured",
+      "review": "native stage sequence reviewed",
+      "previews": [
+        "living-previews/windsock-72.gif",
+        "living-previews/windsock-80.gif",
+        "living-previews/windsock-96.gif"
+      ]
+    }
+  },
+  "atmospheres": {
+    "balloons": {
+      "opportunity": "balloon",
+      "preview": "living-previews/balloons-environment-80.gif"
+    },
+    "butterflies": {
+      "opportunity": "flower",
+      "preview": "living-previews/butterflies-environment-80.gif"
+    },
+    "clouds": {
+      "opportunity": "cloud",
+      "preview": "living-previews/clouds-environment-80.gif"
+    },
+    "confetti": {
+      "opportunity": "broom",
+      "preview": "living-previews/confetti-environment-80.gif"
+    },
+    "fireflies": {
+      "opportunity": "grass",
+      "preview": "living-previews/fireflies-environment-80.gif"
+    },
+    "fireworks": {
+      "opportunity": "rocket",
+      "preview": "living-previews/fireworks-environment-80.gif"
+    },
+    "fog": {
+      "opportunity": "lamp",
+      "preview": "living-previews/fog-environment-80.gif"
+    },
+    "fountain": {
+      "opportunity": "fountain",
+      "preview": "living-previews/fountain-environment-80.gif"
+    },
+    "hearts": {
+      "opportunity": "heart",
+      "preview": "living-previews/hearts-environment-80.gif"
+    },
+    "hurricane": {
+      "opportunity": "window",
+      "preview": "living-previews/hurricane-environment-80.gif"
+    },
+    "icicles": {
+      "opportunity": "icicles",
+      "preview": "living-previews/icicles-environment-80.gif"
+    },
+    "lanterns": {
+      "opportunity": "lantern",
+      "preview": "living-previews/lanterns-environment-80.gif"
+    },
+    "leaves": {
+      "opportunity": "rake",
+      "preview": "living-previews/leaves-environment-80.gif"
+    },
+    "lights": {
+      "opportunity": "tree",
+      "preview": "living-previews/lights-environment-80.gif"
+    },
+    "meteor": {
+      "opportunity": "telescope",
+      "preview": "living-previews/meteor-environment-80.gif"
+    },
+    "petals": {
+      "opportunity": "leaf",
+      "preview": "living-previews/petals-environment-80.gif"
+    },
+    "rain": {
+      "opportunity": "window",
+      "preview": "living-previews/rain-environment-80.gif"
+    },
+    "rainbow": {
+      "opportunity": "puddle",
+      "preview": "living-previews/rainbow-environment-80.gif"
+    },
+    "smoke": {
+      "opportunity": "canister",
+      "preview": "living-previews/smoke-environment-80.gif"
+    },
+    "snow": {
+      "opportunity": "snowman",
+      "preview": "living-previews/snow-environment-80.gif"
+    },
+    "stars": {
+      "opportunity": "telescope",
+      "preview": "living-previews/stars-environment-80.gif"
+    },
+    "sun": {
+      "opportunity": "lemonade",
+      "preview": "living-previews/sun-environment-80.gif"
+    },
+    "sunrise": {
+      "opportunity": "window",
+      "preview": "living-previews/sunrise-environment-80.gif"
+    },
+    "tornado": {
+      "opportunity": "window",
+      "preview": "living-previews/tornado-environment-80.gif"
+    },
+    "wind": {
+      "opportunity": "kite",
+      "preview": "living-previews/wind-environment-80.gif"
+    }
+  },
+  "scenes": {
+    "sky_fireworks": {
+      "prop": "rocket",
+      "sky": "fireworks",
+      "opportunity": "rocket"
+    },
+    "ground_fountain": {
+      "prop": "fountain",
+      "sky": "fountain",
+      "opportunity": "fountain"
+    },
+    "smoke_bombs": {
+      "prop": "canister",
+      "sky": "smoke",
+      "opportunity": "canister"
+    },
+    "thanksgiving_table": {
+      "prop": "feast",
+      "sky": "",
+      "opportunity": "feast"
+    },
+    "thanksgiving_bite": {
+      "prop": "pie",
+      "sky": "",
+      "opportunity": "pie"
+    },
+    "christmas_lights": {
+      "prop": "tree",
+      "sky": "lights",
+      "opportunity": "tree"
+    },
+    "christmas_santa": {
+      "prop": "gift",
+      "sky": "snow",
+      "opportunity": "gift"
+    },
+    "christmas_elf": {
+      "prop": "gift",
+      "sky": "lights",
+      "opportunity": "gift"
+    },
+    "christmas_snow": {
+      "prop": "snowman",
+      "sky": "snow",
+      "opportunity": "snowman"
+    },
+    "holi_colors": {
+      "prop": "powder",
+      "sky": "confetti",
+      "opportunity": "powder"
+    },
+    "easter_hunt": {
+      "prop": "eggs",
+      "sky": "",
+      "opportunity": "eggs"
+    },
+    "ghost_hover": {
+      "prop": "pumpkin",
+      "sky": "stars",
+      "opportunity": "pumpkin"
+    },
+    "skeleton_dance": {
+      "prop": "pumpkin",
+      "sky": "",
+      "opportunity": "pumpkin"
+    },
+    "reaper_stroll": {
+      "prop": "scythe",
+      "sky": "fog",
+      "opportunity": "scythe"
+    },
+    "masked_jelly": {
+      "prop": "candy",
+      "sky": "",
+      "opportunity": "candy"
+    },
+    "rain": {
+      "prop": "puddle",
+      "sky": "rain",
+      "opportunity": "puddle"
+    },
+    "snow": {
+      "prop": "snowman",
+      "sky": "snow",
+      "opportunity": "snowman"
+    },
+    "hot": {
+      "prop": "fan",
+      "sky": "sun",
+      "opportunity": "fan"
+    },
+    "cloudy": {
+      "prop": "",
+      "sky": "clouds",
+      "opportunity": "cloud"
+    },
+    "wind": {
+      "prop": "windsock",
+      "sky": "wind",
+      "opportunity": "windsock"
+    },
+    "storm": {
+      "prop": "cloud",
+      "sky": "rain",
+      "opportunity": "cloud"
+    },
+    "fog": {
+      "prop": "lamp",
+      "sky": "fog",
+      "opportunity": "lamp"
+    },
+    "tornado": {
+      "prop": "windsock",
+      "sky": "tornado",
+      "opportunity": "windsock"
+    },
+    "hurricane": {
+      "prop": "cloud",
+      "sky": "hurricane",
+      "opportunity": "cloud"
+    },
+    "straight_line_wind": {
+      "prop": "leaf",
+      "sky": "wind",
+      "opportunity": "leaf"
+    },
+    "new_year_countdown": {
+      "prop": "clock",
+      "sky": "stars",
+      "opportunity": "clock"
+    },
+    "new_year_confetti": {
+      "prop": "balloon",
+      "sky": "confetti",
+      "opportunity": "balloon"
+    },
+    "valentine_hearts": {
+      "prop": "heart",
+      "sky": "hearts",
+      "opportunity": "heart"
+    },
+    "valentine_letter": {
+      "prop": "letter",
+      "sky": "hearts",
+      "opportunity": "letter"
+    },
+    "lunar_lanterns": {
+      "prop": "lantern",
+      "sky": "lanterns",
+      "opportunity": "lantern"
+    },
+    "lunar_envelope": {
+      "prop": "letter",
+      "sky": "stars",
+      "opportunity": "letter"
+    },
+    "diwali_diyas": {
+      "prop": "diya",
+      "sky": "stars",
+      "opportunity": "diya"
+    },
+    "diwali_rangoli": {
+      "prop": "rangoli",
+      "sky": "confetti",
+      "opportunity": "rangoli"
+    },
+    "eid_crescent": {
+      "prop": "crescent",
+      "sky": "stars",
+      "opportunity": "crescent"
+    },
+    "eid_sweets": {
+      "prop": "sweets",
+      "sky": "lanterns",
+      "opportunity": "sweets"
+    },
+    "hanukkah_lights": {
+      "prop": "menorah",
+      "sky": "stars",
+      "opportunity": "menorah"
+    },
+    "hanukkah_dreidel": {
+      "prop": "dreidel",
+      "sky": "",
+      "opportunity": "dreidel"
+    },
+    "st_patrick_clover": {
+      "prop": "clover",
+      "sky": "",
+      "opportunity": "clover"
+    },
+    "st_patrick_rainbow": {
+      "prop": "pot",
+      "sky": "rainbow",
+      "opportunity": "pot"
+    },
+    "earth_day_seed": {
+      "prop": "seedling",
+      "sky": "",
+      "opportunity": "seedling"
+    },
+    "earth_day_globe": {
+      "prop": "globe",
+      "sky": "stars",
+      "opportunity": "globe"
+    },
+    "birthday_cake": {
+      "prop": "cake",
+      "sky": "confetti",
+      "opportunity": "cake"
+    },
+    "birthday_balloons": {
+      "prop": "gift",
+      "sky": "balloons",
+      "opportunity": "gift"
+    },
+    "spring_blossoms": {
+      "prop": "flower",
+      "sky": "petals",
+      "opportunity": "flower"
+    },
+    "spring_butterfly": {
+      "prop": "flower",
+      "sky": "butterflies",
+      "opportunity": "flower"
+    },
+    "spring_seedling": {
+      "prop": "seedling",
+      "sky": "",
+      "opportunity": "seedling"
+    },
+    "spring_kite": {
+      "prop": "kite",
+      "sky": "clouds",
+      "opportunity": "kite"
+    },
+    "summer_lemonade": {
+      "prop": "lemonade",
+      "sky": "sun",
+      "opportunity": "lemonade"
+    },
+    "summer_sandcastle": {
+      "prop": "sandcastle",
+      "sky": "sun",
+      "opportunity": "sandcastle"
+    },
+    "summer_beachball": {
+      "prop": "beachball",
+      "sky": "clouds",
+      "opportunity": "beachball"
+    },
+    "summer_fireflies": {
+      "prop": "grass",
+      "sky": "fireflies",
+      "opportunity": "grass"
+    },
+    "autumn_leaves": {
+      "prop": "leaf",
+      "sky": "leaves",
+      "opportunity": "leaf"
+    },
+    "autumn_rake": {
+      "prop": "rake",
+      "sky": "leaves",
+      "opportunity": "rake"
+    },
+    "autumn_acorn": {
+      "prop": "acorn",
+      "sky": "",
+      "opportunity": "acorn"
+    },
+    "autumn_cocoa": {
+      "prop": "cocoa",
+      "sky": "smoke",
+      "opportunity": "cocoa"
+    },
+    "winter_snowangel": {
+      "prop": "snowangel",
+      "sky": "snow",
+      "opportunity": "snowangel"
+    },
+    "winter_snowball": {
+      "prop": "snowball",
+      "sky": "snow",
+      "opportunity": "snowball"
+    },
+    "winter_icicles": {
+      "prop": "snowman",
+      "sky": "icicles",
+      "opportunity": "snowman"
+    },
+    "winter_mittens": {
+      "prop": "mittens",
+      "sky": "snow",
+      "opportunity": "mittens"
+    },
+    "rain_puddle_jump": {
+      "prop": "puddle",
+      "sky": "rain",
+      "opportunity": "puddle"
+    },
+    "rain_umbrella": {
+      "prop": "flower",
+      "sky": "rain",
+      "opportunity": "flower"
+    },
+    "rain_window": {
+      "prop": "window",
+      "sky": "rain",
+      "opportunity": "window"
+    },
+    "rain_rainbow": {
+      "prop": "puddle",
+      "sky": "rainbow",
+      "opportunity": "puddle"
+    },
+    "snow_catch": {
+      "prop": "snowflake",
+      "sky": "snow",
+      "opportunity": "snowflake"
+    },
+    "snow_sled": {
+      "prop": "sled",
+      "sky": "snow",
+      "opportunity": "sled"
+    },
+    "hot_popsicle": {
+      "prop": "popsicle",
+      "sky": "sun",
+      "opportunity": "popsicle"
+    },
+    "hot_fan": {
+      "prop": "fan",
+      "sky": "wind",
+      "opportunity": "fan"
+    },
+    "wind_pinwheel": {
+      "prop": "pinwheel",
+      "sky": "wind",
+      "opportunity": "pinwheel"
+    },
+    "wind_scarf": {
+      "prop": "windsock",
+      "sky": "leaves",
+      "opportunity": "windsock"
+    },
+    "night_stargazing": {
+      "prop": "telescope",
+      "sky": "stars",
+      "opportunity": "telescope"
+    },
+    "night_meteor": {
+      "prop": "crescent",
+      "sky": "meteor",
+      "opportunity": "crescent"
+    },
+    "night_lullaby": {
+      "prop": "music",
+      "sky": "stars",
+      "opportunity": "music"
+    },
+    "morning_sunrise": {
+      "prop": "flower",
+      "sky": "sunrise",
+      "opportunity": "flower"
+    },
+    "halloween_witch": {
+      "prop": "broom",
+      "sky": "stars",
+      "opportunity": "broom"
+    },
+    "christmas_train": {
+      "prop": "train",
+      "sky": "lights",
+      "opportunity": "train"
+    }
+  }
+}
