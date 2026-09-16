@@ -51,3 +51,7 @@ and report output boundaries. See [NEXT.md](docs/NEXT.md) for coverage limits.
 ## Living-world data and original art
 
 World props and costumes are original procedural pixel drawings in `ocdeck/world_art.py`. Calendar calculations use the MIT-licensed `holidays` and `pyluach` packages, plus timezone data from `tzdata`. Weather data: [Open-Meteo](https://open-meteo.com/), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Approximate IP location: [IPWhois](https://ipwhois.io/). See [provider behavior and usage limits](docs/jelly/world.md#weather-and-location).
+
+## Stream Deck product photographs
+
+The documentation hardware composites use Elgato product photographs sourced from MaxGaming, JB Hi-Fi and GearTechs. Photographs and hardware marks remain the property of their respective owners and are excluded from the Apache software license. See [photo sources and reproduction](docs/hardware/README.md#image-sources-and-reproduction).
