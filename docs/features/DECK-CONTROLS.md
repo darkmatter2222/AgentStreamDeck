@@ -51,7 +51,7 @@ The menu occupies the first six keys on Mini, Original/MK.2 and XL. Extra keys r
 | Harness | Launch from saved folder | Native deck decision | Requirements / limits |
 |---|---|---|---|
 | OpenCode | Yes | Yes, server plugin | Live `permission.asked` event with session/request IDs and a supported SDK reply method. TUI-only plugin and missed historical requests use native UI. |
-| Claude Code | Yes | Yes | Reinstall this branch's project hooks. `PermissionRequest` waits for a physical decision; other hook events remain observers. |
+| Claude Code | Yes | Yes | Reinstall the current project hooks. `PermissionRequest` waits for a physical decision; other hook events remain observers. |
 | Codex | Yes | Focus native prompt | Existing adapter observes permission state; this feature does not supply Codex decisions. |
 | Copilot CLI | Yes | Focus native prompt | Its current permission hook runs before rule evaluation, not just at a pending user prompt. This feature does not intercept every tool call. |
 | Copilot VS Code | Yes, preview | Focus editor | Managed launch uses a separate editor profile, as in the existing integration. |

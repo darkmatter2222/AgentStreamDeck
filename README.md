@@ -19,7 +19,7 @@
 [![Support on Buy Me a Coffee](https://img.shields.io/badge/Support-Buy_Me_a_Coffee-FFDD00?logo=buymeacoffee&logoColor=000000)](https://buymeacoffee.com/j6oiubzfnh)
 
 <p align="center">
-  <img src="docs/jelly/readme_hero.gif" alt="AgentStreamDeck animated dashboard with live coding-agent status keys and Jelly exploring unused Stream Deck buttons" width="100%">
+  <img src="docs/jelly/readme_hero.gif" alt="AgentStreamDeck real rendered status keys, button presets and Jelly composited onto Stream Deck Mini, MK.2 and XL product photos" width="100%">
 </p>
 
 [Get started](#get-started) · [Watch the video](#watch-agentstreamdeck-on-a-real-stream-deck) · [All features](#explore-every-feature) · [CLI reference](docs/CLI.md) · [UI options](docs/UI.md) · [Visual gallery](docs/GALLERY.md) · [Documentation](docs/README.md)
@@ -39,7 +39,18 @@ Running several coding agents means several windows to check. AgentStreamDeck gi
 - **Keep your usual workflow.** Launch your CLI or editor normally after installing its integration. No special launcher, Elgato plugin or MCP server required.
 - **Give spare keys some personality.** Jelly plays on unused buttons, celebrates holidays and reacts to your local weather.
 
-The hero above uses the actual renderers on a simulated deck. [The video demo](https://www.youtube.com/watch?v=NTWLbLbJiO0) shows the OpenCode workflow on hardware.
+The hero above composites the actual application renderers onto product photos of the Mini, MK.2 and XL. These are illustrative previews. [The video demo](https://www.youtube.com/watch?v=NTWLbLbJiO0) shows the OpenCode workflow on hardware.
+
+## Choose your deck
+
+The same dashboard scales from six keys to thirty-two. Session keys stay in charge; Jelly uses the space that is free.
+
+| Mini | Original / MK.2 | XL |
+|---|---|---|
+| 6 keys · 2 × 3 | 15 keys · 3 × 5 | 32 keys · 4 × 8 |
+| Compact desk companion | Room for parallel projects | A larger view of your agent sessions |
+
+[See the three hardware previews and photo sources](docs/hardware/README.md). Each broker controls one device. These capacities include agent keys and spare keys; Jelly yields when a session needs a slot.
 
 ## Get started
 
@@ -116,11 +127,26 @@ A normal tap on an agent key requests window focus. Optional [deck controls](doc
 
 ## Launch and review from the deck
 
-**On this feature branch:** hold and release a key to choose a saved repository and agent, then launch a dedicated window in the right folder. Hold a session key to review a specific pending permission and press ACCEPT or REJECT. Native decisions are supported for Claude Code and the OpenCode server plugin; other harnesses offer terminal focus.
+Hold and release a key to choose a saved repository and agent, then launch a dedicated window in the right folder. Hold a session key to review a specific pending permission and press ACCEPT or REJECT. Native decisions are supported for Claude Code and the OpenCode server plugin; other harnesses offer terminal focus.
 
 Everything is configurable from the CLI, including named folders, harness choices, custom BAT launchers, arguments and interaction timing. The controls are opt-in and preserve ordinary taps and Jelly interactions.
 
 [Step-by-step tutorials](docs/TUTORIALS.md#launch-a-new-agent-without-leaving-the-deck) · [Feature guide and animated preview](docs/features/DECK-CONTROLS.md) · [CLI commands](docs/CLI.md#controls)
+
+### What each press does
+
+| Button or gesture | Result |
+|---|---|
+| Tap an agent | Return to its terminal or editor window |
+| Hold and release a free key, with controls enabled | Choose a saved project and harness, then confirm launch |
+| Hold and release an agent, with controls enabled | Open its session menu and supported request review |
+| ACCEPT / REJECT | Decide the single displayed native request for supported Claude Code or OpenCode integrations |
+| Tap Jelly | Pet reaction; five taps within a minute can invite a coffee break |
+| Tap Jelly or the cup during the coffee invitation | Open Buy Me a Coffee and dismiss the invitation |
+| Press Jelly with “Update available” | Install the detected update and restart |
+| Hold Jelly for world help | Show setup guidance, then hold again for documentation; enabled controls take priority |
+
+![Project selection, launch confirmation and native permission review](docs/controls/preview.gif)
 
 ## Make it yours
 
@@ -128,13 +154,29 @@ The physical deck is the UI; preferences are configured through the CLI and JSON
 
 Choose recognizable agent logos, project labels, layouts, color palettes and animation styles. Apply a preset across the deck or give individual keys their own look.
 
-![Examples of configurable agent key styles](docs/appearance-preview.gif)
+![Five visual presets and three motion effects on a photographed Stream Deck MK.2](docs/hardware/mk2-showcase.gif)
 
 ```powershell
 python -m ocdeck appearance --preset neon --layout harness
 ```
 
 Restart the broker after saving appearance changes. You can preview changes before saving, export a favorite look, or turn animation off. Sound alerts and Windows notifications are optional and off by default.
+
+| Customize | Available options |
+|---|---|
+| Layout | Classic, harness logos, minimal |
+| Theme | Classic, high-contrast, aurora, ocean, accessible, mono |
+| Preset | Studio, neon, focus, readable, marquee |
+| Key motion | Breathe, glow, steady; adjustable intensity and speed |
+| Text motion | None, scroll, shimmer |
+| Information | Status, project, harness, detail, custom text, alias, or hidden, independently on two lines |
+| Typography | Small / normal / large; left / center / right |
+| Status badge | Dot, ring, pill on the harness layout |
+| Border | Solid, double, corners, none |
+| Background | Solid, gradient, grid |
+| Logo | Small / normal / large on the harness layout |
+| Brightness | Per-key image dimming and separate device backlight |
+| Scope | Whole-deck defaults plus individual button overrides; import, export and preview |
 
 [Appearance gallery and settings](docs/APPEARANCE.md) · [Configuration, alerts and maintenance](docs/CONFIGURATION.md)
 
@@ -156,11 +198,15 @@ Prefer a quieter deck? Set `"jelly": {"coffee": false}` to disable coffee invita
 
 ## A little world on your spare keys
 
-![Jelly celebrates holidays and reacts to weather across free Stream Deck keys](docs/jelly/world-showcase.gif)
+![Rain, snow and autumn leaves rendered inside a photographed Stream Deck Mini](docs/hardware/weather-showcase.gif)
 
 Fireworks for July Fourth. A Thanksgiving feast. Christmas lights across the deck. A floating Halloween ghost. Holi colors, snow days and a sunhat when it gets hot. **75 configurable scenes**, including 50 additional seasonal and festival experiences, bring Jelly into the world around you.
 
-Jelly picks up a rake and gathers leaves, lifts a mug for a sip, opens gifts, waters plants, and plays with a ball. Rain falls in quick individual drops and splashes on each key, snow drifts and settles, and autumn leaves flutter down, land sideways and fade. Lanterns glow, and tiny acorns sit beside Jelly at a believable scale. Layered pixel scenery and object-specific motion keep the little world readable without crowding your companion. [See the animated artwork gallery](docs/jelly/artwork.md) and [Jelly using the props](docs/jelly/prop-review.md).
+Jelly picks up a rake and gathers leaves, lifts a mug for a sip, opens gifts, waters plants, and plays with a ball. Rain falls in quick individual drops and splashes on each key, snow drifts and settles, and autumn leaves flutter down, land sideways and fade. Lanterns glow, and Jelly plants tiny acorns at a believable scale. Layered pixel scenery and object-specific motion keep the little world readable without crowding your companion. [See the animated artwork gallery](docs/jelly/artwork.md) and [Jelly using the props](docs/jelly/prop-review.md).
+
+**Objects have a purpose.** Jelly travels to a reachable object, picks it up, uses it and puts it away. Rakes return to their rack, cups are sipped and returned, gifts reveal a toy, balls are chased, and kites are reeled in. Activities clean up when interrupted, so abandoned props do not linger on your keys. The optional support-coffee invitation has its own interaction routine.
+
+[Living-world behavior and visual coverage](docs/jelly/living-world-development.md) · [All prop interactions](docs/jelly/prop-review.md)
 
 The broker can discover approximate location and retrieve current weather. Jelly shares temperature updates and wears the right outfit while your agent buttons keep their jobs. Hold Jelly for setup guidance, then hold again to open the instructions. Every scene, costume, effect and caption can be configured or disabled.
 
@@ -203,6 +249,9 @@ A running broker with upgrade monitoring automatically restarts after the new pa
 | Customize Jelly’s behavior | Four personalities, fourteen hop styles, movement frequency and optional persistence | [Jelly settings](docs/reference/JELLY.md) |
 | Take a coffee break | Timed or five-tap invitation with a steaming cup on a second free key | [Coffee interactions](docs/features/COFFEE.md) |
 | Keep the package current | Visible update notice, press-to-install and verified restart after pip upgrades | [Update guide](docs/features/UPDATES.md) |
+| Launch an agent from a saved folder | Opt-in project and harness picker, custom launchers, dedicated terminal | [Deck controls](docs/features/DECK-CONTROLS.md) |
+| Review a supported permission request | Explicit ACCEPT / REJECT for a specific native Claude Code or OpenCode request | [Permission coverage](docs/features/DECK-CONTROLS.md#harness-coverage) |
+| Bring spare keys to life | 75 scenes, weather particles, holidays and purposeful object interactions | [World catalog](docs/jelly/world-catalog.md) |
 | Start automatically at login | Per-user Windows task or Linux systemd service | [Startup controls](docs/features/STARTUP.md) |
 | Use Mini, Original/MK.2 or XL | Automatic 6/15/32-key capacity, serial selection and reconnect handling | [Hardware guide](docs/features/HARDWARE.md) |
 | Mount a Mini beside your monitor | Multi-part printable holder, reinforced wing and five-degree locking hinge | [STLs and assembly](3d-models/side-monitor-mount/README.md) |
@@ -246,5 +295,3 @@ Adapter improvements, bug reports and hardware testing are welcome. See [CONTRIB
 CI tests Windows and Ubuntu with Python 3.11/3.13, including package installation and upgrade behavior. USB hardware and interactive window focus also need real desktop testing; [verification details](docs/TEST-RESULTS.md) distinguish that from automated coverage.
 
 Licensed under [Apache 2.0](LICENSE). Agent names and logos belong to their respective owners; see [third-party notices](THIRD-PARTY.md).
-
-Jelly gives objects a purpose: fetch a supported rake, gather leaves, sip and return a cup, plant an acorn, chase a ball, or unfold and reel in a kite. Objects appear as part of a reachable activity and clear after use. [Living-world behavior, controls and visual coverage](docs/jelly/living-world-development.md).

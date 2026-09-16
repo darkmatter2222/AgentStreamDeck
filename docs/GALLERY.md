@@ -16,6 +16,12 @@
 
 [Start using it](FIRST-RUN.md) · [UI controls](UI.md).
 
+## Real device composites
+
+[Mini, MK.2 and XL showcase, source photos and reproduction](hardware/README.md). The current app output is composited into the photographed LCDs.
+
+![Rain, snow and falling leaves on the Mini](hardware/weather-showcase.gif)
+
 ## Layouts
 
 ![Classic artwork, harness logos and minimal state glyphs.](visuals/layouts.png)

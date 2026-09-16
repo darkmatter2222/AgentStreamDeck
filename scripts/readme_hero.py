@@ -1,120 +1,194 @@
-"""Generate the evergreen README hero without changing documentation."""
+"""Composite production renderers into photographed LCDs; no network at render time.
+
+Photo sources and calibration notes: docs/hardware/README.md.
+"""
 
 from pathlib import Path
 import sys
+from dataclasses import replace
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-
 from PIL import Image, ImageDraw, ImageFont
-
-from ocdeck.appearance import Appearance
+from ocdeck.appearance import Appearance, PRESETS, animation_phase
 from ocdeck.art import frame as agent_frame
 from ocdeck.jelly import DeckGeometry, Jelly
+from ocdeck.world import World
+from ocdeck.world_settings import settings
+from ocdeck.world_weather import WeatherService
 
-OUT = ROOT / "docs" / "jelly" / "readme_hero.gif"
-W, H, FPS, SECONDS = 1000, 420, 8, 6
-FONT = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
-BOLD = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+OUT = ROOT / "docs/hardware"
+FPS = 12
+# Photo-native screen rectangles. Row-specific spacing follows photographic perspective.
+MODELS = {
+    "mini": (2, 3, (105, 170, 1095, 785), [(309, 289, 214, 158, 108), (299, 450, 219, 165, 116)]),
+    "mk2": (
+        3,
+        5,
+        (68, 325, 1530, 1245),
+        [(265, 489, 226, 166, 126), (253, 672, 231, 174, 128), (239, 856, 237, 177, 133)],
+    ),
+    "xl": (
+        4,
+        8,
+        (30, 285, 1170, 865),
+        [(163, 391, 113, 82, 58), (155, 480, 115, 85, 58), (148, 567, 116, 86, 61), (141, 657, 118, 88, 64)],
+    ),
+}
+NAMES = {"mini": "Stream Deck Mini", "mk2": "Stream Deck MK.2", "xl": "Stream Deck XL"}
+HARNESSES = ("opencode", "claude", "codex", "copilot", "gemini", "cursor")
 
 
 def font(size, bold=False):
+    path = "/usr/share/fonts/truetype/dejavu/DejaVuSans" + ("-Bold" if bold else "") + ".ttf"
     try:
-        return ImageFont.truetype(BOLD if bold else FONT, size)
+        return ImageFont.truetype(path, size)
     except OSError:
-        return ImageFont.load_default()
+        return ImageFont.load_default(size=size)
 
 
-def deck_shell(image):
-    draw = ImageDraw.Draw(image)
-    x, y = 548, 64
-    draw.rounded_rectangle((x, y, x + 390, y + 292), 34, fill="#303947", outline="#536172", width=2)
-    draw.rounded_rectangle((x + 10, y + 10, x + 380, y + 282), 28, fill="#111925")
-    draw.text((x + 195, y + 18), "STREAM DECK", anchor="ma", font=font(10, True), fill="#8494a7")
-    return x + 28, y + 52
+def photo(model, tiles):
+    rows, cols, crop, screens = MODELS[model]
+    im = Image.open(OUT / (model + ".jpg")).convert("RGB")
+    if model == "mk2":
+        im = im.resize((1600, 1600), Image.Resampling.LANCZOS)
+    for key, tile in tiles.items():
+        row, col = divmod(key, cols)
+        x, y, step, w, h = screens[row]
+        mask = Image.new("L", (w, h))
+        ImageDraw.Draw(mask).rounded_rectangle((0, 0, w - 1, h - 1), radius=12, fill=255)
+        im.paste(tile.resize((w, h), Image.Resampling.NEAREST), (x + col * step, y), mask)
+    return im.crop(crop)
 
 
-def background():
-    image = Image.new("RGB", (W, H), "#080d18")
-    draw = ImageDraw.Draw(image)
-    for i in range(8):
-        draw.ellipse((655 - i * 12, 20 - i * 8, 1080 + i * 18, 430 + i * 14), fill=(9 + i, 24 + i * 2, 37 + i * 3))
-    draw.rectangle((0, 0, 7, H), fill="#61dec3")
-    draw.text((50, 48), "AGENTSTREAMDECK", font=font(14, True), fill="#70e7cb")
-    draw.text((48, 91), "Mission control for", font=font(42, True), fill="#f4f7fb")
-    draw.text((48, 141), "AI coding agents.", font=font(42, True), fill="#f4f7fb")
-    draw.text((50, 211), "See the session. Press the key. Get back to code.", font=font(16), fill="#b2c0d2")
-    draw.rounded_rectangle((48, 268, 345, 309), 20, fill="#102d31", outline="#2c7168")
-    draw.text((196, 289), "MEET JELLY  •  OFFLINE  •  ON BY DEFAULT", anchor="mm", font=font(11, True), fill="#8af0d5")
-    draw.text((50, 338), "Your coding companion lives in the keys you are not using.", font=font(13), fill="#8297aa")
-    return image
+def card(model, tiles, title, subtitle):
+    im = Image.new("RGB", (1200, 700), "white")
+    d = ImageDraw.Draw(im)
+    d.text((52, 32), "AGENTSTREAMDECK", font=font(16, True), fill="#17786e")
+    d.text((50, 68), title, font=font(38, True), fill="#101c2c")
+    d.text((52, 121), subtitle, font=font(18), fill="#526174")
+    device = photo(model, tiles)
+    device.thumbnail((1060, 435), Image.Resampling.LANCZOS)
+    im.paste(device, ((1200 - device.width) // 2, 179 + (435 - device.height) // 2))
+    d.text(
+        (52, 650),
+        NAMES[model] + f"  /  {MODELS[model][0] * MODELS[model][1]} keys",
+        font=font(18, True),
+        fill="#182536",
+    )
+    d.text((1148, 655), "Actual UI rendered onto a product photo", anchor="ra", font=font(13), fill="#697587")
+    return im
 
 
-def make_frames():
-    base = background()
-    jelly = Jelly(DeckGeometry(), 7, "fluid", {"needs": False, "thoughts": "off"})
-    jelly.settle(3, 0)
-    jelly.deadline = 100
-    free = {3, 4, 5}
-    frames = []
-
-    for index in range(FPS * SECONDS):
-        t = index / FPS
-        if index == 5:
-            jelly.start_action("nod", t)
-        elif index == 13:
-            jelly.hop(4, t, free)
-        elif index == 28:
-            jelly.start_action("dance", t)
-        elif index == 36:
-            jelly.hop(5, t, free)
-        jelly.update(t, free)
-        if jelly.state == "idle":
-            jelly.deadline = 100
-
-        image = base.copy()
-        draw = ImageDraw.Draw(image)
-        ox, oy = deck_shell(image)
-        crops = jelly.crops(free)
-        for key in range(6):
-            col, row = key % 3, key // 3
-            kx, ky = ox + col * 116, oy + row * 116
-            draw.rounded_rectangle((kx - 4, ky - 4, kx + 99, ky + 99), 14, fill="#03060b", outline="#3e4b5a", width=2)
-            if key < 3:
-                state = ("running", "idle", "input")[key]
-                label = ("API", "WEB", "TEST")[key]
-                tile = agent_frame(
-                    state,
-                    label,
+def segment(model, scene, title, subtitle, seconds=4, appearance=False):
+    rows, cols, _, _ = MODELS[model]
+    size = {"mini": 80, "mk2": 72, "xl": 96}[model]
+    g = DeckGeometry(rows, cols, size, size)
+    j = Jelly(g, seed=6, options={"thoughts": "off", "needs": False})
+    occupied = cols if not appearance else g.count
+    free = set(range(occupied, g.count))
+    j.settle(occupied if free else 0, 0)
+    o = settings(dict(scene_override=scene, auto_location=False, weather=False, captions=False))
+    world = World(o, WeatherService(o))
+    warmup = 0
+    for i in range(warmup + round(FPS * seconds)):
+        now = i / FPS
+        j.update(now, free)
+        world.tick(now, j, free)
+        crops = world.decorate(now, j, j.crops(free), free)
+        if i < warmup:
+            continue
+        tiles = {}
+        for key in range(g.count):
+            if key < occupied:
+                style = Appearance(layout="harness", show_slot=False)
+                if appearance:
+                    # Each row compares the same three motion styles; columns vary presets.
+                    style = Appearance(**list(PRESETS.values())[key % 5])
+                    style = replace(style, effect=("breathe", "glow", "steady")[key // cols % 3], alias="Builder")
+                tiles[key] = agent_frame(
+                    ("running", "idle", "input")[key % 3],
+                    ("API", "WEB", "TEST")[key % 3],
                     key,
-                    index % 96,
-                    style=Appearance(layout="harness"),
-                    harness=("opencode", "claude", "codex")[key],
-                ).resize((96, 96), Image.Resampling.LANCZOS)
+                    animation_phase(now, style),
+                    size,
+                    style,
+                    HARNESSES[key % 6],
+                )
             else:
-                tile = Image.new("RGB", (80, 80), "black")
+                tile = Image.new("RGB", (size, size), "#050910")
                 if key in crops:
                     tile.paste(crops[key], (0, 0), crops[key])
-                tile = tile.resize((96, 96), Image.Resampling.NEAREST)
-            mask = Image.new("L", (96, 96))
-            ImageDraw.Draw(mask).rounded_rectangle((0, 0, 95, 95), 10, fill=255)
-            image.paste(tile, (kx, ky), mask)
-        frames.append(image)
+                tiles[key] = tile
+        yield card(model, tiles, title, subtitle)
+
+
+def save(path, frames):
+    frames = list(frames)
+    # Sample the entire reel for a stable palette, preventing frame-to-frame color shimmer.
+    sheet = Image.new("RGB", (300, 175 * len(frames[::12])))
+    for i, f in enumerate(frames[::12]):
+        sheet.paste(f.resize((300, 175)), (0, i * 175))
+    palette = sheet.quantize(colors=256)
+    indexed = [f.quantize(palette=palette, dither=Image.Dither.NONE) for f in frames]
+    indexed[0].save(
+        path,
+        save_all=True,
+        append_images=indexed[1:],
+        duration=[80, 80, 90] * ((len(indexed) + 2) // 3) if len(indexed) % 3 == 0 else 83,
+        loop=0,
+        optimize=True,
+    )
+    print(path.relative_to(ROOT), path.stat().st_size)
     return frames
 
 
 def main():
-    OUT.parent.mkdir(parents=True, exist_ok=True)
-    frames = make_frames()
-    frames[0].save(
-        OUT,
-        save_all=True,
-        append_images=frames[1:],
-        duration=1000 // FPS,
-        loop=0,
-        optimize=True,
-    )
-    print(f"wrote {OUT.relative_to(ROOT)}")
+    hero = []
+    for model, scene, title, sub, appearance in [
+        (
+            "mini",
+            "rain",
+            "Your agents. One glance away.",
+            "Live status, one-touch focus, and a little companion on your spare keys.",
+            False,
+        ),
+        (
+            "mk2",
+            "autumn_rake",
+            "Make every button your own.",
+            "Studio / Neon / Focus / Readable / Marquee   •   Breathe / Glow / Steady",
+            True,
+        ),
+        (
+            "xl",
+            "winter_snowball",
+            "More room for work. And wonder.",
+            "32 keys for your sessions, with holidays and a living world in the free space.",
+            False,
+        ),
+    ]:
+        frames = list(segment(model, scene, title, sub, appearance=appearance))
+        hero.extend(frames)
+        save(OUT / (model + "-showcase.gif"), frames)
+        frames[12].save(OUT / (model + "-showcase.png"))
+    save(ROOT / "docs/jelly/readme_hero.gif", hero)
+    weather = []
+    for scene, title, sub in [
+        (
+            "rain",
+            "Rain that falls and splashes.",
+            "Individual drops, varied speed, and little impacts on the key floor.",
+        ),
+        ("winter_snowball", "A little winter on your desk.", "Drifting snow and a playful seasonal companion."),
+        (
+            "autumn_rake",
+            "Leaves fall. Jelly gets to work.",
+            "Fluttering leaves, grounded props, and purposeful activities.",
+        ),
+    ]:
+        weather.extend(segment("mini", scene, title, sub, seconds=6))
+    save(OUT / "weather-showcase.gif", weather)
 
 
 if __name__ == "__main__":
